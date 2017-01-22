@@ -33,6 +33,7 @@ const initialState = fromJS({
   tabs: {
     index: 0,
     routes: [
+      {key: 'HitchhikingMapTab', title: 'HitchhikingMap'},
       {key: 'HomeTab', title: 'HOME'},
       {key: 'ProfileTab', title: 'PROFILE'}
     ]
@@ -46,6 +47,11 @@ const initialState = fromJS({
   ProfileTab: {
     index: 0,
     routes: [{key: 'Color', title: 'Color Screen'}]
+  },
+  // Scenes for the `MapTab` tab.
+  HitchhikingMapTab: {
+    index: 0,
+    routes: [{key: 'HitchhikingMap', title: 'HitchhikingMap'}]
   }
 });
 

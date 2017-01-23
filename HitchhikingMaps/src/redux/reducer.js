@@ -1,6 +1,6 @@
 import {Map, fromJS} from 'immutable';
 import {loop, combineReducers} from 'redux-loop';
-import NavigationStateReducer from '../modules/navigation/NavigationState';
+import NavigationStateReducer from '../modules/Navigation/NavigationState';
 import CounterStateReducer from '../modules/counter/CounterState';
 import SessionStateReducer, {RESET_STATE} from '../modules/session/SessionState';
 

@@ -33,9 +33,9 @@ const initialState = fromJS({
   tabs: {
     index: 0,
     routes: [
-      {key: 'HitchhikingMapTab', title: 'HitchhikingMap'},
-      {key: 'HomeTab', title: 'HOME'},
-      {key: 'ProfileTab', title: 'PROFILE'}
+      {key: 'HitchhikingMapTab', title: 'Map'},
+      {key: 'HomeTab', title: 'Home'},
+      {key: 'ProfileTab', title: 'Profile'}
     ]
   },
   // Scenes for the `HomeTab` tab.
@@ -51,7 +51,7 @@ const initialState = fromJS({
   // Scenes for the `MapTab` tab.
   HitchhikingMapTab: {
     index: 0,
-    routes: [{key: 'HitchhikingMap', title: 'HitchhikingMap'}]
+    routes: [{key: 'HitchhikingMap', title: 'Map'}]
   }
 });
 

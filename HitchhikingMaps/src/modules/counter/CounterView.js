@@ -1,5 +1,5 @@
 import * as CounterState from './CounterState';
-import * as NavigationState from '../../modules/navigation/NavigationState';
+import * as NavigationState from '../../modules/Navigation/NavigationState';
 import React, {PropTypes} from 'react';
 import {
   StyleSheet,

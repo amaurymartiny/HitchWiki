@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 // import Mapbox, { MapView } from 'react-native-mapbox-gl';
 
-import * as NavigationState from '../../modules/navigation/NavigationState';
+import * as NavigationState from '../../modules/Navigation/NavigationState';
 
 /**
  * Sample view to demonstrate navigation patterns.

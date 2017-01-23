@@ -5,7 +5,7 @@ import {
   StyleSheet
 } from 'react-native';
 
-import * as NavigationState from '../../modules/navigation/NavigationState';
+import * as NavigationState from '../../modules/Navigation/NavigationState';
 
 const color = () => Math.floor(255 * Math.random());
 

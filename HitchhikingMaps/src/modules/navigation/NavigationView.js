@@ -10,10 +10,7 @@ const {
   PropTypes: NavigationPropTypes
 } = NavigationExperimental;
 import AppRouter from '../AppRouter';
-import TabBar from '../../components/TabBar';
-
-// Customize bottom tab bar height here if desired
-const TAB_BAR_HEIGHT = 50;
+import TabBar from '../../components/TabBar/TabBar';
 
 const NavigationView = React.createClass({
   propTypes: {
@@ -33,23 +30,25 @@ const NavigationView = React.createClass({
     switchTab: PropTypes.func.isRequired,
     pushRoute: PropTypes.func.isRequired
   },
-  // NavigationHeader accepts a prop style
-  // NavigationHeader.title accepts a prop textStyle
-  renderHeader(sceneProps) {
-    return (
-      <NavigationHeader
-        {...sceneProps}
-        onNavigateBack={this.props.onNavigateBack}
-        renderTitleComponent={() => {
-          return (
-            <NavigationHeader.Title>
-              {sceneProps.scene.route.title}
-            </NavigationHeader.Title>
-          );
-        }}
-      />
-    );
-  },
+
+  // // NavigationHeader accepts a prop style
+  // // NavigationHeader.title accepts a prop textStyle
+  // renderHeader(sceneProps) {
+  //   return (
+  //     <NavigationHeader
+  //       {...sceneProps}
+  //       onNavigateBack={this.props.onNavigateBack}
+  //       renderTitleComponent={() => {
+  //         return (
+  //           <NavigationHeader.Title>
+  //             {sceneProps.scene.route.title}
+  //           </NavigationHeader.Title>
+  //         );
+  //       }}
+  //     />
+  //   );
+  // },
+  
   renderScene(sceneProps) {
     // render scene and apply padding to cover
     // for app bar and navigation bar
@@ -59,6 +58,7 @@ const NavigationView = React.createClass({
       </View>
     );
   },
+
   render() {
     const {tabs} = this.props.navigationState;
     const tabKey = tabs.routes[tabs.index].key;
@@ -69,11 +69,9 @@ const NavigationView = React.createClass({
           key={'stack_' + tabKey}
           onNavigateBack={this.props.onNavigateBack}
           navigationState={scenes}
-          renderHeader={this.renderHeader}
           renderScene={this.renderScene}
         />
         <TabBar
-          height={TAB_BAR_HEIGHT}
           tabs={tabs}
           currentTabIndex={tabs.index}
           switchTab={this.props.switchTab}
@@ -88,8 +86,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   sceneContainer: {
-    flex: 1,
-    marginBottom: TAB_BAR_HEIGHT
+    flex: 1
   }
 });
 

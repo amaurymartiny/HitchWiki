@@ -14,6 +14,9 @@ const HitchhikingMapView = React.createClass({
     return (
       <Container>
         <Content>
+          <Button onPress={() => this.props.dispatch(HitchhikingMapState.fetchCountries())}>
+            GET COUNTRIES
+          </Button>
           <Button onPress={() => this.props.dispatch(HitchhikingMapState.fetchPoints())}>
             GET POINTS
           </Button>

@@ -15,7 +15,7 @@ const TabBar = React.createClass({
   },
 
   render() {
-    const icons = ['ios-map', 'ios-bookmarks', 'ios-menu'] // Icon for each tab
+    const icons = ['ios-map', 'ios-bookmarks', 'ios-menu']; // Icon for each tab
     return (
       <Footer>
         <FooterTab>

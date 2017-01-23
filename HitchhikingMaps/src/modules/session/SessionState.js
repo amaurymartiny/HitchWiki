@@ -23,13 +23,9 @@ export function initializeSessionState() {
 }
 
 // ======================================================
-// Initial State
-// ======================================================
-const initialState = Map({isReady: false});
-
-// ======================================================
 // Reducers
 // ======================================================
+const initialState = Map({isReady: false});
 export default function SessionStateReducer(state = initialState, action = {}) {
   switch (action.type) {
     case INITIALIZE_STATE:

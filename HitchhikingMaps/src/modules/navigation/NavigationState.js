@@ -4,7 +4,9 @@ import {NavigationExperimental} from 'react-native';
 
 const {StateUtils: NavigationStateUtils} = NavigationExperimental;
 
+// ======================================================
 // Actions
+// ======================================================
 const PUSH_ROUTE = 'NavigationState/PUSH_ROUTE';
 const POP_ROUTE = 'NavigationState/POP_ROUTE';
 const SWITCH_TAB = 'NavigationState/SWITCH_TAB';
@@ -16,7 +18,9 @@ export function switchTab(index) {
   };
 }
 
-// Action creators
+// ======================================================
+// Action Creators
+// ======================================================
 export function pushRoute(route) {
   return {
     type: PUSH_ROUTE,
@@ -28,7 +32,9 @@ export function popRoute() {
   return {type: POP_ROUTE};
 }
 
-// reducers for tabs and scenes are separate
+// ======================================================
+// Reducers
+// ======================================================
 const initialState = fromJS({
   tabs: {
     index: 0,
@@ -54,7 +60,6 @@ const initialState = fromJS({
     routes: [{key: 'HitchhikingMap', title: 'Map'}]
   }
 });
-
 export default function NavigationReducer(state = initialState, action) {
   switch (action.type) {
     case PUSH_ROUTE: {

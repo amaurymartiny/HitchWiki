@@ -1,4 +1,8 @@
 import {connect} from 'react-redux';
 import HitchhikingMapView from './HitchhikingMapView';
 
-export default connect()(HitchhikingMapView);
+const mapStateToProps = state => ({
+  HitchhikingMapState: state.get('hitchhikingMap').toJS()
+});
+
+export default connect(mapStateToProps)(HitchhikingMapView);

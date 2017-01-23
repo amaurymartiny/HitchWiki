@@ -48,7 +48,7 @@ const NavigationView = React.createClass({
   //     />
   //   );
   // },
-  
+
   renderScene(sceneProps) {
     // render scene and apply padding to cover
     // for app bar and navigation bar

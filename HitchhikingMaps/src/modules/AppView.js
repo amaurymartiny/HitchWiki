@@ -42,7 +42,7 @@ const AppView = React.createClass({
 
     return (
       <NavigationProvider router={Router}>
-        <StackNavigation initialRoute={Router.getRoute('hitchhikingMap')} />
+        <StackNavigation initialRoute={Router.getRoute('navigationBar')} />
       </NavigationProvider>
     );
   }

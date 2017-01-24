@@ -4,13 +4,19 @@ import {Content, Container, Header, Button} from 'native-base';
 
 import * as HitchhikingMapState from './HitchhikingMapState';
 
-const HitchhikingMapView = React.createClass({
-  propTypes: {
+class HitchhikingMapView extends React.Component {
+
+  static route = {
+    navigationBar: {
+      visible: false,
+    }
+  }
+
+  static propTypes = {
     dispatch: PropTypes.func.isRequired
-  },
+  }
 
   render() {
-    const text = 'This is not a map.';
     return (
       <Container>
         <Content>
@@ -24,6 +30,6 @@ const HitchhikingMapView = React.createClass({
       </Container>
     );
   }
-});
+}
 
 export default HitchhikingMapView;

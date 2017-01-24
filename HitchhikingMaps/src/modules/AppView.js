@@ -1,10 +1,13 @@
 import React, {PropTypes} from 'react';
-import {View, StyleSheet, ActivityIndicator} from 'react-native';
+import {View, StyleSheet, ActivityIndicator, Text} from 'react-native';
 import NavigationViewContainer from './Navigation/NavigationViewContainer';
 import * as snapshotUtil from '../utils/snapshot';
 import * as SessionStateActions from '../modules/Session/SessionState';
 import store from '../redux/store';
 import DeveloperMenu from '../components/DeveloperMenu';
+
+import {createRouter, NavigationProvider, StackNavigation} from '@exponent/ex-navigation';
+import Router from './AppRouter';
 
 const AppView = React.createClass({
   propTypes: {
@@ -38,10 +41,9 @@ const AppView = React.createClass({
     }
 
     return (
-      <View style={{flex: 1}}>
-        <NavigationViewContainer />
-        {__DEV__ && <DeveloperMenu />}
-      </View>
+      <NavigationProvider router={Router}>
+        <StackNavigation initialRoute={Router.getRoute('hitchhikingMap')} />
+      </NavigationProvider>
     );
   }
 });

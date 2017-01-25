@@ -20,7 +20,7 @@ class HitchhikingMapView extends React.Component {
 
   // TODO I don't like this
   _goToSpotDetails = () => {
-    this.props.navigator.push('spotDetails', { id: 22231 });
+    this.props.navigator.push('spotDetails', { id: 22203 });
   }
 
   render() {

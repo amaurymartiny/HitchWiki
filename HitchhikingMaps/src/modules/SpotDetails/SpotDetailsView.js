@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import { Text } from 'react-native';
-import { Tile, Heading, Subtitle, Screen } from '@shoutem/ui';
-// import Mapbox, { MapView } from 'react-native-mapbox-gl';
+import { ScrollView } from 'react-native';
+import { Tile, Heading, Title, Subtitle, Text, ListView, View, RichMedia, Icon } from '@shoutem/ui';
+import StarRating from 'react-native-star-rating';
 
 import * as Actions from './SpotDetailsState';
 
@@ -24,18 +24,38 @@ class SpotDetailsView extends React.Component {
 
   render() {
     return (
-      <Screen>
-      <Tile styleName="xl-gutter">
+      <ScrollView>
+        <Tile styleName="xl-gutter">
 
-        <Heading>{this.props.Cities.length ? this.props.Cities[this.props.Cities.length - 1] : this.props.title}</Heading>
-        <Subtitle>
-          {this.props.Cities.slice(0, -1).map((city) => {
-            return city + ', ';
-          })}
-          {this.props.Country.length && this.props.Country[0]}
-        </Subtitle>
-      </Tile>
-      </Screen>
+          <Heading>{this.props.Cities.length ? this.props.Cities[this.props.Cities.length - 1] : this.props.title}</Heading>
+          <Subtitle>
+            {this.props.Cities.slice(0, -1).map((city) => {
+              return city + ', ';
+            })}
+            {this.props.Country.length && this.props.Country[0]}
+          </Subtitle>
+          <StarRating
+            disabled={true}
+            rating={this.props.rating_average}
+            starSize={25}
+            selectedStar={() => {}}
+          />
+          <Text styleName="xl-gutter">{this.props.rating_count} <Icon name='ic_user_profile' /></Text>
+
+          <Title styleName="md-gutter-top">Description</Title>
+          <Text>HEdslfslkdafjdl dsafjklds fjlkdsfj ldksjf lkdsjf lksdjf alkds jfldksaj flksdfj lkdasj flkadsjf.</Text>
+
+          <Title styleName="md-gutter-top">Comments</Title>
+          <ListView
+            data={this.props.comments}
+            renderRow={comment => {
+              return <Text>{comment.commenttext}</Text>
+            }}
+          />
+
+
+        </Tile>
+      </ScrollView>
     );
   }
 }

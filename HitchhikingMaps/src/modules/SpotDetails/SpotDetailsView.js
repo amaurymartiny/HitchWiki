@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
-import { Button } from 'react-native-elements';
+import { Text } from 'react-native';
+import { Card, Button } from 'react-native-elements';
 // import Mapbox, { MapView } from 'react-native-mapbox-gl';
 
 import * as Actions from './SpotDetailsState';
@@ -23,7 +24,12 @@ class SpotDetailsView extends React.Component {
 
   render() {
     return (
-      <Button title="Hello" />
+      <Card
+        title='DESCRIPTION'>
+        <Text>
+          {this.props.Description}
+        </Text>
+      </Card>
     );
   }
 }

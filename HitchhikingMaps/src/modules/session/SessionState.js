@@ -1,4 +1,4 @@
-import {Map} from 'immutable';
+import { Map } from 'immutable';
 
 // ======================================================
 // Actions
@@ -12,20 +12,20 @@ export const INITIALIZE_STATE = 'SessionState/INITIALIZE';
 export function resetSessionStateFromSnapshot(state) {
   return {
     type: RESET_STATE,
-    payload: state
+    payload: state,
   };
 }
 
 export function initializeSessionState() {
   return {
-    type: INITIALIZE_STATE
+    type: INITIALIZE_STATE,
   };
 }
 
 // ======================================================
 // Reducers
 // ======================================================
-const initialState = Map({isReady: false});
+const initialState = Map({ isReady: false });
 export default function SessionStateReducer(state = initialState, action = {}) {
   switch (action.type) {
     case INITIALIZE_STATE:

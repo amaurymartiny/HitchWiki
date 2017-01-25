@@ -1,5 +1,5 @@
-import React, {PropTypes} from 'react';
-import {Content, Container, Header, Button} from 'native-base';
+import React, { PropTypes } from 'react';
+import { Content, Container, Header, Button } from 'native-base';
 import { withNavigation } from '@exponent/ex-navigation';
 // import Mapbox, { MapView } from 'react-native-mapbox-gl';
 
@@ -11,16 +11,16 @@ class HitchhikingMapView extends React.Component {
   static route = {
     navigationBar: {
       visible: false,
-    }
+    },
   }
 
   static propTypes = {
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
   }
 
   // TODO I don't like this
   _goToSpotDetails = () => {
-    this.props.navigator.push('spotDetails', {id: 22231});
+    this.props.navigator.push('spotDetails', { id: 22231 });
   }
 
   render() {

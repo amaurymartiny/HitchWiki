@@ -1,6 +1,6 @@
-/*eslint-disable max-nested-callbacks, no-unused-expressions*/
+/* eslint-disable max-nested-callbacks, no-unused-expressions*/
 
-import {initialState, dispatch} from '../../../test/state';
+import { initialState, dispatch } from '../../../test/state';
 import * as SessionState from '../../modules/session/SessionState';
 
 describe('reducer', () => {

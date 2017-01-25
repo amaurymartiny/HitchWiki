@@ -1,11 +1,11 @@
 import * as CounterState from './CounterState';
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
   Image,
   Text,
-  View
+  View,
 } from 'react-native';
 
 const CounterView = React.createClass({
@@ -14,7 +14,7 @@ const CounterView = React.createClass({
     userName: PropTypes.string,
     userProfilePhoto: PropTypes.string,
     loading: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
   },
 
   renderUserInfo() {
@@ -29,7 +29,7 @@ const CounterView = React.createClass({
           source={{
             uri: this.props.userProfilePhoto,
             width: 80,
-            height: 80
+            height: 80,
           }}
         />
         <Text style={styles.linkButton}>
@@ -40,7 +40,7 @@ const CounterView = React.createClass({
   },
   render() {
     const loadingStyle = this.props.loading
-      ? {backgroundColor: '#eee'}
+      ? { backgroundColor: '#eee' }
       : null;
 
     return (
@@ -51,14 +51,14 @@ const CounterView = React.createClass({
 
       </View>
     );
-  }
+  },
 });
 
 const circle = {
   borderWidth: 0,
   borderRadius: 40,
   width: 80,
-  height: 80
+  height: 80,
 };
 
 const styles = StyleSheet.create({
@@ -66,40 +66,40 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   userContainer: {
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   userProfilePhoto: {
     ...circle,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   counterButton: {
     ...circle,
     backgroundColor: 'green',
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 20
+    margin: 20,
   },
   counter: {
     color: 'white',
     fontSize: 20,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   welcome: {
     textAlign: 'center',
     color: 'black',
     marginBottom: 5,
-    padding: 5
+    padding: 5,
   },
   linkButton: {
     textAlign: 'center',
     color: '#CCCCCC',
     marginBottom: 10,
-    padding: 5
-  }
+    padding: 5,
+  },
 });
 
 export default CounterView;

@@ -1,11 +1,10 @@
-/*eslint-disable max-nested-callbacks, no-unused-expressions*/
+/* eslint-disable max-nested-callbacks, no-unused-expressions*/
 
-import {Effects} from 'redux-loop';
-import {initialState, dispatch} from '../../../../test/state';
+import { Effects } from 'redux-loop';
+import { initialState, dispatch } from '../../../../test/state';
 import * as CounterStateActions from '../CounterState';
 
 describe('CounterState', () => {
-
   // Example of how to test multiple dispatches in series
   describe('increment', () => {
     const getValue = state => state.getIn(['counter', 'value']);
@@ -33,7 +32,6 @@ describe('CounterState', () => {
 
   // Example of how to test side effects returned from reducers
   describe('random', () => {
-
     const [nextState, effects] = dispatch(initialState, CounterStateActions.random());
 
     it('should update loading bit', () => {
@@ -42,7 +40,7 @@ describe('CounterState', () => {
 
     it('should trigger a requestRandomNumber side effect', () => {
       expect(effects).toEqual(
-        Effects.promise(CounterStateActions.requestRandomNumber)
+        Effects.promise(CounterStateActions.requestRandomNumber),
       );
     });
   });
@@ -55,7 +53,7 @@ describe('CounterState', () => {
       // jest 16 still breaks Promises...
       global.Promise = require.requireActual('promise');
       // instantly resolve timeouts
-      global.setTimeout = (cb) => cb();
+      global.setTimeout = cb => cb();
     });
 
     it('should generate a random number and dispatch it', async () => {

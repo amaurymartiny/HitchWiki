@@ -1,9 +1,9 @@
-import {Map, fromJS} from 'immutable';
-import {loop, combineReducers} from 'redux-loop';
+import { Map, fromJS } from 'immutable';
+import { loop, combineReducers } from 'redux-loop';
 import HitchhikingMapStateReducer from '../modules/HitchhikingMap/HitchhikingMapState';
 import SpotDetailsStateReducer from '../modules/SpotDetails/SpotDetailsState';
 import CounterStateReducer from '../modules/counter/CounterState';
-import SessionStateReducer, {RESET_STATE} from '../modules/Session/SessionState';
+import SessionStateReducer, { RESET_STATE } from '../modules/Session/SessionState';
 
 const reducers = {
   // Counter sample app state. This can be removed in a live application
@@ -11,7 +11,7 @@ const reducers = {
   hitchhikingMap: HitchhikingMapStateReducer,
   spotDetails: SpotDetailsStateReducer,
 
-  session: SessionStateReducer
+  session: SessionStateReducer,
 
 };
 
@@ -25,7 +25,7 @@ const namespacedReducer = combineReducers(
   reducers,
   immutableStateContainer,
   getImmutable,
-  setImmutable
+  setImmutable,
 );
 
 export default function mainReducer(state, action) {

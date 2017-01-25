@@ -1,4 +1,4 @@
-/*eslint-disable max-nested-callbacks, no-unused-expressions*/
+/* eslint-disable max-nested-callbacks, no-unused-expressions*/
 
 import fetch from 'fetch-mock';
 import HttpError from 'standard-http-error';
@@ -11,7 +11,7 @@ const SIMPLE_ENDPOINT = '/endpoint';
 const ERROR_ENDPOINT = '/cant/touch/this';
 const PROTECTED_ENDPOINT = '/nothing/to/see/here';
 const FAILING_ENDPOINT = '/broken';
-const SIMPLE_RESPONSE = {foo: 'bar'};
+const SIMPLE_RESPONSE = { foo: 'bar' };
 
 describe('API', () => {
   beforeEach(() => {
@@ -21,10 +21,10 @@ describe('API', () => {
     require.requireActual('react-native').AsyncStorage.getItem = () => Promise.resolve(1);
     configuration.setConfiguration('API_ROOT', API_ROOT);
     fetch
-      .mock(API_ROOT + SIMPLE_ENDPOINT, {status: 200, body: SIMPLE_RESPONSE})
-      .mock(API_ROOT + ERROR_ENDPOINT, {status: 400,body: {message: 'You did bad.'}})
-      .mock(API_ROOT + PROTECTED_ENDPOINT, {status: 403})
-      .mock(API_ROOT + FAILING_ENDPOINT, {status: 500}); // don't specify body to test default message
+      .mock(API_ROOT + SIMPLE_ENDPOINT, { status: 200, body: SIMPLE_RESPONSE })
+      .mock(API_ROOT + ERROR_ENDPOINT, { status: 400, body: { message: 'You did bad.' } })
+      .mock(API_ROOT + PROTECTED_ENDPOINT, { status: 403 })
+      .mock(API_ROOT + FAILING_ENDPOINT, { status: 500 }); // don't specify body to test default message
   });
 
   afterEach(() => {
@@ -34,8 +34,7 @@ describe('API', () => {
 
   // generate basic tests for basic HTTP methods
   for (const method of ['get', 'put', 'post', 'del']) {
-
-    const body = {foo: 'bar'};
+    const body = { foo: 'bar' };
 
     // create a function that calls the corresponding method on the API module
     const apiMethod = method === 'put' || method === 'post'
@@ -43,7 +42,6 @@ describe('API', () => {
       : path => api[method](path);
 
     describe(method, () => {
-
       it('should fetch() the given endpoint', async () => {
         await apiMethod(SIMPLE_ENDPOINT);
         expect(fetch.lastUrl()).toBe(`${API_ROOT}${SIMPLE_ENDPOINT}`);
@@ -81,22 +79,21 @@ describe('API', () => {
 
   describe('url', () => {
     it('generates a full url from a path using API_ROOT configuration value', async () => {
-      expect(api.url('foobar')).toEqual(API_ROOT + '/foobar');
+      expect(api.url('foobar')).toEqual(`${API_ROOT}/foobar`);
     });
 
     it('generates a full url with leading forward slash', async () => {
-      expect(api.url('/foobar')).toEqual(API_ROOT + '/foobar');
+      expect(api.url('/foobar')).toEqual(`${API_ROOT}/foobar`);
     });
   });
 
   describe('errors EventEmitter', () => {
-
     let spy400Errors;
     let spy403Errors;
     let spyAllErrors;
     const expectedArgs = {
       path: PROTECTED_ENDPOINT,
-      message: 'Forbidden'
+      message: 'Forbidden',
     };
 
     beforeEach(() => {

@@ -1,23 +1,23 @@
-import React, {PropTypes} from 'react';
-import {View, StyleSheet, ActivityIndicator, Text} from 'react-native';
+import React, { PropTypes } from 'react';
+import { View, StyleSheet, ActivityIndicator, Text } from 'react-native';
 
 import * as snapshotUtil from '../utils/snapshot';
 import * as SessionStateActions from '../modules/Session/SessionState';
 import store from '../redux/store';
 import DeveloperMenu from '../components/DeveloperMenu';
 
-import {createRouter, NavigationProvider, StackNavigation} from '@exponent/ex-navigation';
+import { createRouter, NavigationProvider, StackNavigation } from '@exponent/ex-navigation';
 import Router from './AppRouter';
 
 const AppView = React.createClass({
   propTypes: {
     isReady: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
   },
   componentDidMount() {
     snapshotUtil.resetSnapshot()
-      .then(snapshot => {
-        const {dispatch} = this.props;
+      .then((snapshot) => {
+        const { dispatch } = this.props;
 
         if (snapshot) {
           dispatch(SessionStateActions.resetSessionStateFromSnapshot(snapshot));
@@ -34,8 +34,8 @@ const AppView = React.createClass({
   render() {
     if (!this.props.isReady) {
       return (
-        <View style={{flex: 1}}>
-          <ActivityIndicator style={styles.centered}/>
+        <View style={{ flex: 1 }}>
+          <ActivityIndicator style={styles.centered} />
         </View>
       );
     }
@@ -45,14 +45,14 @@ const AppView = React.createClass({
         <StackNavigation initialRoute={Router.getRoute('navigationBar')} />
       </NavigationProvider>
     );
-  }
+  },
 });
 
 const styles = StyleSheet.create({
   centered: {
     flex: 1,
-    alignSelf: 'center'
-  }
+    alignSelf: 'center',
+  },
 });
 
 export default AppView;

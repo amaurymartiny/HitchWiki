@@ -5,7 +5,7 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet
+  StyleSheet,
 } from 'react-native';
 
 /**
@@ -17,10 +17,10 @@ const DeveloperMenu = React.createClass({
   displayName: 'DeveloperMenu',
 
   getInitialState() {
-    return {visible: false};
+    return { visible: false };
   },
   showDeveloperMenu() {
-    this.setState({isVisible: true});
+    this.setState({ isVisible: true });
   },
 
   async clearState() {
@@ -30,7 +30,7 @@ const DeveloperMenu = React.createClass({
   },
 
   closeMenu() {
-    this.setState({isVisible: false});
+    this.setState({ isVisible: false });
   },
 
   renderMenuItem(text, onPress) {
@@ -39,7 +39,7 @@ const DeveloperMenu = React.createClass({
         key={text}
         onPress={onPress}
         style={styles.menuItem}
-        >
+      >
         <Text style={styles.menuItemText}>{text}</Text>
       </TouchableOpacity>
     );
@@ -53,15 +53,15 @@ const DeveloperMenu = React.createClass({
     if (!this.state.isVisible) {
       return (
         <TouchableOpacity
-        style={styles.circle}
-        onPress={this.showDeveloperMenu}
+          style={styles.circle}
+          onPress={this.showDeveloperMenu}
         />
       );
     }
 
     const buttons = [
       this.renderMenuItem('Clear state', this.clearState),
-      this.renderMenuItem('Cancel', this.closeMenu)
+      this.renderMenuItem('Cancel', this.closeMenu),
     ];
 
     return (
@@ -69,7 +69,7 @@ const DeveloperMenu = React.createClass({
         {buttons}
       </View>
     );
-  }
+  },
 });
 
 const styles = StyleSheet.create({
@@ -80,14 +80,14 @@ const styles = StyleSheet.create({
     width: 10,
     height: 10,
     borderRadius: 5,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   menu: {
     backgroundColor: 'white',
     position: 'absolute',
     left: 0,
     right: 0,
-    bottom: 0
+    bottom: 0,
   },
   menuItem: {
     flex: 1,
@@ -96,11 +96,11 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: '#eee',
     padding: 10,
-    height: 60
+    height: 60,
   },
   menuItemText: {
-    fontSize: 20
-  }
+    fontSize: 20,
+  },
 });
 
 export default DeveloperMenu;

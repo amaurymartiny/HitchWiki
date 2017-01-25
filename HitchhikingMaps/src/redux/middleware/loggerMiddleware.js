@@ -13,6 +13,6 @@ export default createLogger({
   // transform immutable action payloads to plain objects
   actionTransformer: action =>
     action && action.payload && action.payload.toJS
-      ? {...action, payload: action.payload.toJS()}
-      : action
+      ? { ...action, payload: action.payload.toJS() }
+      : action,
 });

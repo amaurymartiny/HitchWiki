@@ -1,14 +1,14 @@
 import React from 'react';
-import {StyleSheet, Colors} from 'react-native';
-import {StackNavigation, TabNavigation, TabNavigationItem as TabItem, withNavigation} from '@exponent/ex-navigation';
-import {Icon, FooterTab, Footer, Button} from 'native-base';
+import { StyleSheet, Colors } from 'react-native';
+import { StackNavigation, TabNavigation, TabNavigationItem as TabItem, withNavigation } from '@exponent/ex-navigation';
+import { Icon, FooterTab, Footer, Button } from 'native-base';
 
 @withNavigation
 class NavigationBar extends React.Component {
   static route = {
     navigationBar: {
       visible: false,
-    }
+    },
   }
 
   render() {
@@ -21,7 +21,7 @@ class NavigationBar extends React.Component {
         <TabItem
           id="hitchhikingMap"
           title="Map"
-          renderIcon={() => {return(<Icon name='ios-map' />)}}
+          renderIcon={() => (<Icon name="ios-map" />)}
         >
           <StackNavigation
             id="hitchhikingMap"
@@ -33,7 +33,7 @@ class NavigationBar extends React.Component {
         <TabItem
           id="settings"
           title="Settings"
-          renderIcon={() => {return(<Icon name="ios-settings" />)}}
+          renderIcon={() => (<Icon name="ios-settings" />)}
         >
           <StackNavigation
             id="Settings"

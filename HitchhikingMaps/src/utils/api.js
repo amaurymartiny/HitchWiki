@@ -1,7 +1,7 @@
 import Promise from 'bluebird';
 import HttpError from 'standard-http-error';
-import {getConfiguration} from '../utils/configuration';
-import {getAuthenticationToken} from '../utils/authentication';
+import { getConfiguration } from '../utils/configuration';
+import { getAuthenticationToken } from '../utils/authentication';
 
 const EventEmitter = require('event-emitter');
 
@@ -66,10 +66,9 @@ export async function request(method, path, body, suppressRedBox) {
     const response = await sendRequest(method, path, body, suppressRedBox);
     return handleResponse(
       path,
-      response
+      response,
     );
-  }
-  catch (error) {
+  } catch (error) {
     if (!suppressRedBox) {
       logError(error, url(path), method);
     }
@@ -84,21 +83,20 @@ export function url(path) {
   const apiRoot = getConfiguration('API_ROOT');
   return path.indexOf('/') === 0
     ? apiRoot + path
-    : apiRoot + '/' + path;
+    : `${apiRoot}/${path}`;
 }
 
 /**
  * Constructs and fires a HTTP request
  */
 async function sendRequest(method, path, body) {
-
   try {
     const endpoint = url(path);
     const token = await getAuthenticationToken();
     const headers = getRequestHeaders(body, token);
     const options = body
-      ? {method, headers, body: JSON.stringify(body)}
-      : {method, headers};
+      ? { method, headers, body: JSON.stringify(body) }
+      : { method, headers };
 
     return timeout(fetch(endpoint, options), TIMEOUT);
   } catch (e) {
@@ -120,8 +118,8 @@ async function handleResponse(path, response) {
       const error = new HttpError(status, message);
 
       // emit events on error channel, one for status-specific errors and other for all errors
-      errors.emit(status.toString(), {path, message: error.message});
-      errors.emit('*', {path, message: error.message}, status);
+      errors.emit(status.toString(), { path, message: error.message });
+      errors.emit('*', { path, message: error.message }, status);
 
       throw error;
     }
@@ -131,7 +129,7 @@ async function handleResponse(path, response) {
     return {
       status: response.status,
       headers: response.headers,
-      body: responseBody ? JSON.parse(responseBody) : null
+      body: responseBody ? JSON.parse(responseBody) : null,
     };
   } catch (e) {
     throw e;
@@ -140,11 +138,11 @@ async function handleResponse(path, response) {
 
 function getRequestHeaders(body, token) {
   const headers = body
-    ? {'Accept': 'application/json', 'Content-Type': 'application/json'}
-    : {'Accept': 'application/json'};
+    ? { Accept: 'application/json', 'Content-Type': 'application/json' }
+    : { Accept: 'application/json' };
 
   if (token) {
-    return {...headers, Authorization: token};
+    return { ...headers, Authorization: token };
   }
 
   return headers;
@@ -167,7 +165,6 @@ async function getErrorMessageSafely(response) {
 
     // Should that fail, return the whole response body as text
     return body;
-
   } catch (e) {
     // Unreadable body, return whatever the server returned
     return response._bodyInit;
@@ -181,7 +178,7 @@ function timeout(promise, ms) {
   return new Promise((resolve, reject) => {
     const timer = setTimeout(() => reject(new Error('timeout')), ms);
     promise
-      .then(response => {
+      .then((response) => {
         clearTimeout(timer);
         resolve(response);
       })
@@ -205,8 +202,7 @@ function logError(error, endpoint, method) {
   if (error.status) {
     const summary = `(${error.status} ${error.statusText}): ${error._bodyInit}`;
     console.error(`API request ${method.toUpperCase()} ${endpoint} responded with ${summary}`);
-  }
-  else {
+  } else {
     console.error(`API request ${method.toUpperCase()} ${endpoint} failed with message "${error.message}"`);
   }
 }

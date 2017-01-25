@@ -1,11 +1,11 @@
-import {Map} from 'immutable';
-import {loop, Effects} from 'redux-loop';
-import {generateRandomNumber} from '../../services/randomNumberService';
+import { Map } from 'immutable';
+import { loop, Effects } from 'redux-loop';
+import { generateRandomNumber } from '../../services/randomNumberService';
 
 // Initial state
 const initialState = Map({
   value: 0,
-  loading: false
+  loading: false,
 });
 
 // Actions
@@ -16,23 +16,23 @@ const RANDOM_RESPONSE = 'CounterState/RANDOM_RESPONSE';
 
 // Action creators
 export function increment() {
-  return {type: INCREMENT};
+  return { type: INCREMENT };
 }
 
 export function reset() {
-  return {type: RESET};
+  return { type: RESET };
 }
 
 export function random() {
   return {
-    type: RANDOM_REQUEST
+    type: RANDOM_REQUEST,
   };
 }
 
 export async function requestRandomNumber() {
   return {
     type: RANDOM_RESPONSE,
-    payload: await generateRandomNumber()
+    payload: await generateRandomNumber(),
   };
 }
 
@@ -48,7 +48,7 @@ export default function CounterStateReducer(state = initialState, action = {}) {
     case RANDOM_REQUEST:
       return loop(
         state.set('loading', true),
-        Effects.promise(requestRandomNumber)
+        Effects.promise(requestRandomNumber),
       );
 
     case RANDOM_RESPONSE:

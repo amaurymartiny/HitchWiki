@@ -1,4 +1,4 @@
-import {fromJS} from 'immutable';
+import { fromJS } from 'immutable';
 
 // ======================================================
 // Actions
@@ -15,23 +15,23 @@ export const FETCH_POINTS_FAILURE = 'FETCH_POINTS_FAILURE';
 // Action Creators
 // ======================================================
 export function fetchCountries() {
-  return dispatch => {
-    dispatch({type: FETCH_COUNTRIES_REQUEST});
+  return (dispatch) => {
+    dispatch({ type: FETCH_COUNTRIES_REQUEST });
     return fetch('https://hitchwiki.org/maps/api/?countries&coordinates')
       .then(response => response.json())
-      .then(json => dispatch({type: FETCH_COUNTRIES_SUCCESS, countries: json}))
-      .catch(error => dispatch({type: FETCH_COUNTRIES_FAILURE, error: error}));
+      .then(json => dispatch({ type: FETCH_COUNTRIES_SUCCESS, countries: json }))
+      .catch(error => dispatch({ type: FETCH_COUNTRIES_FAILURE, error }));
   };
 }
 
 export function fetchPoints(bounds) {
   bounds = '49,50,0,10';
-  return dispatch => {
-    dispatch({type: FETCH_POINTS_REQUEST});
+  return (dispatch) => {
+    dispatch({ type: FETCH_POINTS_REQUEST });
     return fetch(`https://hitchwiki.org/maps/api/?bounds=${bounds}`)
       .then(response => response.json())
-      .then(json => dispatch({type: FETCH_POINTS_SUCCESS, points: json}))
-      .catch(error => dispatch({type: FETCH_POINTS_FAILURE, error: error}));
+      .then(json => dispatch({ type: FETCH_POINTS_SUCCESS, points: json }))
+      .catch(error => dispatch({ type: FETCH_POINTS_FAILURE, error }));
   };
 }
 
@@ -40,7 +40,7 @@ export function fetchPoints(bounds) {
 // ======================================================
 const initialState = fromJS({
   countries: {},
-  points: []
+  points: [],
 });
 export default function HitchhikingMapStateReducer(state = initialState, action = {}) {
   switch (action.type) {

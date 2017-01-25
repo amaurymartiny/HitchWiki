@@ -1,6 +1,7 @@
 import {Map, fromJS} from 'immutable';
 import {loop, combineReducers} from 'redux-loop';
 import HitchhikingMapStateReducer from '../modules/HitchhikingMap/HitchhikingMapState';
+import SpotDetailsStateReducer from '../modules/SpotDetails/SpotDetailsState';
 import CounterStateReducer from '../modules/counter/CounterState';
 import SessionStateReducer, {RESET_STATE} from '../modules/Session/SessionState';
 
@@ -8,6 +9,7 @@ const reducers = {
   // Counter sample app state. This can be removed in a live application
   counter: CounterStateReducer,
   hitchhikingMap: HitchhikingMapStateReducer,
+  spotDetails: SpotDetailsStateReducer,
 
   session: SessionStateReducer
 

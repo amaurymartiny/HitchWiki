@@ -3,7 +3,7 @@ import {Content, Container, Header, Button} from 'native-base';
 import { withNavigation } from '@exponent/ex-navigation';
 // import Mapbox, { MapView } from 'react-native-mapbox-gl';
 
-import * as HitchhikingMapState from './HitchhikingMapState';
+import * as Actions from './HitchhikingMapState';
 
 @withNavigation
 class HitchhikingMapView extends React.Component {
@@ -19,21 +19,21 @@ class HitchhikingMapView extends React.Component {
   }
 
   // TODO I don't like this
-  _goToAbout = () => {
-    this.props.navigator.push('settings', {name: 'Brent'});
+  _goToSpotDetails = () => {
+    this.props.navigator.push('spotDetails', {id: 22231});
   }
 
   render() {
     return (
       <Container>
         <Content>
-          <Button onPress={() => this.props.dispatch(HitchhikingMapState.fetchCountries())}>
+          <Button onPress={() => this.props.dispatch(Actions.fetchCountries())}>
             GET COUNTRIES
           </Button>
-          <Button onPress={() => this.props.dispatch(HitchhikingMapState.fetchPoints())}>
+          <Button onPress={() => this.props.dispatch(Actions.fetchPoints())}>
             GET POINTS
           </Button>
-          <Button onPress={this._goToAbout}>
+          <Button onPress={this._goToSpotDetails}>
             SEE POINT DETAILS
           </Button>
         </Content>

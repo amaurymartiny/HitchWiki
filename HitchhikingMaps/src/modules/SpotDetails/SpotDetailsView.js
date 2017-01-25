@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Text } from 'react-native';
-import { Card, Button } from 'react-native-elements';
+import { Title, Subtitle, Screen } from '@shoutem/ui';
 // import Mapbox, { MapView } from 'react-native-mapbox-gl';
 
 import * as Actions from './SpotDetailsState';
@@ -24,12 +24,10 @@ class SpotDetailsView extends React.Component {
 
   render() {
     return (
-      <Card
-        title='DESCRIPTION'>
-        <Text>
-          {this.props.Description}
-        </Text>
-      </Card>
+      <Screen>
+        <Title>{this.props.Cities.length ? this.props.Cities[this.props.Cities.length - 1] : this.props.title}</Title>
+        <Subtitle>{this.props.Country.length && this.props.Country[0]}</Subtitle>
+      </Screen>
     );
   }
 }

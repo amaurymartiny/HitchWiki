@@ -45,7 +45,8 @@ class AppView extends React.Component {
     return (
       
       <NavigationProvider router={Router}>
-        <StackNavigation initialRoute={Router.getRoute('navigationBar')} />
+        <StackNavigation initialRoute={Router.getRoute('tabBar')} />
+        <DeveloperMenu />
       </NavigationProvider>
     );
   }

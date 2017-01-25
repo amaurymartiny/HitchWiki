@@ -5,10 +5,10 @@ import { createRouter } from '@exponent/ex-navigation';
 import CounterViewContainer from './counter/CounterViewContainer';
 import HitchhikingMapViewContainer from './HitchhikingMap/HitchhikingMapViewContainer';
 import SpotDetailsViewContainer from './SpotDetails/SpotDetailsViewContainer';
-import NavigationBar from '../components/NavigationBar/NavigationBar';
+import TabBar from '../components/TabBar/TabBar';
 
 export default Router = createRouter(() => ({
-  navigationBar: () => NavigationBar,
+  tabBar: () => TabBar,
   hitchhikingMap: () => HitchhikingMapViewContainer,
   spotDetails: () => SpotDetailsViewContainer,
   settings: () => CounterViewContainer,

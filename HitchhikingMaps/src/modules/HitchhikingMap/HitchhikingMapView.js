@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Content, Container, Header, Button } from 'native-base';
+import { Card, Button } from 'react-native-elements';
 import { withNavigation } from '@exponent/ex-navigation';
 // import Mapbox, { MapView } from 'react-native-mapbox-gl';
 
@@ -25,19 +25,20 @@ class HitchhikingMapView extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Content>
-          <Button onPress={() => this.props.dispatch(Actions.fetchCountries())}>
-            GET COUNTRIES
-          </Button>
-          <Button onPress={() => this.props.dispatch(Actions.fetchPoints())}>
-            GET POINTS
-          </Button>
-          <Button onPress={this._goToSpotDetails}>
-            SEE POINT DETAILS
-          </Button>
-        </Content>
-      </Container>
+      <Card>
+        <Button
+          onPress={() => this.props.dispatch(Actions.fetchCountries())}
+          title="GET COUNTRIES"
+        />
+        <Button 
+          onPress={() => this.props.dispatch(Actions.fetchPoints())}
+          title="GET POINTS"
+        />
+        <Button 
+          onPress={this._goToSpotDetails}
+          title="SEE POINT DETAILS"
+        />
+      </Card>
     );
   }
 }

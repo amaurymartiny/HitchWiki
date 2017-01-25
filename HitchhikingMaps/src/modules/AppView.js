@@ -9,11 +9,13 @@ import DeveloperMenu from '../components/DeveloperMenu';
 import { createRouter, NavigationProvider, StackNavigation } from '@exponent/ex-navigation';
 import Router from './AppRouter';
 
-const AppView = React.createClass({
-  propTypes: {
+class AppView extends React.Component {
+
+  static propTypes: {
     isReady: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
-  },
+  }
+
   componentDidMount() {
     snapshotUtil.resetSnapshot()
       .then((snapshot) => {
@@ -29,7 +31,7 @@ const AppView = React.createClass({
           snapshotUtil.saveSnapshot(store.getState());
         });
       });
-  },
+  }
 
   render() {
     if (!this.props.isReady) {
@@ -41,12 +43,13 @@ const AppView = React.createClass({
     }
 
     return (
+      
       <NavigationProvider router={Router}>
         <StackNavigation initialRoute={Router.getRoute('navigationBar')} />
       </NavigationProvider>
     );
-  },
-});
+  }
+}
 
 const styles = StyleSheet.create({
   centered: {

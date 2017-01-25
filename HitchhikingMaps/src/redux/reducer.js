@@ -1,6 +1,5 @@
 import {Map, fromJS} from 'immutable';
 import {loop, combineReducers} from 'redux-loop';
-import NavigationStateReducer from '../modules/Navigation/NavigationState';
 import HitchhikingMapStateReducer from '../modules/HitchhikingMap/HitchhikingMapState';
 import CounterStateReducer from '../modules/counter/CounterState';
 import SessionStateReducer, {RESET_STATE} from '../modules/Session/SessionState';
@@ -9,10 +8,6 @@ const reducers = {
   // Counter sample app state. This can be removed in a live application
   counter: CounterStateReducer,
   hitchhikingMap: HitchhikingMapStateReducer,
-
-  // @NOTE: By convention, the navigation state must live in a subtree called
-  //`navigationState`
-  navigationState: NavigationStateReducer,
 
   session: SessionStateReducer
 

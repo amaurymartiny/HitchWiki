@@ -3,9 +3,6 @@ import {StyleSheet, Colors} from 'react-native';
 import {StackNavigation, TabNavigation, TabNavigationItem as TabItem, withNavigation} from '@exponent/ex-navigation';
 import {Icon, FooterTab, Footer, Button} from 'native-base';
 
-import HitchhikingMapViewContainer from '../../modules/HitchhikingMap/HitchhikingMapViewContainer';
-import ColorViewContainer from '../../modules/colors/ColorViewContainer';
-
 @withNavigation
 class NavigationBar extends React.Component {
   static route = {

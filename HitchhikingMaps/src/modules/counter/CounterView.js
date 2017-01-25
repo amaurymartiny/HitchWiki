@@ -1,5 +1,4 @@
 import * as CounterState from './CounterState';
-import * as NavigationState from '../../modules/Navigation/NavigationState';
 import React, {PropTypes} from 'react';
 import {
   StyleSheet,
@@ -16,21 +15,6 @@ const CounterView = React.createClass({
     userProfilePhoto: PropTypes.string,
     loading: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
-  },
-  increment() {
-    this.props.dispatch(CounterState.increment());
-  },
-  reset() {
-    this.props.dispatch(CounterState.reset());
-  },
-  random() {
-    this.props.dispatch(CounterState.random());
-  },
-  bored() {
-    this.props.dispatch(NavigationState.pushRoute({
-      key: 'Color',
-      title: 'Color Screen'
-    }));
   },
 
   renderUserInfo() {
@@ -61,34 +45,9 @@ const CounterView = React.createClass({
 
     return (
       <View style={styles.container}>
+        <Text>Settings</Text>
 
         {this.renderUserInfo()}
-
-        <TouchableOpacity
-          onPress={this.increment}
-          style={[styles.counterButton, loadingStyle]}>
-          <Text style={styles.counter}>
-            {this.props.counter}
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={this.reset}>
-          <Text style={styles.linkButton}>
-            Reset
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={this.random}>
-          <Text style={styles.linkButton}>
-            Random
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={this.bored} accessible={true}>
-          <Text style={styles.linkButton}>
-            {'I\'m bored!'}
-          </Text>
-        </TouchableOpacity>
 
       </View>
     );

@@ -1,9 +1,11 @@
 import React, {PropTypes} from 'react';
 import {Content, Container, Header, Button} from 'native-base';
+import { withNavigation } from '@exponent/ex-navigation';
 // import Mapbox, { MapView } from 'react-native-mapbox-gl';
 
 import * as HitchhikingMapState from './HitchhikingMapState';
 
+@withNavigation
 class HitchhikingMapView extends React.Component {
 
   static route = {
@@ -16,6 +18,11 @@ class HitchhikingMapView extends React.Component {
     dispatch: PropTypes.func.isRequired
   }
 
+  // TODO I don't like this
+  _goToAbout = () => {
+    this.props.navigator.push('settings', {name: 'Brent'});
+  }
+
   render() {
     return (
       <Container>
@@ -25,6 +32,9 @@ class HitchhikingMapView extends React.Component {
           </Button>
           <Button onPress={() => this.props.dispatch(HitchhikingMapState.fetchPoints())}>
             GET POINTS
+          </Button>
+          <Button onPress={this._goToAbout}>
+            SEE POINT DETAILS
           </Button>
         </Content>
       </Container>

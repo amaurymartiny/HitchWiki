@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Card, Button, Text } from '@shoutem/ui';
+import { Card, Button, Text } from 'react-native-elements';
 import { withNavigation } from '@exponent/ex-navigation';
 // import Mapbox, { MapView } from 'react-native-mapbox-gl';
 
@@ -34,7 +34,10 @@ class HitchhikingMapView extends React.Component {
           onPress={() => this.props.dispatch(Actions.fetchPoints())}
           title="GET POINTS"
         />
-        <Button onPress={this._goToSpotDetails}><Text>SEE POINT DETAILS</Text></Button>
+        <Button
+          onPress={this._goToSpotDetails}
+          title="SEE POINT DETAILS"
+        />
       </Card>
     );
   }

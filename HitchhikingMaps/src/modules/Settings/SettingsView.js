@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Examples } from '@shoutem/ui';
+import { Text } from 'react-native-elements';
 import { withNavigation } from '@exponent/ex-navigation';
 
 @withNavigation
@@ -18,7 +18,7 @@ class SettingsView extends React.Component {
 
   render() {
     return (
-      <Examples />
+      <Text>Settings</Text>
     );
   }
 }

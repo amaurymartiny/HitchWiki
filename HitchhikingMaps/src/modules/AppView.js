@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 import { View, StyleSheet, ActivityIndicator, Text } from 'react-native';
+import { createRouter, NavigationProvider, StackNavigation } from '@exponent/ex-navigation';
 
 import * as snapshotUtil from '../utils/snapshot';
 import * as SessionStateActions from '../modules/Session/SessionState';
 import store from '../redux/store';
 import DeveloperMenu from '../components/DeveloperMenu';
 
-import { createRouter, NavigationProvider, StackNavigation } from '@exponent/ex-navigation';
 import Router from './AppRouter';
 
 class AppView extends React.Component {
@@ -43,7 +43,6 @@ class AppView extends React.Component {
     }
 
     return (
-      
       <NavigationProvider router={Router}>
         <StackNavigation initialRoute={Router.getRoute('tabBar')} />
         <DeveloperMenu />

@@ -68,7 +68,7 @@ class SpotDetailsView extends React.Component {
           </View>
 
           <Text style={[styles.h5, styles.mdGutterVertical]}>
-            <FontAwesomeIcon name="file-image-o" size={22} color={theme.secondary} /> Description
+            <FontAwesomeIcon name="file-image-o" size={22} color={theme.secondary} />  Description
           </Text>
           <Text>{this.props.Description || 'No description available.'}</Text>
           <List>

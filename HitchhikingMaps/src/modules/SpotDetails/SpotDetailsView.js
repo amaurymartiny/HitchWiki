@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { Card, Text, Icon, List, ListItem } from 'react-native-elements';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import StarRating from 'react-native-star-rating';
 
+import theme from '../../config/theme';
 import * as Actions from './SpotDetailsState';
 
 class SpotDetailsView extends React.Component {
@@ -37,7 +38,7 @@ class SpotDetailsView extends React.Component {
         <Card
           title={
             <Text>
-              <Text h3>{this.props.Cities.length ? this.props.Cities[this.props.Cities.length - 1] : this.props.title}</Text>
+              <Text h3 style={styles.primaryColor}>{this.props.Cities.length ? this.props.Cities[this.props.Cities.length - 1] : this.props.title}</Text>
               {"\n"}
               <Text>
                 {this.props.Cities.slice(0, -1).map((city) => {
@@ -45,31 +46,30 @@ class SpotDetailsView extends React.Component {
                 })}
                 {this.props.Country.length && this.props.Country[0]}
               </Text>
-              {"\n"}
-              <Text style={{justifyContent: 'space-between'}}>
-                <Text><MaterialIcon name='thumb-up' size={20} /> {this.props.rating_count}</Text>
-                <Text><MaterialIcon name='chat-bubble-outline' size={20} /> {this.props.comment_count}</Text>
-                <Text><MaterialIcon name='av-timer' size={20} /> {this.props.waiting_time_average}</Text>
-              </Text>
             </Text>
           }
         >
 
-          <View style={styles.horizontal}>
+          <View style={[styles.horizontal, styles.flexStart, styles.mdGutterVertical]}>
             <StarRating
               disabled={true}
               rating={this.props.rating_average}
               starSize={25}
+              starColor={theme.secondary}
               selectedStar={() => {}}
             />
-            <View>
-              <Text><MaterialIcon name='thumb-up' size={20} /> {this.props.rating_count}</Text>
-              <Text><MaterialIcon name='chat-bubble-outline' size={20} /> {this.props.comment_count}</Text>
-              <Text><MaterialIcon name='av-timer' size={20} /> {this.props.waiting_time_average}</Text>
-            </View>
+            <Text style={[styles.secondaryColor, styles.h5]}> {this.props.rating_average}/5</Text>
           </View>
 
-          <Text h4><MaterialIcon name="description" size={20} style={{marginTop: 5}} /> Description</Text>
+          <View style={[styles.horizontal, styles.spaceBetween, styles.lgGutterVertical]}>
+            <Text><FontAwesomeIcon name='thumbs-up' size={20} color={theme.secondary}/> {this.props.rating_count + ' ratings' || '-'}</Text>
+            <Text><FontAwesomeIcon name='hourglass-half' size={20} color={theme.secondary}/> {this.props.waiting_time_average + 'min' || '-'}</Text>
+            <Text><FontAwesomeIcon name='comments' size={20} color={theme.secondary}/> {this.props.comment_count + ' comments' || '-'}</Text>
+          </View>
+
+          <Text style={[styles.h5, styles.mdGutterVertical]}>
+            <FontAwesomeIcon name="file-image-o" size={22} color={theme.secondary} /> Description
+          </Text>
           <Text>{this.props.Description || 'No description available.'}</Text>
           <List>
             {this.props.comments.map((comment, index) => {
@@ -77,8 +77,9 @@ class SpotDetailsView extends React.Component {
                 <ListItem
                   key={comment.comment_id}
                   leftIcon={{
-                    name: 'chat-bubble-outline',
-                    color: 'black',
+                    name: 'comment-o',
+                    type: 'font-awesome',
+                    color: theme.secondary,
                     style: styles.alignTop
                   }}
                   title={(comment.user_name || 'Anonymous User') + ' on ' + this._formatDate(comment.timestamp)}
@@ -125,10 +126,29 @@ class SpotDetailsView extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  h5: {
+    fontSize: 20,
+  },
+  primaryColor: {
+    color: theme.primary
+  },
+  secondaryColor: {
+    color: theme.secondary
+  },
   horizontal: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
+  },
+  spaceBetween: {
     justifyContent: 'space-between'
+  },
+  mdGutterVertical: {
+    marginTop: 5,
+    marginBottom: 5,
+  },
+  lgGutterVertical: {
+    marginTop: 10,
+    marginBottom: 10,
   },
   caption: {
     fontSize: 12

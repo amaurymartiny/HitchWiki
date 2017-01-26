@@ -11,11 +11,12 @@ import Router from './AppRouter';
 
 class AppView extends React.Component {
 
-  static propTypes: {
+  static propTypes = {
     isReady: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
   }
 
+  // Create snapshot from previous state, is that what this is doing?
   componentDidMount() {
     snapshotUtil.resetSnapshot()
       .then((snapshot) => {

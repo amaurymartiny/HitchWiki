@@ -34,7 +34,6 @@ class SpotDetailsView extends React.Component {
   render() {
     return (
       <ScrollView>
-
         <Card
           title={
             <Text>

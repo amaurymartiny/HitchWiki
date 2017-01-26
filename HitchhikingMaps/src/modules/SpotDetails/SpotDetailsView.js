@@ -62,9 +62,9 @@ class SpotDetailsView extends React.Component {
           </View>
 
           <View style={[styles.horizontal, styles.spaceBetween, styles.lgGutterVertical]}>
-            <Text><FontAwesomeIcon name='thumbs-up' size={20} color={theme.secondary}/> {this.props.rating_count + ' ratings' || '-'}</Text>
-            <Text><FontAwesomeIcon name='hourglass-half' size={20} color={theme.secondary}/> {this.props.waiting_time_average + 'min' || '-'}</Text>
-            <Text><FontAwesomeIcon name='comments' size={20} color={theme.secondary}/> {this.props.comment_count + ' comments' || '-'}</Text>
+            <Text><FontAwesomeIcon name='thumbs-up' size={20} color={theme.secondary}/> {this.props.rating_count ? this.props.rating_count + ' ratings' : '-'}</Text>
+            <Text><FontAwesomeIcon name='hourglass-half' size={20} color={theme.secondary}/> {this.props.waiting_time_average ? this.props.waiting_time_average + 'min' : '-'}</Text>
+            <Text><FontAwesomeIcon name='comments' size={20} color={theme.secondary}/> {this.props.comment_count ? this.props.comment_count + ' comments' : '-'}</Text>
           </View>
 
           <Text style={[styles.h5, styles.mdGutterVertical]}>

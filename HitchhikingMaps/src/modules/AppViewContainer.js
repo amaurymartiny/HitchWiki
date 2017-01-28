@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import AppView from './AppView';
 
-const mapStateToProps = state => ({
-  isReady: state.session.isReady,
-});
+// const mapStateToProps = state => ({
 
-export default connect(mapStateToProps)(AppView);
+// });
+
+export default connect()(AppView);

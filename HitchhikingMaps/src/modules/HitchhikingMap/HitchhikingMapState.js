@@ -1,5 +1,3 @@
-import { fromJS } from 'immutable';
-
 // ======================================================
 // Actions
 // ======================================================
@@ -38,16 +36,22 @@ export function fetchPoints(bounds) {
 // ======================================================
 // Reducers
 // ======================================================
-const initialState = fromJS({
+const initialState = {
   countries: {},
   points: [],
-});
+};
 export default function HitchhikingMapStateReducer(state = initialState, action = {}) {
   switch (action.type) {
     case FETCH_COUNTRIES_SUCCESS:
-      return state.set('countries', action.countries);
+      return {
+        ...state,
+        countries: action.countries
+      };
     case FETCH_POINTS_SUCCESS:
-      return state.set('points', action.points);
+      return {
+        ...state,
+        points: action.spots
+      };
     default:
       return state;
   }

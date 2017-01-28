@@ -1,5 +1,3 @@
-import { fromJS } from 'immutable';
-
 // ======================================================
 // Actions
 // ======================================================
@@ -26,7 +24,7 @@ export function fetchSpotDetails(pointId) {
 // ======================================================
 // To get an idea of the API response:
 // http://beta.hitchwiki.org/en/Special:ApiSandbox#action=hwspotidapi&format=json&page_id=22231&properties=Cities%2CCountry%2CCardinalDirection&user_id=0
-const initialState = fromJS({
+const initialState = {
   title: '',
   Cities: [],
   Country: [],
@@ -41,12 +39,15 @@ const initialState = fromJS({
   waiting_time_count: 0,
   comment_count: 0,
   comments: []
-});
+};
 
 export default function SpotDetailsStateReducer(state = initialState, action = {}) {
   switch (action.type) {
     case FETCH_SPOT_DETAILS_SUCCESS:
-      return fromJS(action.details);
+      return {
+        ...state,
+        ...action.details
+      };
     default:
       return state;
   }

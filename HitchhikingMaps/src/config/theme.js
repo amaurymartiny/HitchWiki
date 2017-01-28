@@ -7,6 +7,7 @@ const palette = {
 }
 
 export default theme = {
+  ...palette,
   primary: palette.red,
   secondary: palette.green
 }

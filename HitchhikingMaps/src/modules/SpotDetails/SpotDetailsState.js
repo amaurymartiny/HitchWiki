@@ -8,15 +8,11 @@ export const FETCH_SPOT_DETAILS_FAILURE = 'FETCH_SPOT_DETAILS_FAILURE';
 // ======================================================
 // Action Creators
 // ======================================================
-export function fetchSpotDetails(pointId) {
-  console.log(pointId);
-  return (dispatch) => {
-    dispatch({ type: FETCH_SPOT_DETAILS_REQUEST });
-    return fetch(`http://beta.hitchwiki.org/en/api.php?action=hwspotidapi&page_id=${pointId}&format=json&properties=Cities%2CCountry%2CCardinalDirection&user_id=0`)
-      .then(response => response.json())
-      .then(json => dispatch({ type: FETCH_SPOT_DETAILS_SUCCESS, details: json.query.spot }))
-      .catch(error => dispatch({ type: FETCH_SPOT_DETAILS_FAILURE, error }));
-  };
+export function fetchSpotDetails(spotId) {
+  return {
+    type: FETCH_SPOT_DETAILS_REQUEST,
+    spotId: spotId
+  }
 }
 
 // ======================================================
@@ -46,7 +42,7 @@ export default function SpotDetailsStateReducer(state = initialState, action = {
     case FETCH_SPOT_DETAILS_SUCCESS:
       return {
         ...state,
-        ...action.details
+        ...action.payload
       };
     default:
       return state;

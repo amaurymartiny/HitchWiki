@@ -18,6 +18,8 @@ class HitchhikingMapView extends React.Component {
     },
   }
 
+  _map: Object = null
+
   static propTypes = {
     annotations: PropTypes.array.isRequired,
     zoomLevel: PropTypes.number.isRequired,
@@ -42,15 +44,13 @@ class HitchhikingMapView extends React.Component {
           onRegionDidChange={
             payload => {
               this.props.dispatch(setZoomLevel(payload.zoomLevel));
-              payload.zoomLevel > 10 && this.props.dispatch(fetchSpots([
-                payload.latitude + 1,
-                payload.longitude + 1,
-                payload.latitude - 1,
-                payload.longitude - 1,
-              ]));
+              payload.zoomLevel > 10 && this._map.getBounds(bounds => {
+                this.props.dispatch(fetchSpots(bounds));
+              });
             }
           }
           logoIsHidden={true}
+          ref={map => { this._map = map; }}
         />
         <View style={styles.fba}>
         <Icon

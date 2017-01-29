@@ -14,6 +14,7 @@ export const SET_ZOOM_LEVEL = 'SET_ZOOM_LEVEL';
 // Action Creators
 // ======================================================
 export function fetchSpots(bounds) {
+  // bounds from Mapbox is [ latitudeSW, longitudeSW, latitudeNE, longitudeNE ]
   return {
     type: FETCH_SPOTS_REQUEST,
     payload: { bounds }
@@ -84,7 +85,7 @@ function spotsToAnnotations(spots) {
 
 const initialState = {
   annotations: [],
-  zoomLevel: 10
+  zoomLevel: 11
 };
 export default function HitchhikingMapStateReducer(state = initialState, action = {}) {
   switch (action.type) {

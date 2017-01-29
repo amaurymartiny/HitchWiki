@@ -1,6 +1,7 @@
 const BASE_URL = 'http://beta.hitchwiki.org/en/api.php?';
 
 export default function request(endpoint, method = 'GET', body) {
+  console.log('Fetching...')
   return fetch(BASE_URL + endpoint, {
     method,
     headers: {

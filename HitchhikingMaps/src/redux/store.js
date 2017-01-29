@@ -7,8 +7,6 @@ import middleware from './middleware';
 import reducer from './reducer';
 import rootSaga from './saga';
 
-import SpotDetailsSaga from '../modules/SpotDetails/SpotDetailsSaga';
-
 const sagaMiddleware = createSagaMiddleware();
 
 const enhancer = compose(
@@ -22,6 +20,6 @@ const store = createStore(
   enhancer,
 );
 
-sagaMiddleware.run(SpotDetailsSaga);
+sagaMiddleware.run(rootSaga);
 
 export default store;

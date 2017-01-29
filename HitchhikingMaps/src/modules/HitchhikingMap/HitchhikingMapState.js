@@ -1,58 +1,57 @@
 // ======================================================
 // Actions
 // ======================================================
-export const FETCH_COUNTRIES_REQUEST = 'FETCH_COUNTRIES_REQUEST';
-export const FETCH_COUNTRIES_SUCCESS = 'FETCH_COUNTRIES_SUCCESS';
-export const FETCH_COUNTRIES_FAILURE = 'FETCH_COUNTRIES_FAILURE';
-
-export const FETCH_POINTS_REQUEST = 'FETCH_POINTS_REQUEST';
-export const FETCH_POINTS_SUCCESS = 'FETCH_POINTS_SUCCESS';
-export const FETCH_POINTS_FAILURE = 'FETCH_POINTS_FAILURE';
+export const FETCH_SPOTS_REQUEST = 'FETCH_SPOTS_REQUEST';
+export const FETCH_SPOTS_SUCCESS = 'FETCH_SPOTS_SUCCESS';
+export const FETCH_SPOTS_FAILURE = 'FETCH_SPOTS_FAILURE';
 
 // ======================================================
 // Action Creators
 // ======================================================
-export function fetchCountries() {
-  return (dispatch) => {
-    dispatch({ type: FETCH_COUNTRIES_REQUEST });
-    return fetch('https://hitchwiki.org/maps/api/?countries&coordinates')
-      .then(response => response.json())
-      .then(json => dispatch({ type: FETCH_COUNTRIES_SUCCESS, countries: json }))
-      .catch(error => dispatch({ type: FETCH_COUNTRIES_FAILURE, error }));
-  };
-}
-
-export function fetchPoints(bounds) {
-  bounds = '49,50,0,10';
-  return (dispatch) => {
-    dispatch({ type: FETCH_POINTS_REQUEST });
-    return fetch(`https://hitchwiki.org/maps/api/?bounds=${bounds}`)
-      .then(response => response.json())
-      .then(json => dispatch({ type: FETCH_POINTS_SUCCESS, points: json }))
-      .catch(error => dispatch({ type: FETCH_POINTS_FAILURE, error }));
-  };
+export function fetchSpots(bounds) {
+  return {
+    type: FETCH_SPOTS_REQUEST,
+    bounds: bounds
+  }
 }
 
 // ======================================================
 // Reducers
 // ======================================================
 const initialState = {
-  countries: {},
-  points: [],
+  annotations: [],
 };
 export default function HitchhikingMapStateReducer(state = initialState, action = {}) {
   switch (action.type) {
-    case FETCH_COUNTRIES_SUCCESS:
+    case FETCH_SPOTS_SUCCESS:
       return {
         ...state,
-        countries: action.countries
-      };
-    case FETCH_POINTS_SUCCESS:
-      return {
-        ...state,
-        points: action.spots
+        annotations: spotsToAnnotations(action.payload)
       };
     default:
       return state;
   }
+}
+
+/**
+ * Helper function to transform spots given by API to annotations in state
+ * @param  {array}  spots Array of spots given by the API
+ * @return {array}        Array of annotations understandable by mapbox
+ */
+function spotsToAnnotations(spots) {
+  let annotations = [];
+  for (let i = spots.length - 1; i >= 0; i--) {
+    annotations.push({
+      id: spots[i].id,
+      coordinates: spots[i].location,
+      title: spots[i].title,
+      type: 'point',
+      rightCalloutAccessory: {
+        source: { uri: 'https://cldup.com/9Lp0EaBw5s.png' },
+        height: 25,
+        width: 25
+      }
+    });
+  }
+  return annotations;
 }

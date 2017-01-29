@@ -4,7 +4,7 @@ import { Button, Text } from 'react-native-elements';
 import { withNavigation } from '@exponent/ex-navigation';
 import Mapbox, { MapView } from 'react-native-mapbox-gl';
 
-import * as Actions from './HitchhikingMapState';
+import { fetchSpots } from './HitchhikingMapState';
 
 Mapbox.setAccessToken('pk.eyJ1IjoibWFuaWFhcm15eXVydCIsImEiOiJjaXk4dHIxbDgwMDF0MzNxam95ZXFsM2N1In0.P8-GnGGEQKXRTzklDE73Xw');
 
@@ -67,8 +67,19 @@ class HitchhikingMapView extends React.Component {
           initialCenterCoordinate={{latitude: 40.72052634, longitude: -73.97686958312988}}
           style={styles.fullScreen}
           showsUserLocation={true}
-          annotations={annotations}
+          annotations={this.props.annotations}
           onRightAnnotationTapped={payload => this._goToSpotDetails(payload.id)}
+          onRegionDidChange={
+            payload => {
+              payload.zoomLevel < 10 && this.props.dispatch(fetchSpots([
+                payload.latitude + 1,
+                payload.longitude + 1,
+                payload.latitude - 1,
+                payload.longitude - 1
+              ]));
+            }
+          }
+          logoIsHidden={true}
         />
         {/*
         <Button

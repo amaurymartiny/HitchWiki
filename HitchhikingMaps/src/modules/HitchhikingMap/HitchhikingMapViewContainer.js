@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import HitchhikingMapView from './HitchhikingMapView';
 
 const mapStateToProps = state => ({
-  HitchhikingMapState: state.hitchhikingMap,
+  annotations: state.hitchhikingMap.annotations,
 });
 
 export default connect(mapStateToProps)(HitchhikingMapView);

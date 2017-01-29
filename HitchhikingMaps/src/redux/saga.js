@@ -5,6 +5,6 @@ import HitchhikingMapSaga from '../modules/HitchhikingMap/HitchhikingMapSaga';
 export default function* rootSaga() {
   yield [
     fork(HitchhikingMapSaga),
-    fork(SpotDetailsSaga)
+    fork(SpotDetailsSaga),
   ];
 }

@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react';
-import { createRouter, NavigationProvider, StackNavigation } from '@exponent/ex-navigation';
-
-import store from '../redux/store';
+import { NavigationProvider, StackNavigation } from '@exponent/ex-navigation';
 import Router from './AppRouter';
 
 class AppView extends React.Component {

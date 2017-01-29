@@ -8,7 +8,7 @@ class SettingsView extends React.Component {
   static route = {
     navigationBar: {
       visible: true,
-      title: 'Settings'
+      title: 'Settings',
     },
   }
 

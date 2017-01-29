@@ -11,8 +11,8 @@ export const FETCH_SPOT_DETAILS_FAILURE = 'FETCH_SPOT_DETAILS_FAILURE';
 export function fetchSpotDetails(spotId) {
   return {
     type: FETCH_SPOT_DETAILS_REQUEST,
-    spotId: spotId
-  }
+    spotId,
+  };
 }
 
 // ======================================================
@@ -34,7 +34,7 @@ const initialState = {
   waiting_time_average: 0,
   waiting_time_count: 0,
   comment_count: 0,
-  comments: []
+  comments: [],
 };
 
 export default function SpotDetailsStateReducer(state = initialState, action = {}) {
@@ -42,7 +42,7 @@ export default function SpotDetailsStateReducer(state = initialState, action = {
     case FETCH_SPOT_DETAILS_SUCCESS:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       };
     default:
       return state;

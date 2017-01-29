@@ -4,7 +4,7 @@ import SpotDetailsStateReducer from '../modules/SpotDetails/SpotDetailsState';
 
 const rootReducer = combineReducers({
   hitchhikingMap: HitchhikingMapStateReducer,
-  spotDetails: SpotDetailsStateReducer
+  spotDetails: SpotDetailsStateReducer,
 });
 
 export default rootReducer;

@@ -14,30 +14,16 @@ export const FETCH_SPOTS_FAILURE = 'FETCH_SPOTS_FAILURE';
 export function fetchSpots(bounds) {
   return {
     type: FETCH_SPOTS_REQUEST,
-    bounds: bounds
-  }
+    bounds,
+  };
 }
 
 // ======================================================
 // Reducers
 // ======================================================
-const initialState = {
-  annotations: [],
-};
-export default function HitchhikingMapStateReducer(state = initialState, action = {}) {
-  switch (action.type) {
-    case FETCH_SPOTS_SUCCESS:
-      return {
-        ...state,
-        annotations: spotsToAnnotations(action.payload)
-      };
-    default:
-      return state;
-  }
-}
-
 /**
  * Helper function to transform spots given by API to annotations understandable by Mapbox
+ * Maybe put in a middleware TODO
  * @param  {array}  spots Array of spots given by the API
  * @return {array}        Array of annotations understandable by mapbox
  */
@@ -49,40 +35,55 @@ function spotsToAnnotations(spots) {
   // Find the right marker image according to rating
   // Note: the require needs to be static
   function getAnnotationImage(number) {
-    switch(number) {
+    switch (number) {
       case 5:
-        return resolveAssetSource(require('../../../images/annotation5.png'));
+        return resolveAssetSource(require('../../../images/annotation5.png')); // eslint-disable-line
       case 4:
-        return resolveAssetSource(require('../../../images/annotation4.png'));
+        return resolveAssetSource(require('../../../images/annotation4.png')); // eslint-disable-line
       case 3:
-        return resolveAssetSource(require('../../../images/annotation3.png'));
+        return resolveAssetSource(require('../../../images/annotation3.png')); // eslint-disable-line
       case 2:
-        return resolveAssetSource(require('../../../images/annotation2.png'));
+        return resolveAssetSource(require('../../../images/annotation2.png')); // eslint-disable-line
       default:
-        return resolveAssetSource(require('../../../images/annotation1.png'));
+        return resolveAssetSource(require('../../../images/annotation1.png')); // eslint-disable-line
     }
   }
 
-  let annotations = [];
-  for (let i = spots.length - 1; i >= 0; i--) {
-    const average_rating = Math.floor(Math.random() * (5 + 1)); // TODO fix API
+  const annotations = [];
+  for (let i = spots.length - 1; i >= 0; i -= 1) {
+    const averageRating = Math.floor(Math.random() * (5 + 1)); // TODO fix API
     annotations.push({
       id: spots[i].id,
       coordinates: spots[i].location,
       title: spots[i].title,
-      subtitle: drawStars(average_rating),
+      subtitle: drawStars(averageRating),
       type: 'point',
       annotationImage: {
-        source: getAnnotationImage(average_rating),
+        source: getAnnotationImage(averageRating),
         height: 25,
-        width: 18
+        width: 18,
       },
       rightCalloutAccessory: {
-        source: resolveAssetSource(require('../../../images/next.png')),
+        source: resolveAssetSource(require('../../../images/next.png')), // eslint-disable-line
         height: 25,
-        width: 25
-      }
+        width: 25,
+      },
     });
   }
   return annotations;
+}
+
+const initialState = {
+  annotations: [],
+};
+export default function HitchhikingMapStateReducer(state = initialState, action = {}) {
+  switch (action.type) {
+    case FETCH_SPOTS_SUCCESS:
+      return {
+        ...state,
+        annotations: spotsToAnnotations(action.payload),
+      };
+    default:
+      return state;
+  }
 }

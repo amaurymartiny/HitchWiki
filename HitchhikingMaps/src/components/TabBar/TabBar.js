@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet, Colors } from 'react-native';
 import { StackNavigation, TabNavigation, TabNavigationItem as TabItem, withNavigation } from '@exponent/ex-navigation';
 
 @withNavigation
@@ -42,19 +41,5 @@ class TabBar extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  tabItemContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  tabTitleText: {
-    fontSize: 11,
-  },
-});
 
 export default TabBar;

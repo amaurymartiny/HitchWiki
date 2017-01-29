@@ -4,8 +4,7 @@ import {Provider} from 'react-redux';
 import store from './src/redux/store';
 import AppViewContainer from './src/modules/AppViewContainer';
 
-const HitchhikingMaps = React.createClass({
-
+class HitchhikingMaps extends React.Component {
   render() {
     return (
       <Provider store={store}>
@@ -13,6 +12,6 @@ const HitchhikingMaps = React.createClass({
       </Provider>
     );
   }
-});
+}
 
 AppRegistry.registerComponent('HitchhikingMaps', () => HitchhikingMaps);

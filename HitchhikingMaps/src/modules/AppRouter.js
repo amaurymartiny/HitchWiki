@@ -1,6 +1,3 @@
-/* eslint-disable react/prop-types*/
-
-import React from 'react';
 import { createRouter } from '@exponent/ex-navigation';
 import SettingsViewContainer from './Settings/SettingsViewContainer';
 import HitchhikingMapViewContainer from './HitchhikingMap/HitchhikingMapViewContainer';

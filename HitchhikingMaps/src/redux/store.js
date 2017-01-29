@@ -10,7 +10,7 @@ import rootSaga from './saga';
 const sagaMiddleware = createSagaMiddleware();
 
 const enhancer = compose(
-  applyMiddleware(...middleware, thunkMiddleware, sagaMiddleware, createLogger())
+  applyMiddleware(...middleware, thunkMiddleware, sagaMiddleware, createLogger()),
 );
 
 // create the store

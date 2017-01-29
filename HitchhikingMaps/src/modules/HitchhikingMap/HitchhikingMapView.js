@@ -27,13 +27,6 @@ class HitchhikingMapView extends React.Component {
     dispatch: PropTypes.func.isRequired,
   }
 
-  componentDidUpdate(prevState) {
-    if (prevState.location.latitude !== this.props.location.latitude
-      || prevState.location.longitude !== this.props.location.longitude) {
-      this._map.setCenterCoordinate(this.props.location.latitude, this.props.location.longitude);
-    }
-  }
-
   // TODO I don't like this
   goToSpotDetails = (spotId) => {
     this.props.navigator.push('spotDetails', { spotId });
@@ -77,7 +70,7 @@ class HitchhikingMapView extends React.Component {
           raised
           name='my-location'
           color={theme.red}
-          onPress={() => this.props.dispatch(getLocation())}
+          onPress={() => this.props.dispatch(getLocation(this._map))}
         />
         </View>
       </View>

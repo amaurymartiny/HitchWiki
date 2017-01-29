@@ -44,9 +44,12 @@ export function setLocation(latitude, longitude) {
   };
 }
 
-export function getLocation() {
+// mapView is a reference to the <MapView />
+// used to called setCoordinates in saga side effect
+export function getLocation(mapView) {
   return {
-    type: GET_LOCATION_REQUEST
+    type: GET_LOCATION_REQUEST,
+    payload: mapView
   }
 }
 

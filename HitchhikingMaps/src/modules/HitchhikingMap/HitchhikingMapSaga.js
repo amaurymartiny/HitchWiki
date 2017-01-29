@@ -14,7 +14,7 @@ function* fetchSpotsSaga(action) {
   }
 }
 
-function* getLocationSaga() {
+function* getLocationSaga(action) {
 
   // geolocation.getCurrentPosition's footprint is (dataCallback, errorCallback, options)
   // cps needs a function whose footprint is (err, data) => ...
@@ -29,6 +29,10 @@ function* getLocationSaga() {
   
   try {
     const position = yield cps(getCurrentPosition);
+    // TODO not sure if to put here
+    // action.payload here is a reference to the <MapView />
+    // used to called setCoordinates in saga side effect
+    action.payload.setCenterCoordinate(position.coords.latitude, position.coords.longitude);
     yield put({ type: GET_LOCATION_SUCCESS, payload: position });
   } catch(error) {
     yield put({ type: GET_LOCATION_FAILURE, error });

@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { withNavigation } from '@exponent/ex-navigation';
 import Mapbox, { MapView } from 'react-native-mapbox-gl';
 
-import { fetchSpots } from './HitchhikingMapState';
+import { fetchSpots, setZoomLevel } from './HitchhikingMapState';
 
 Mapbox.setAccessToken('pk.eyJ1IjoibWFuaWFhcm15eXVydCIsImEiOiJjaXk4dHIxbDgwMDF0MzNxam95ZXFsM2N1In0.P8-GnGGEQKXRTzklDE73Xw');
 
@@ -18,6 +18,7 @@ class HitchhikingMapView extends React.Component {
 
   static propTypes = {
     annotations: PropTypes.array.isRequired,
+    zoomLevel: PropTypes.number.isRequired,
     dispatch: PropTypes.func.isRequired,
   }
 
@@ -30,14 +31,15 @@ class HitchhikingMapView extends React.Component {
     return (
       <View style={styles.fullScreen}>
         <MapView
-          initialZoomLevel={10}
+          initialZoomLevel={this.props.zoomLevel}
           initialCenterCoordinate={{ latitude: 40.72052634, longitude: -73.97686958312988 }}
           style={styles.fullScreen}
           showsUserLocation
           annotations={this.props.annotations}
           onRightAnnotationTapped={payload => this.goToSpotDetails(payload.id)}
           onRegionDidChange={
-            (payload) => {
+            payload => {
+              this.props.dispatch(setZoomLevel(payload.zoomLevel));
               payload.zoomLevel > 10 && this.props.dispatch(fetchSpots([
                 payload.latitude + 1,
                 payload.longitude + 1,
@@ -46,7 +48,7 @@ class HitchhikingMapView extends React.Component {
               ]));
             }
           }
-          logoIsHidden
+          logoIsHidden={true}
         />
       </View>
     );

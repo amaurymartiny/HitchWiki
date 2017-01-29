@@ -8,14 +8,23 @@ export const FETCH_SPOTS_REQUEST = 'FETCH_SPOTS_REQUEST';
 export const FETCH_SPOTS_SUCCESS = 'FETCH_SPOTS_SUCCESS';
 export const FETCH_SPOTS_FAILURE = 'FETCH_SPOTS_FAILURE';
 
+export const SET_ZOOM_LEVEL = 'SET_ZOOM_LEVEL';
+
 // ======================================================
 // Action Creators
 // ======================================================
 export function fetchSpots(bounds) {
   return {
     type: FETCH_SPOTS_REQUEST,
-    bounds,
+    payload: { bounds }
   };
+}
+
+export function setZoomLevel(zoomLevel) {
+  return {
+    type: SET_ZOOM_LEVEL,
+    payload: { zoomLevel }
+  }
 }
 
 // ======================================================
@@ -75,9 +84,15 @@ function spotsToAnnotations(spots) {
 
 const initialState = {
   annotations: [],
+  zoomLevel: 10
 };
 export default function HitchhikingMapStateReducer(state = initialState, action = {}) {
   switch (action.type) {
+    case SET_ZOOM_LEVEL:
+      return {
+        ...state,
+        zoomLevel: action.payload.zoomLevel
+      }
     case FETCH_SPOTS_SUCCESS:
       return {
         ...state,

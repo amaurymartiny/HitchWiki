@@ -3,8 +3,9 @@ import { FETCH_SPOTS_REQUEST, FETCH_SPOTS_SUCCESS, FETCH_SPOTS_FAILURE } from '.
 import apiRequest from '../../services/api';
 
 function* fetchSpotsSaga(action) {
+  console.log(action)
   try {
-    const response = yield call(apiRequest, `action=hwmapapi&format=json&NElat=${action.bounds[0]}&NElon=${action.bounds[1]}&SWlat=${action.bounds[2]}&SWlon=${action.bounds[3]}`);
+    const response = yield call(apiRequest, `action=hwmapapi&format=json&NElat=${action.payload.bounds[0]}&NElon=${action.payload.bounds[1]}&SWlat=${action.payload.bounds[2]}&SWlon=${action.payload.bounds[3]}`);
     yield put({ type: FETCH_SPOTS_SUCCESS, payload: response.spots });
   } catch (error) {
     yield put({ type: FETCH_SPOTS_FAILURE, error });

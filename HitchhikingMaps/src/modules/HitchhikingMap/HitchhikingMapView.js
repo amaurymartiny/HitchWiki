@@ -28,39 +28,6 @@ class HitchhikingMapView extends React.Component {
   }
 
   render() {
-    const annotations= [{
-  coordinates: [40.72052634, -73.97686958312988],
-  type: 'point',
-  title: 'This is marker 1',
-  subtitle: 'It has a rightCalloutAccessory too',
-  rightCalloutAccessory: {
-    source: { uri: 'https://cldup.com/9Lp0EaBw5s.png' },
-    height: 25,
-    width: 25
-  },
-  annotationImage: {
-    source: { uri: 'https://cldup.com/CnRLZem9k9.png' },
-    height: 25,
-    width: 25
-  },
-  id: '22203'
-}, {
-  coordinates: [40.714541341726175,-74.00579452514648],
-  type: 'point',
-  title: 'Important',
-  subtitle: 'Neat, this is a custom annotation image',
-  rightCalloutAccessory: {
-    source: { uri: 'https://cldup.com/9Lp0EaBw5s.png' },
-    height: 25,
-    width: 25
-  },
-  annotationImage: {
-    source: { uri: 'https://cldup.com/7NLZklp8zS.png' },
-    height: 25,
-    width: 25
-  },
-  id: '22202'
-}];
     return (
       <View style={styles.fullScreen}>
         <MapView
@@ -82,20 +49,6 @@ class HitchhikingMapView extends React.Component {
           }
           logoIsHidden={true}
         />
-        {/*
-        <Button
-          onPress={() => this.props.dispatch(Actions.fetchCountries())}
-          title="GET COUNTRIES"
-        />
-        <Button 
-          onPress={() => this.props.dispatch(Actions.fetchPoints())}
-          title="GET POINTS"
-        />
-        <Button
-          onPress={this._goToSpotDetails}
-          title="SEE POINT DETAILS"
-        />
-        */}
       </View>
     );
   }

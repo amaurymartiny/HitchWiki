@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react';
 import { View, StyleSheet } from 'react-native';
+import { Icon } from 'react-native-elements';
 import { withNavigation } from '@exponent/ex-navigation';
 import Mapbox, { MapView } from 'react-native-mapbox-gl';
 
 import { fetchSpots, setZoomLevel } from './HitchhikingMapState';
+import theme from '../../config/theme';
 
 Mapbox.setAccessToken('pk.eyJ1IjoibWFuaWFhcm15eXVydCIsImEiOiJjaXk4dHIxbDgwMDF0MzNxam95ZXFsM2N1In0.P8-GnGGEQKXRTzklDE73Xw');
 
@@ -50,6 +52,24 @@ class HitchhikingMapView extends React.Component {
           }
           logoIsHidden={true}
         />
+        <View style={styles.fba}>
+        <Icon
+          reverse
+          raised
+          name='cloud-download'
+          color={theme.red}
+          onPress={() => console.log('hello')}
+          
+        />
+        <Icon
+          reverse
+          raised
+          name='my-location'
+          color={theme.red}
+          onPress={() => console.log('hello')}
+          
+        />
+        </View>
       </View>
     );
   }
@@ -60,6 +80,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'stretch',
   },
+  fba: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    position: 'absolute',
+    right: 20,
+    bottom: 20
+  }
 });
 
 export default HitchhikingMapView;

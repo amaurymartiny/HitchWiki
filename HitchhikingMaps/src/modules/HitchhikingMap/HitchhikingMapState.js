@@ -39,12 +39,17 @@ export default function HitchhikingMapStateReducer(state = initialState, action 
  * @return {array}        Array of annotations understandable by mapbox
  */
 function spotsToAnnotations(spots) {
+  function drawStars(number) {
+    return '★'.repeat(number) + '☆'.repeat(5 - number);
+  }
+
   let annotations = [];
   for (let i = spots.length - 1; i >= 0; i--) {
     annotations.push({
       id: spots[i].id,
       coordinates: spots[i].location,
-      title: spots[i].title,
+      subtitle: spots[i].title,
+      title: drawStars(Math.floor(Math.random() * (5 + 1)) ),
       type: 'point',
       rightCalloutAccessory: {
         source: { uri: 'https://cldup.com/9Lp0EaBw5s.png' },

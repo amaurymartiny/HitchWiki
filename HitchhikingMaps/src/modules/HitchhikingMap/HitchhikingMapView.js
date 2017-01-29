@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { Button, Text } from 'react-native-elements';
 import { withNavigation } from '@exponent/ex-navigation';
 import Mapbox, { MapView } from 'react-native-mapbox-gl';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 import { fetchSpots } from './HitchhikingMapState';
 
@@ -71,7 +72,7 @@ class HitchhikingMapView extends React.Component {
           onRightAnnotationTapped={payload => this._goToSpotDetails(payload.id)}
           onRegionDidChange={
             payload => {
-              payload.zoomLevel < 10 && this.props.dispatch(fetchSpots([
+              payload.zoomLevel > 10 && this.props.dispatch(fetchSpots([
                 payload.latitude + 1,
                 payload.longitude + 1,
                 payload.latitude - 1,

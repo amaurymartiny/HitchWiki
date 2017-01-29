@@ -75,10 +75,10 @@ function spotsToAnnotations(spots) {
       annotationImage: {
         source: getAnnotationImage(average_rating),
         height: 25,
-        width: 20
+        width: 18
       },
       rightCalloutAccessory: {
-        source: { uri: 'https://cldup.com/9Lp0EaBw5s.png' },
+        source: resolveAssetSource(require('../../../images/next.png')),
         height: 25,
         width: 25
       }

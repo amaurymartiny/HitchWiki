@@ -10,11 +10,16 @@ export const GET_LOCATION_FAILURE = 'GET_LOCATION_FAILURE';
 
 export const SET_LOCATION = 'SET_LOCATION';
 
+export const SET_ZOOM_LEVEL = 'SET_ZOOM_LEVEL';
+
 export const FETCH_SPOTS_REQUEST = 'FETCH_SPOTS_REQUEST';
 export const FETCH_SPOTS_SUCCESS = 'FETCH_SPOTS_SUCCESS';
 export const FETCH_SPOTS_FAILURE = 'FETCH_SPOTS_FAILURE';
 
-export const SET_ZOOM_LEVEL = 'SET_ZOOM_LEVEL';
+
+export const SAVE_OFFLINE_MAP_REQUEST = 'SAVE_OFFLINE_MAP_REQUEST';
+export const SAVE_OFFLINE_MAP_SUCCESS = 'SAVE_OFFLINE_MAP_SUCCESS';
+export const SAVE_OFFLINE_MAP_FAILURE = 'SAVE_OFFLINE_MAP_FAILURE';
 
 // ======================================================
 // Action Creators
@@ -50,6 +55,17 @@ export function getLocation(mapView) {
   return {
     type: GET_LOCATION_REQUEST,
     payload: mapView
+  }
+}
+
+export function saveOfflineMap(bounds, zoomLevel) {
+  // bounds from Mapbox is [ latitudeSW, longitudeSW, latitudeNE, longitudeNE ]
+  return {
+    type: SAVE_OFFLINE_MAP_REQUEST,
+    payload: {
+      bounds,
+      zoomLevel
+    }
   }
 }
 

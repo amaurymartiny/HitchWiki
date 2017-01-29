@@ -2,12 +2,11 @@ import React, { PropTypes } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { withNavigation } from '@exponent/ex-navigation';
-import Mapbox, { MapView } from 'react-native-mapbox-gl';
+import { MapView } from 'react-native-mapbox-gl';
 
-import { fetchSpots, getLocation, setLocation, setZoomLevel } from './HitchhikingMapState';
+import Mapbox from '../../services/Mapbox';
+import { fetchSpots, getLocation, setLocation, setZoomLevel, saveOfflineMap } from './HitchhikingMapState';
 import theme from '../../config/theme';
-
-Mapbox.setAccessToken('pk.eyJ1IjoibWFuaWFhcm15eXVydCIsImEiOiJjaXk4dHIxbDgwMDF0MzNxam95ZXFsM2N1In0.P8-GnGGEQKXRTzklDE73Xw');
 
 @withNavigation
 class HitchhikingMapView extends React.Component {
@@ -57,14 +56,17 @@ class HitchhikingMapView extends React.Component {
           ref={map => { this._map = map; }}
         />
         <View style={styles.fba}>
-        <Icon
+        {this.props.zoomLevel > 9 && <Icon
           reverse
           raised
           name='cloud-download'
           color={theme.red}
-          onPress={() => console.log('hello')}
-          
-        />
+          onPress={() => {
+            this._map.getBounds(bounds => {
+              this.props.dispatch(saveOfflineMap(bounds, this.props.zoomLevel))
+            });
+          }}
+        />}
         <Icon
           reverse
           raised

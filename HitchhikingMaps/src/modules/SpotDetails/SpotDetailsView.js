@@ -21,7 +21,7 @@ class SpotDetailsView extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(fetchSpotDetails(this.props.route.params.id));
+    this.props.dispatch(fetchSpotDetails(this.props.route.params.spotId));
   }
 
   _formatDate(timestamp) {

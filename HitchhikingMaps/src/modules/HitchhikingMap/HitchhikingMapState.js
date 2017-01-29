@@ -4,6 +4,12 @@ const resolveAssetSource = require('resolveAssetSource'); // eslint-disable-line
 // ======================================================
 // Actions
 // ======================================================
+export const GET_LOCATION_REQUEST = 'GET_LOCATION_REQUEST';
+export const GET_LOCATION_SUCCESS = 'GET_LOCATION_SUCCESS';
+export const GET_LOCATION_FAILURE = 'GET_LOCATION_FAILURE';
+
+export const SET_LOCATION = 'SET_LOCATION';
+
 export const FETCH_SPOTS_REQUEST = 'FETCH_SPOTS_REQUEST';
 export const FETCH_SPOTS_SUCCESS = 'FETCH_SPOTS_SUCCESS';
 export const FETCH_SPOTS_FAILURE = 'FETCH_SPOTS_FAILURE';
@@ -25,6 +31,22 @@ export function setZoomLevel(zoomLevel) {
   return {
     type: SET_ZOOM_LEVEL,
     payload: { zoomLevel }
+  };
+}
+
+export function setLocation(latitude, longitude) {
+  return {
+    type: SET_LOCATION,
+    payload: {
+      latitude,
+      longitude
+    }
+  };
+}
+
+export function getLocation() {
+  return {
+    type: GET_LOCATION_REQUEST
   }
 }
 
@@ -65,8 +87,8 @@ function spotsToAnnotations(spots) {
     annotations.push({
       id: spots[i].id,
       coordinates: spots[i].location,
-      title: spots[i].title,
-      subtitle: drawStars(averageRating),
+      title: `Spot: ${drawStars(averageRating)}`,
+      // subtitle: drawStars(averageRating),
       type: 'point',
       annotationImage: {
         source: getAnnotationImage(averageRating),
@@ -85,19 +107,36 @@ function spotsToAnnotations(spots) {
 
 const initialState = {
   annotations: [],
+  location: {
+    latitude: 48.8566, // Paris coordinates
+    longitude: 2.3522
+  },
   zoomLevel: 11
 };
 export default function HitchhikingMapStateReducer(state = initialState, action = {}) {
   switch (action.type) {
-    case SET_ZOOM_LEVEL:
+    case GET_LOCATION_SUCCESS:
       return {
         ...state,
-        zoomLevel: action.payload.zoomLevel
+        location: {
+          latitude: action.payload.coords.latitude,
+          longitude: action.payload.coords.longitude
+        }
+      }
+    case SET_LOCATION:
+      return {
+        ...state,
+        location: action.payload
       }
     case FETCH_SPOTS_SUCCESS:
       return {
         ...state,
         annotations: spotsToAnnotations(action.payload),
+      };
+    case SET_ZOOM_LEVEL:
+      return {
+        ...state,
+        zoomLevel: action.payload.zoomLevel
       };
     default:
       return state;

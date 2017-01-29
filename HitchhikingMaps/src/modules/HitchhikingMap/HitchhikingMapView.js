@@ -4,7 +4,7 @@ import { Icon } from 'react-native-elements';
 import { withNavigation } from '@exponent/ex-navigation';
 import Mapbox, { MapView } from 'react-native-mapbox-gl';
 
-import { fetchSpots, setZoomLevel } from './HitchhikingMapState';
+import { fetchSpots, getLocation, setLocation, setZoomLevel } from './HitchhikingMapState';
 import theme from '../../config/theme';
 
 Mapbox.setAccessToken('pk.eyJ1IjoibWFuaWFhcm15eXVydCIsImEiOiJjaXk4dHIxbDgwMDF0MzNxam95ZXFsM2N1In0.P8-GnGGEQKXRTzklDE73Xw');
@@ -22,8 +22,16 @@ class HitchhikingMapView extends React.Component {
 
   static propTypes = {
     annotations: PropTypes.array.isRequired,
+    location: PropTypes.object.isRequired,
     zoomLevel: PropTypes.number.isRequired,
     dispatch: PropTypes.func.isRequired,
+  }
+
+  componentDidUpdate(prevState) {
+    if (prevState.location.latitude !== this.props.location.latitude
+      || prevState.location.longitude !== this.props.location.longitude) {
+      this._map.setCenterCoordinate(this.props.location.latitude, this.props.location.longitude);
+    }
   }
 
   // TODO I don't like this
@@ -36,14 +44,17 @@ class HitchhikingMapView extends React.Component {
       <View style={styles.fullScreen}>
         <MapView
           initialZoomLevel={this.props.zoomLevel}
-          initialCenterCoordinate={{ latitude: 40.72052634, longitude: -73.97686958312988 }}
+          initialCenterCoordinate={this.props.location}
           style={styles.fullScreen}
           showsUserLocation
           annotations={this.props.annotations}
           onRightAnnotationTapped={payload => this.goToSpotDetails(payload.id)}
           onRegionDidChange={
             payload => {
+              // update current location and zoomLevel
               this.props.dispatch(setZoomLevel(payload.zoomLevel));
+              // this.props.dispatch(setLocation(payload.latitude, payload.longitude));
+              // update spots in between bounds
               payload.zoomLevel > 10 && this._map.getBounds(bounds => {
                 this.props.dispatch(fetchSpots(bounds));
               });
@@ -66,8 +77,7 @@ class HitchhikingMapView extends React.Component {
           raised
           name='my-location'
           color={theme.red}
-          onPress={() => console.log('hello')}
-          
+          onPress={() => this.props.dispatch(getLocation())}
         />
         </View>
       </View>

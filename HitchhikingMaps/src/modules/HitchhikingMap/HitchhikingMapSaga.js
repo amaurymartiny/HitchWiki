@@ -1,5 +1,8 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
-import { FETCH_SPOTS_REQUEST, FETCH_SPOTS_SUCCESS, FETCH_SPOTS_FAILURE } from './HitchhikingMapState';
+import { call, cps, put, takeLatest } from 'redux-saga/effects';
+import {
+  FETCH_SPOTS_REQUEST, FETCH_SPOTS_SUCCESS, FETCH_SPOTS_FAILURE,
+  GET_LOCATION_REQUEST, GET_LOCATION_SUCCESS, GET_LOCATION_FAILURE
+} from './HitchhikingMapState';
 import apiRequest from '../../services/api';
 
 function* fetchSpotsSaga(action) {
@@ -11,6 +14,30 @@ function* fetchSpotsSaga(action) {
   }
 }
 
+function* getLocationSaga() {
+
+  // geolocation.getCurrentPosition's footprint is (dataCallback, errorCallback, options)
+  // cps needs a function whose footprint is (err, data) => ...
+  // this function makes the change
+  function getCurrentPosition(callback) {
+    return navigator.geolocation.getCurrentPosition(
+      position => { return callback(null, position); },
+      error => { return callback(error, null); },
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
+  }
+  
+  try {
+    const position = yield cps(getCurrentPosition);
+    yield put({ type: GET_LOCATION_SUCCESS, payload: position });
+  } catch(error) {
+    yield put({ type: GET_LOCATION_FAILURE, error });
+  }
+}
+
 export default function* HitchhikingMapSaga() {
-  yield takeLatest(FETCH_SPOTS_REQUEST, fetchSpotsSaga);
+  yield [
+    takeLatest(FETCH_SPOTS_REQUEST, fetchSpotsSaga),
+    takeLatest(GET_LOCATION_REQUEST, getLocationSaga)
+  ];
 }

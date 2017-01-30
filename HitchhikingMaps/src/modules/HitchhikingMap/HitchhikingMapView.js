@@ -4,7 +4,8 @@ import { Icon, Text } from 'react-native-elements';
 import { MapView } from 'react-native-mapbox-gl';
 
 import Mapbox from '../../services/Mapbox';
-import { fetchSpots, getLocation, setLocation, setZoomLevel, saveOfflineMap, saveOfflineMapProgress } from './HitchhikingMapState';
+import { fetchSpots, getLocation, setLocation, setZoomLevel, } from './HitchhikingMapState';
+import { saveOfflineMap, saveOfflineMapProgress } from '../OfflineMaps/OfflineMapsState';
 import theme from '../../services/ThemeService';
 
 class HitchhikingMapView extends React.Component {
@@ -24,11 +25,15 @@ class HitchhikingMapView extends React.Component {
     dispatch: PropTypes.func.isRequired,
   }
 
-  componentWillMount() {
+  componentDidMount() {
     // didn't find a way to do this inside saga
     this._offlineProgressSubscription = Mapbox.addOfflinePackProgressListener(progress => {
       this.props.dispatch(saveOfflineMapProgress(progress));
     });
+  }
+
+  componentWillUnmount() {
+    this._offlineProgressSubscription.remove();
   }
 
   // TODO I don't like this
@@ -46,17 +51,22 @@ class HitchhikingMapView extends React.Component {
           showsUserLocation
           annotations={this.props.annotations}
           onRightAnnotationTapped={payload => this.goToSpotDetails(payload.id)}
-          onRegionDidChange={
-            payload => {
-              // update current location and zoomLevel
-              this.props.dispatch(setZoomLevel(payload.zoomLevel));
-              // this.props.dispatch(setLocation(payload.latitude, payload.longitude));
-              // update spots in between bounds
-              payload.zoomLevel > 10 && this._map.getBounds(bounds => {
-                this.props.dispatch(fetchSpots(bounds));
-              });
-            }
-          }
+          // onRegionWillChange={payload => {
+          //   // maximum zoomLevel is 16
+          //   if (payload.zoomLevel > 16) {
+          //     console.log('3234')
+          //     this._map.setZoomLevel(16);
+          //   }
+          // }}
+          onRegionDidChange={payload => {
+            // update current location and zoomLevel
+            this.props.dispatch(setZoomLevel(payload.zoomLevel));
+            // this.props.dispatch(setLocation(payload.latitude, payload.longitude));
+            // update spots in between bounds
+            payload.zoomLevel > 10 && this._map.getBounds(bounds => {
+              this.props.dispatch(fetchSpots(bounds));
+            });
+          }}
           logoIsHidden={true}
           ref={map => { this._map = map; }}
         />
@@ -96,7 +106,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     position: 'absolute',
-    right: 20,
+    left: 20,
     bottom: 20
   }
 });

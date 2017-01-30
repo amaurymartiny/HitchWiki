@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react';
 import { List, ListItem } from 'react-native-elements';
 import prettysize from 'prettysize';
 
-import { fetchOfflineMaps, deleteOfflineMap } from './OfflineMapsState';
+import Mapbox from '../../services/Mapbox';
+import { fetchOfflineMaps, saveOfflineMapProgress, deleteOfflineMap } from './OfflineMapsState';
 import theme from '../../services/ThemeService';
 
 class OfflineMapsView extends React.Component {
@@ -20,6 +21,14 @@ class OfflineMapsView extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(fetchOfflineMaps());
+    // didn't find a way to do this inside saga
+    this._offlineProgressSubscription = Mapbox.addOfflinePackProgressListener(progress => {
+      this.props.dispatch(saveOfflineMapProgress(progress));
+    });
+  }
+
+  componentWillUnmount() {
+    this._offlineProgressSubscription.remove();
   }
 
   render() {

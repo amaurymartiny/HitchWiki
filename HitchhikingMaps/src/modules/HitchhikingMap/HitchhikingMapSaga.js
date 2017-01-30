@@ -1,8 +1,7 @@
 import { call, cps, put, takeLatest } from 'redux-saga/effects';
 import {
   FETCH_SPOTS_REQUEST, FETCH_SPOTS_SUCCESS, FETCH_SPOTS_FAILURE,
-  GET_LOCATION_REQUEST, GET_LOCATION_SUCCESS, GET_LOCATION_FAILURE,
-  SAVE_OFFLINE_MAP_REQUEST, SAVE_OFFLINE_MAP_SUCCESS, SAVE_OFFLINE_MAP_FAILURE
+  GET_LOCATION_REQUEST, GET_LOCATION_SUCCESS, GET_LOCATION_FAILURE
 } from './HitchhikingMapState';
 import Mapbox from '../../services/Mapbox';
 import ApiRequest from '../../services/Api';
@@ -51,34 +50,9 @@ function* getLocationSaga(action) {
   }
 }
 
-/**
- * Saga which saves offline map
- * @param {[type]} action        action.payload is a { bounds, zoomLevel } object
- * @yield {[type]} [description]
- */
-function* saveOfflineMapSaga(action) {
-  try {
-    const response = yield call(Mapbox.addOfflinePack, {
-      name: (new Date()).toString(), // required
-      type: 'bbox', // required, only type currently supported
-      metadata: { // optional. You can put any information in here that may be useful to you
-          date: new Date(),
-      },
-      bounds: action.payload.bounds,
-      minZoomLevel: action.payload.zoomLevel, // required
-      maxZoomLevel: 18, // required
-      styleURL: Mapbox.mapStyles.streets // required. Valid styleURL
-    });
-    yield put({ type: SAVE_OFFLINE_MAP_SUCCESS, payload: response });
-  } catch (error) {
-    yield put({ type: SAVE_OFFLINE_MAP_FAILURE, error });
-  }
-}
-
 export default function* HitchhikingMapSaga() {
   yield [
     takeLatest(FETCH_SPOTS_REQUEST, fetchSpotsSaga),
-    takeLatest(GET_LOCATION_REQUEST, getLocationSaga),
-    takeLatest(SAVE_OFFLINE_MAP_REQUEST, saveOfflineMapSaga)
+    takeLatest(GET_LOCATION_REQUEST, getLocationSaga)
   ];
 }

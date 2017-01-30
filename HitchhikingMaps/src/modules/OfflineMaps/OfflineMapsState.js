@@ -23,7 +23,7 @@ const initialState = {
   offlineMaps: []
 };
 
-export default function SpotDetailsStateReducer(state = initialState, action = {}) {
+export default function OfflineMapsStateReducer(state = initialState, action = {}) {
   switch (action.type) {
     case FETCH_OFFLINE_MAPS_SUCCESS:
       return {

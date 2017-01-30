@@ -1,14 +1,12 @@
 import React, { PropTypes } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { withNavigation } from '@exponent/ex-navigation';
 import { MapView } from 'react-native-mapbox-gl';
 
 import Mapbox from '../../services/Mapbox';
 import { fetchSpots, getLocation, setLocation, setZoomLevel, saveOfflineMap } from './HitchhikingMapState';
 import theme from '../../config/theme';
 
-@withNavigation
 class HitchhikingMapView extends React.Component {
 
   static route = {

@@ -1,5 +1,5 @@
 import { createRouter } from '@exponent/ex-navigation';
-import SettingsViewContainer from './Settings/SettingsViewContainer';
+import SettingsView from './Settings/SettingsView';
 import HitchhikingMapViewContainer from './HitchhikingMap/HitchhikingMapViewContainer';
 import SpotDetailsViewContainer from './SpotDetails/SpotDetailsViewContainer';
 import OfflineMapsViewContainer from './OfflineMaps/OfflineMapsViewContainer';
@@ -9,6 +9,6 @@ export default Router = createRouter(() => ({
   tabBar: () => TabBar,
   hitchhikingMap: () => HitchhikingMapViewContainer,
   spotDetails: () => SpotDetailsViewContainer,
-  settings: () => SettingsViewContainer,
+  settings: () => SettingsView,
   offlineMaps: () => OfflineMapsViewContainer
 }));

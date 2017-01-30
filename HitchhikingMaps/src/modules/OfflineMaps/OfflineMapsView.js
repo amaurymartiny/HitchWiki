@@ -1,8 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Text } from 'react-native-elements';
-import { withNavigation } from '@exponent/ex-navigation';
 
-@withNavigation
 class OfflineMapsView extends React.Component {
 
   static route = {

@@ -1,9 +1,7 @@
 import React, { PropTypes } from 'react';
 import { View } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
-import { withNavigation } from '@exponent/ex-navigation';
 
-@withNavigation
 class SettingsView extends React.Component {
 
   static route = {
@@ -13,12 +11,11 @@ class SettingsView extends React.Component {
     },
   }
 
-  static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-  }
+  // static propTypes = {
+  //   dispatch: PropTypes.func.isRequired,
+  // }
 
-  goToOfflineMaps() {
-    console.log(this.props)
+  goToOfflineMaps = () => {
     this.props.navigator.push('offlineMaps');
   }
 

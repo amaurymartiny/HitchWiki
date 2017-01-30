@@ -10,7 +10,7 @@ export const FETCH_OFFLINE_MAPS_FAILURE = 'FETCH_OFFLINE_MAPS_FAILURE';
 // ======================================================
 export function fetchOfflineMaps() {
   return {
-    type: FETCH_SPOT_DETAILS_REQUEST
+    type: FETCH_OFFLINE_MAPS_REQUEST
   };
 }
 
@@ -20,7 +20,7 @@ export function fetchOfflineMaps() {
 // To get an idea of the API response:
 // http://beta.hitchwiki.org/en/Special:ApiSandbox#action=hwspotidapi&format=json&page_id=22231&properties=Cities%2CCountry%2CCardinalDirection&user_id=0
 const initialState = {
-  offlineMaps: []
+  packs: []
 };
 
 export default function OfflineMapsStateReducer(state = initialState, action = {}) {
@@ -28,7 +28,7 @@ export default function OfflineMapsStateReducer(state = initialState, action = {
     case FETCH_OFFLINE_MAPS_SUCCESS:
       return {
         ...state,
-        ...action.payload,
+        packs: action.payload,
       };
     default:
       return state;

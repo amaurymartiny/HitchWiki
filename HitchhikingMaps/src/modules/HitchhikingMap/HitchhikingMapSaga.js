@@ -61,9 +61,9 @@ function* saveOfflineMapSaga(action) {
     const response = yield call(Mapbox.addOfflinePack, {
       name: 'test', // required
       type: 'bbox', // required, only type currently supported
-      // metadata: { // optional. You can put any information in here that may be useful to you
-      //     date: new Date(),
-      // },
+      metadata: { // optional. You can put any information in here that may be useful to you
+          date: new Date(),
+      },
       bounds: action.payload.bounds,
       minZoomLevel: action.payload.zoomLevel, // required
       maxZoomLevel: 18, // required

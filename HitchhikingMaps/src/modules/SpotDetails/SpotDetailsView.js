@@ -102,7 +102,8 @@ class SpotDetailsView extends React.Component {
                   }
                 hideChevron
               />
-              ))}
+              ))
+            }
           </List>
         </Card>
 

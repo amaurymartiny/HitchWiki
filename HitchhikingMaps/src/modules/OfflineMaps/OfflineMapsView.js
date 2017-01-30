@@ -1,5 +1,8 @@
 import React, { PropTypes } from 'react';
-import { Text } from 'react-native-elements';
+import { List, ListItem } from 'react-native-elements';
+import prettysize from 'prettysize';
+
+import { fetchOfflineMaps } from './OfflineMapsState';
 
 class OfflineMapsView extends React.Component {
 
@@ -14,9 +17,21 @@ class OfflineMapsView extends React.Component {
     dispatch: PropTypes.func.isRequired,
   }
 
+  componentDidMount() {
+    this.props.dispatch(fetchOfflineMaps());
+  }
+
   render() {
     return (
-      <Text>Settings</Text>
+      <List>
+        {this.props.packs.map((pack, index) => (
+          <ListItem
+            key={index}
+            title={pack.name}
+            subtitle={prettysize(pack.countOfBytesCompleted)}
+          />
+        ))}
+      </List>
     );
   }
 }

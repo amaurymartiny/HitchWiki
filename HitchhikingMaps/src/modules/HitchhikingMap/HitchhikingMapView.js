@@ -88,7 +88,7 @@ class HitchhikingMapView extends React.Component {
             }}
           />}
           <Icon
-            reverse
+            reverse={!this.props.location.isFetching}
             raised
             name="my-location"
             color={theme.red}

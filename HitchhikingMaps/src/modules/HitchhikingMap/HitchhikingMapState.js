@@ -112,22 +112,28 @@ const initialState = {
   annotations: [],
   location: {
     latitude: 48.8566, // Paris coordinates
-    longitude: 2.3522
+    longitude: 2.3522,
+    isFetching: false
   },
-  zoomLevel: 11,
-  saveOfflineMap: {
-    isFinished: false,
-    progress: {}
-  }
+  zoomLevel: 11
 };
 export default function HitchhikingMapStateReducer(state = initialState, action = {}) {
   switch (action.type) {
+    case GET_LOCATION_REQUEST:
+      return {
+        ...state,
+        location: {
+          ...state.location,
+          isFetching: true
+        }
+      }
     case GET_LOCATION_SUCCESS:
       return {
         ...state,
         location: {
           latitude: action.payload.coords.latitude,
-          longitude: action.payload.coords.longitude
+          longitude: action.payload.coords.longitude,
+          isFetching: false
         }
       }
     case SET_LOCATION:

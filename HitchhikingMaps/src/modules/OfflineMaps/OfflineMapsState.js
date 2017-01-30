@@ -55,10 +55,7 @@ export function deleteOfflineMap(packName) {
 // http://beta.hitchwiki.org/en/Special:ApiSandbox#action=hwspotidapi&format=json&page_id=22231&properties=Cities%2CCountry%2CCardinalDirection&user_id=0
 const initialState = {
   packs: [],
-  saveOfflineMapProgress: {
-    isFinished: false,
-    pack: {}
-  }
+  progress: null
 };
 
 export default function OfflineMapsStateReducer(state = initialState, action = {}) {
@@ -71,10 +68,7 @@ export default function OfflineMapsStateReducer(state = initialState, action = {
     case SAVE_OFFLINE_MAP_PROGRESS:
       return {
         ...state,
-        saveOfflineMapProgress: {
-          isFinished: action.payload.countOfResourcesCompleted >= action.payload.countOfResourcesExpected,
-          pack: action.payload
-        }
+        progress: action.payload
       }
     default:
       return state;

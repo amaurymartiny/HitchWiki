@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
-import { List, ListItem } from 'react-native-elements';
+import { View } from 'react-native';
+import { List, ListItem, Text } from 'react-native-elements';
+import ProgressBar from 'react-native-progress/Bar';
 import prettysize from 'prettysize';
 
 import Mapbox from '../../services/Mapbox';
@@ -38,7 +40,19 @@ class OfflineMapsView extends React.Component {
           <ListItem
             key={index}
             title={pack.name}
-            subtitle={prettysize(pack.countOfBytesCompleted)}
+            subtitle={
+              pack.countOfResourcesCompleted < pack.countOfResourcesExpected ?
+                (this.props.progress && this.props.progress.countOfResourcesCompleted < this.props.progress.countOfResourcesExpected) ?
+                  <ProgressBar
+                    indeterminate={!this.props.progress.countOfResourcesCompleted}
+                    progress={this.props.progress.countOfResourcesCompleted / this.props.progress.countOfResourcesExpected}
+                    width={200}
+                  />
+                :
+                  <Text>{prettysize(this.props.progress.countOfBytesCompleted)}</Text>
+              :
+                <Text>{prettysize(pack.countOfBytesCompleted)}</Text>
+            }
             rightIcon={{ name: 'delete' }}
             onPress={() => this.props.dispatch(deleteOfflineMap(pack.name))}
           />

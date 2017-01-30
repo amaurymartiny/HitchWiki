@@ -1,4 +1,6 @@
 import { call, cps, put, takeLatest } from 'redux-saga/effects';
+import moment from 'moment';
+
 import {
   FETCH_OFFLINE_MAPS_REQUEST, FETCH_OFFLINE_MAPS_SUCCESS, FETCH_OFFLINE_MAPS_FAILURE,
   DELETE_OFFLINE_MAP_REQUEST, DELETE_OFFLINE_MAP_SUCCESS, DELETE_OFFLINE_MAP_FAILURE,
@@ -29,14 +31,14 @@ function* fetchOfflineMapsSaga() {
 function* saveOfflineMapSaga(action) {
   try {
     const response = yield call(Mapbox.addOfflinePack, {
-      name: (new Date()).toString(), // required
+      name: moment().format('DD/MM/YYYY-HH:mm:ss'), // required
       type: 'bbox', // required, only type currently supported
       metadata: { // optional. You can put any information in here that may be useful to you
           date: new Date(),
       },
       bounds: action.payload.bounds,
       minZoomLevel: action.payload.zoomLevel, // required
-      maxZoomLevel: 18, // required
+      maxZoomLevel: 15, // required
       styleURL: Mapbox.mapStyles.streets // required. Valid styleURL
     });
     yield put({ type: SAVE_OFFLINE_MAP_SUCCESS, payload: response });

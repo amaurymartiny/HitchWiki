@@ -6,10 +6,10 @@ const palette = {
   darkGrey: '#354458',
 };
 
-const theme = {
+const ThemeService = {
   ...palette,
   primary: palette.red,
   secondary: palette.green,
 };
 
-export default theme;
+export default ThemeService;

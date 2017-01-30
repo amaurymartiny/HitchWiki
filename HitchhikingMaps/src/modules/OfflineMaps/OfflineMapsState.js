@@ -5,12 +5,23 @@ export const FETCH_OFFLINE_MAPS_REQUEST = 'FETCH_OFFLINE_MAPS_REQUEST';
 export const FETCH_OFFLINE_MAPS_SUCCESS = 'FETCH_OFFLINE_MAPS_SUCCESS';
 export const FETCH_OFFLINE_MAPS_FAILURE = 'FETCH_OFFLINE_MAPS_FAILURE';
 
+export const DELETE_OFFLINE_MAP_REQUEST = 'DELETE_OFFLINE_MAP_REQUEST';
+export const DELETE_OFFLINE_MAP_SUCCESS = 'DELETE_OFFLINE_MAP_SUCCESS';
+export const DELETE_OFFLINE_MAP_FAILURE = 'DELETE_OFFLINE_MAP_FAILURE';
+
 // ======================================================
 // Action Creators
 // ======================================================
 export function fetchOfflineMaps() {
   return {
     type: FETCH_OFFLINE_MAPS_REQUEST
+  };
+}
+
+export function deleteOfflineMap(packName) {
+  return {
+    type: DELETE_OFFLINE_MAP_REQUEST,
+    payload: packName
   };
 }
 

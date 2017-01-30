@@ -5,7 +5,7 @@ import { MapView } from 'react-native-mapbox-gl';
 
 import Mapbox from '../../services/Mapbox';
 import { fetchSpots, getLocation, setLocation, setZoomLevel, saveOfflineMap } from './HitchhikingMapState';
-import theme from '../../config/theme';
+import theme from '../../services/ThemeService';
 
 class HitchhikingMapView extends React.Component {
 

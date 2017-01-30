@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react';
 import { List, ListItem } from 'react-native-elements';
 import prettysize from 'prettysize';
 
-import { fetchOfflineMaps } from './OfflineMapsState';
+import { fetchOfflineMaps, deleteOfflineMap } from './OfflineMapsState';
+import theme from '../../services/ThemeService';
 
 class OfflineMapsView extends React.Component {
 
@@ -29,6 +30,8 @@ class OfflineMapsView extends React.Component {
             key={index}
             title={pack.name}
             subtitle={prettysize(pack.countOfBytesCompleted)}
+            rightIcon={{ name: 'delete' }}
+            onPress={() => this.props.dispatch(deleteOfflineMap(pack.name))}
           />
         ))}
       </List>

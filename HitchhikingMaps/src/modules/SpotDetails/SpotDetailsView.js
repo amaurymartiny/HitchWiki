@@ -4,7 +4,7 @@ import { Card, Text, List, ListItem } from 'react-native-elements';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import StarRating from 'react-native-star-rating';
 
-import theme from '../../config/theme';
+import theme from '../../services/ThemeService';
 import { fetchSpotDetails } from './SpotDetailsState';
 
 class SpotDetailsView extends React.Component {

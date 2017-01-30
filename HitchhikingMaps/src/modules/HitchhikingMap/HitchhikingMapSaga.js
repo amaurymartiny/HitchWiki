@@ -59,7 +59,7 @@ function* getLocationSaga(action) {
 function* saveOfflineMapSaga(action) {
   try {
     const response = yield call(Mapbox.addOfflinePack, {
-      name: 'test', // required
+      name: (new Date()).toString(), // required
       type: 'bbox', // required, only type currently supported
       metadata: { // optional. You can put any information in here that may be useful to you
           date: new Date(),
@@ -69,7 +69,6 @@ function* saveOfflineMapSaga(action) {
       maxZoomLevel: 18, // required
       styleURL: Mapbox.mapStyles.streets // required. Valid styleURL
     });
-    console.log(response)
     yield put({ type: SAVE_OFFLINE_MAP_SUCCESS, payload: response });
   } catch (error) {
     yield put({ type: SAVE_OFFLINE_MAP_FAILURE, error });

@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { Icon, Text } from 'react-native-elements';
 import { MapView } from 'react-native-mapbox-gl';
 
 import Mapbox from '../../services/Mapbox';
-import { fetchSpots, getLocation, setLocation, setZoomLevel, saveOfflineMap } from './HitchhikingMapState';
+import { fetchSpots, getLocation, setLocation, setZoomLevel, saveOfflineMap, saveOfflineMapProgress } from './HitchhikingMapState';
 import theme from '../../services/ThemeService';
 
 class HitchhikingMapView extends React.Component {
@@ -22,6 +22,13 @@ class HitchhikingMapView extends React.Component {
     location: PropTypes.object.isRequired,
     zoomLevel: PropTypes.number.isRequired,
     dispatch: PropTypes.func.isRequired,
+  }
+
+  componentWillMount() {
+    // didn't find a way to do this inside saga
+    this._offlineProgressSubscription = Mapbox.addOfflinePackProgressListener(progress => {
+      this.props.dispatch(saveOfflineMapProgress(progress));
+    });
   }
 
   // TODO I don't like this
@@ -54,24 +61,25 @@ class HitchhikingMapView extends React.Component {
           ref={map => { this._map = map; }}
         />
         <View style={styles.fba}>
-        {this.props.zoomLevel > 9 && <Icon
-          reverse
-          raised
-          name='cloud-download'
-          color={theme.red}
-          onPress={() => {
-            this._map.getBounds(bounds => {
-              this.props.dispatch(saveOfflineMap(bounds, this.props.zoomLevel))
-            });
-          }}
-        />}
-        <Icon
-          reverse
-          raised
-          name='my-location'
-          color={theme.red}
-          onPress={() => this.props.dispatch(getLocation(this._map))}
-        />
+          {this.props.zoomLevel > 14 && <Icon
+            reverse
+            raised
+            name='cloud-download'
+            color={theme.red}
+            onPress={() => {
+              this._map.getBounds(bounds => {
+                this.props.dispatch(saveOfflineMap(bounds, this.props.zoomLevel))
+              });
+            }}
+          />}
+          <Icon
+            reverse
+            raised
+            name='my-location'
+            color={theme.red}
+            onPress={() => this.props.dispatch(getLocation(this._map))}
+          />
+          <Text>HEllo</Text>
         </View>
       </View>
     );

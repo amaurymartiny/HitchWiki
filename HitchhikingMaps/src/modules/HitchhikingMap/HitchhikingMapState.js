@@ -20,6 +20,7 @@ export const FETCH_SPOTS_FAILURE = 'FETCH_SPOTS_FAILURE';
 export const SAVE_OFFLINE_MAP_REQUEST = 'SAVE_OFFLINE_MAP_REQUEST';
 export const SAVE_OFFLINE_MAP_SUCCESS = 'SAVE_OFFLINE_MAP_SUCCESS';
 export const SAVE_OFFLINE_MAP_FAILURE = 'SAVE_OFFLINE_MAP_FAILURE';
+export const SAVE_OFFLINE_MAP_PROGRESS = 'SAVE_OFFLINE_MAP_PROGRESS';
 
 // ======================================================
 // Action Creators
@@ -66,6 +67,13 @@ export function saveOfflineMap(bounds, zoomLevel) {
       bounds,
       zoomLevel
     }
+  }
+}
+
+export function saveOfflineMapProgress(progress) {
+  return {
+    type: SAVE_OFFLINE_MAP_PROGRESS,
+    payload: progress
   }
 }
 
@@ -130,7 +138,11 @@ const initialState = {
     latitude: 48.8566, // Paris coordinates
     longitude: 2.3522
   },
-  zoomLevel: 11
+  zoomLevel: 11,
+  saveOfflineMap: {
+    isFinished: false,
+    progress: {}
+  }
 };
 export default function HitchhikingMapStateReducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -157,6 +169,14 @@ export default function HitchhikingMapStateReducer(state = initialState, action 
         ...state,
         zoomLevel: action.payload.zoomLevel
       };
+    case SAVE_OFFLINE_MAP_PROGRESS:
+      return {
+        ...state,
+        saveOfflineMap: {
+          isFinished: false,
+          progress: action.payload
+        }
+      }
     default:
       return state;
   }

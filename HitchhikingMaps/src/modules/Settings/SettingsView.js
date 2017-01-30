@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
-import { Text } from 'react-native-elements';
+import { View } from 'react-native';
+import { List, ListItem } from 'react-native-elements';
 import { withNavigation } from '@exponent/ex-navigation';
 
 @withNavigation
@@ -16,9 +17,22 @@ class SettingsView extends React.Component {
     dispatch: PropTypes.func.isRequired,
   }
 
+  goToOfflineMaps() {
+    console.log(this.props)
+    this.props.navigator.push('offlineMaps');
+  }
+
   render() {
     return (
-      <Text>Settings</Text>
+      <View style={{backgroundColor: '#EEF0F3'}}>
+        <List>
+          <ListItem
+            title="Offline Maps"
+            leftIcon={{ name: 'cloud-download' }}
+            onPress={this.goToOfflineMaps}
+          />
+        </List>
+      </View>
     );
   }
 }

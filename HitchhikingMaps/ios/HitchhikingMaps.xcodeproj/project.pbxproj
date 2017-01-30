@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -36,10 +35,12 @@
 		CE4AAA92029C40859C9CF061 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E93E87DE9C684A4DB92317CF /* libBVLinearGradient.a */; };
 		DC7FF1712C5445C8BD0C5717 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 054FFAD42D964CC6A84E465C /* Zocial.ttf */; };
 		F275623EF42E45FDA69D0DFB /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87459B6D4B7D4E01ABF9AAE1 /* SimpleLineIcons.ttf */; };
+		FDA9DA321E3FFB870049A1E4 /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA9DA311E3FFB510049A1E4 /* libART.a */; };
 		FDB5B6FA55B441DCB9DDB16F /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB03D05853704C339C99B203 /* FontAwesome.ttf */; };
 		FDC73ADC1E3D66A500D0C8A3 /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDC73ADB1E3D66A500D0C8A3 /* Mapbox.framework */; };
 		FDC73ADD1E3D66A600D0C8A3 /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FDC73ADB1E3D66A500D0C8A3 /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FDC73AE01E3D66E600D0C8A3 /* libRCTMapboxGL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDC73AC61E3D666000D0C8A3 /* libRCTMapboxGL.a */; };
+		C7F24CA8EBF14AAA9F044BD0 /* libRCTMapboxGL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7951D135BE8E49E08206B016 /* libRCTMapboxGL.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -225,6 +226,13 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		FDA9DA301E3FFB510049A1E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FDA9DA2C1E3FFB510049A1E4 /* ART.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
+			remoteInfo = ART;
+		};
 		FDC73AC51E3D666000D0C8A3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FDC73AB81E3D665F00D0C8A3 /* RCTMapboxGL.xcodeproj */;
@@ -327,8 +335,11 @@
 		ECBCDEA7953A4F0AAECDF9C8 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		F50C5A710C524487A9E107DD /* Comic Sans MS.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Comic Sans MS.ttf"; path = "../node_modules/native-base/Fonts/Comic Sans MS.ttf"; sourceTree = "<group>"; };
 		F801D8B7E41C41528C129979 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		FDA9DA2C1E3FFB510049A1E4 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		FDC73AB81E3D665F00D0C8A3 /* RCTMapboxGL.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTMapboxGL.xcodeproj; path = "../node_modules/react-native-mapbox-gl/ios/RCTMapboxGL.xcodeproj"; sourceTree = "<group>"; };
 		FDC73ADB1E3D66A500D0C8A3 /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Mapbox.framework; sourceTree = "<group>"; };
+		C5F58AA424EF4E4CB13BC7F8 /* RCTMapboxGL.xcodeproj */ = {isa = PBXFileReference; name = "RCTMapboxGL.xcodeproj"; path = "../node_modules/react-native-mapbox-gl/ios/RCTMapboxGL.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		7951D135BE8E49E08206B016 /* libRCTMapboxGL.a */ = {isa = PBXFileReference; name = "libRCTMapboxGL.a"; path = "libRCTMapboxGL.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -344,6 +355,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDA9DA321E3FFB870049A1E4 /* libART.a in Frameworks */,
 				FDC73AE01E3D66E600D0C8A3 /* libRCTMapboxGL.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -360,6 +372,7 @@
 				CE4AAA92029C40859C9CF061 /* libBVLinearGradient.a in Frameworks */,
 				1DD667D343C544F49DF80C32 /* libRNShare.a in Frameworks */,
 				FDC73ADC1E3D66A500D0C8A3 /* Mapbox.framework in Frameworks */,
+				C7F24CA8EBF14AAA9F044BD0 /* libRCTMapboxGL.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,6 +535,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				FDA9DA2C1E3FFB510049A1E4 /* ART.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -536,6 +550,7 @@
 				ECBCDEA7953A4F0AAECDF9C8 /* RNVectorIcons.xcodeproj */,
 				18004CA8A8324ACA9242A33A /* BVLinearGradient.xcodeproj */,
 				831E05E4E6984E159E9B2815 /* RNShare.xcodeproj */,
+				C5F58AA424EF4E4CB13BC7F8 /* RCTMapboxGL.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -569,6 +584,14 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* HitchhikingMaps.app */,
 				00E356EE1AD99517003FC87E /* HitchhikingMapsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FDA9DA2D1E3FFB510049A1E4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FDA9DA311E3FFB510049A1E4 /* libART.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -653,7 +676,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 610;
+				LastUpgradeCheck = 820;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -674,6 +697,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = FDA9DA2D1E3FFB510049A1E4 /* Products */;
+					ProjectRef = FDA9DA2C1E3FFB510049A1E4 /* ART.xcodeproj */;
+				},
 				{
 					ProductGroup = FDD553721E390646001600C3 /* Products */;
 					ProjectRef = 18004CA8A8324ACA9242A33A /* BVLinearGradient.xcodeproj */;
@@ -919,6 +946,13 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		FDA9DA311E3FFB510049A1E4 /* libART.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libART.a;
+			remoteRef = FDA9DA301E3FFB510049A1E4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		FDC73AC61E3D666000D0C8A3 /* libRCTMapboxGL.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1073,7 +1107,9 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HitchhikingMaps.app/HitchhikingMaps";
 			};
@@ -1092,7 +1128,9 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HitchhikingMaps.app/HitchhikingMaps";
 			};
@@ -1116,6 +1154,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = HitchhikingMaps;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1138,6 +1177,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = HitchhikingMaps;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1156,15 +1196,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1197,8 +1241,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1206,6 +1252,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

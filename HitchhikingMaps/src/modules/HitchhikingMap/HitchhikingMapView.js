@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Icon, Text } from 'react-native-elements';
 import { MapView } from 'react-native-mapbox-gl';
+import ProgressPie from 'react-native-progress/Pie';
 
 import Mapbox from '../../services/Mapbox';
 import { fetchSpots, getLocation, setLocation, setZoomLevel, } from './HitchhikingMapState';
@@ -41,6 +42,10 @@ class HitchhikingMapView extends React.Component {
     this.props.navigator.push('spotDetails', { spotId });
   }
 
+  goToOfflineMaps = () => {
+    this.props.navigator.push('offlineMaps');
+  }
+
   render() {
     return (
       <View style={styles.fullScreen}>
@@ -74,7 +79,7 @@ class HitchhikingMapView extends React.Component {
           {this.props.zoomLevel > 14 && <Icon
             reverse
             raised
-            name='cloud-download'
+            name="cloud-download"
             color={theme.red}
             onPress={() => {
               this._map.getBounds(bounds => {
@@ -85,11 +90,21 @@ class HitchhikingMapView extends React.Component {
           <Icon
             reverse
             raised
-            name='my-location'
+            name="my-location"
             color={theme.red}
             onPress={() => this.props.dispatch(getLocation(this._map))}
           />
-          <Text>HEllo</Text>
+          {(this.props.progress && this.props.progress.countOfResourcesCompleted < this.props.progress.countOfResourcesExpected) &&
+            <TouchableOpacity style={styles.progressPie} onPress={this.goToOfflineMaps}>
+              <ProgressPie
+                indeterminate={!this.props.progress.countOfResourcesCompleted}
+                color={theme.red}
+                unfilledColor="white"
+                progress={this.props.progress.countOfResourcesCompleted / this.props.progress.countOfResourcesExpected}
+                size={52}
+              />
+            </TouchableOpacity>
+          }
         </View>
       </View>
     );
@@ -108,6 +123,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 20,
     bottom: 20
+  },
+  progressPie: {
+    position: 'absolute',
+    left: 8,
+    bottom: 8,
+    zIndex: 8
   }
 });
 

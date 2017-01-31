@@ -56,6 +56,7 @@ function* deleteOfflineMapSaga(action) {
   try {
     const info = yield call(Mapbox.removeOfflinePack, action.payload);
     yield put({ type: DELETE_OFFLINE_MAP_SUCCESS, payload: info });
+    yield put({ type: FETCH_OFFLINE_MAPS_REQUEST }); // refetch maps after delete
   } catch (error) {
     yield put({ type: DELETE_OFFLINE_MAP_FAILURE, error });
   }

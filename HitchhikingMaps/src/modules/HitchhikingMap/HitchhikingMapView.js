@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import { Icon, Text } from 'react-native-elements';
 import { MapView } from 'react-native-mapbox-gl';
 import ProgressPie from 'react-native-progress/Pie';
@@ -75,18 +75,34 @@ class HitchhikingMapView extends React.Component {
           logoIsHidden={true}
           ref={map => { this._map = map; }}
         />
-        <View style={styles.fba}>
-          {this.props.zoomLevel > 14 && <Icon
-            reverse
-            raised
-            name="cloud-download"
-            color={theme.red}
-            onPress={() => {
-              this._map.getBounds(bounds => {
-                this.props.dispatch(saveOfflineMap(bounds, this.props.zoomLevel))
-              });
-            }}
-          />}
+        <View style={styles.fbaBottomLeft}>
+          {(this.props.progress && this.props.progress.countOfResourcesCompleted < this.props.progress.countOfResourcesExpected) ?
+            <TouchableOpacity style={styles.progress} onPress={this.goToOfflineMaps}>
+              <ProgressPie
+                style={styles.raised}
+                indeterminate={!this.props.progress.countOfResourcesCompleted}
+                color={theme.red}
+                unfilledColor="white"
+                showsText={true}
+                progress={this.props.progress.countOfResourcesCompleted / this.props.progress.countOfResourcesExpected}
+                size={52}
+              />
+            </TouchableOpacity>
+          :
+            <Icon
+              reverse
+              raised
+              name="cloud-download"
+              color={theme.red}
+              onPress={() => {
+                this._map.getBounds(bounds => {
+                  this.props.dispatch(saveOfflineMap(bounds, this.props.zoomLevel))
+                });
+              }}
+            />
+          }
+        </View>
+        <View style={styles.fbaBottomRight}>
           <Icon
             reverse={!this.props.location.isFetching}
             raised
@@ -94,17 +110,6 @@ class HitchhikingMapView extends React.Component {
             color={theme.red}
             onPress={() => this.props.dispatch(getLocation(this._map))}
           />
-          {(this.props.progress && this.props.progress.countOfResourcesCompleted < this.props.progress.countOfResourcesExpected) &&
-            <TouchableOpacity style={styles.progressPie} onPress={this.goToOfflineMaps}>
-              <ProgressPie
-                indeterminate={!this.props.progress.countOfResourcesCompleted}
-                color={theme.red}
-                unfilledColor="white"
-                progress={this.props.progress.countOfResourcesCompleted / this.props.progress.countOfResourcesExpected}
-                size={52}
-              />
-            </TouchableOpacity>
-          }
         </View>
       </View>
     );
@@ -116,7 +121,15 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'stretch',
   },
-  fba: {
+  fbaBottomRight: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    position: 'absolute',
+    right: 20,
+    bottom: 20
+  },
+  fbaBottomLeft: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -124,11 +137,23 @@ const styles = StyleSheet.create({
     left: 20,
     bottom: 20
   },
-  progressPie: {
-    position: 'absolute',
+  progress: {
     left: 8,
     bottom: 8,
-    zIndex: 8
+    zIndex: 10
+  },
+  raised: { // https://github.com/react-native-community/react-native-elements/blob/master/src/icons/Icon.js
+    ...Platform.select({
+      ios: {
+        shadowColor: 'rgba(0,0,0, .4)',
+        shadowOffset: {height: 1, width: 1},
+        shadowOpacity: 1,
+        shadowRadius: 1
+      },
+      android: {
+        elevation: 2
+      }
+    })
   }
 });
 

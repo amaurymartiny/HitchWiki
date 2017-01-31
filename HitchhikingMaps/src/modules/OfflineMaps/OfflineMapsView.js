@@ -41,8 +41,8 @@ class OfflineMapsView extends React.Component {
             key={index}
             title={pack.name}
             subtitle={
-              pack.countOfResourcesCompleted < pack.countOfResourcesExpected ?
-                (this.props.progress && this.props.progress.countOfResourcesCompleted < this.props.progress.countOfResourcesExpected) ?
+              (pack.countOfResourcesCompleted < pack.countOfResourcesExpected && this.props.progress) ?
+                (this.props.progress.countOfResourcesCompleted < this.props.progress.countOfResourcesExpected) ?
                   <ProgressBar
                     indeterminate={!this.props.progress.countOfResourcesCompleted}
                     progress={this.props.progress.countOfResourcesCompleted / this.props.progress.countOfResourcesExpected}

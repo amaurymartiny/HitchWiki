@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { ListItem, Text, Button } from 'react-native-elements';
 import ProgressBar from 'react-native-progress/Bar';
 import Modal from 'react-native-modalbox';
+import Icon from 'react-native-vector-icons/Ionicons';
 import prettysize from 'prettysize';
 
 import Mapbox from '../../services/Mapbox';
@@ -42,6 +43,7 @@ class OfflineMapsView extends React.Component {
             <ListItem
               key={index}
               leftIcon={{ type: 'ionicon', name: 'ios-map'}}
+              rightIcon={(pack.countOfResourcesCompleted < pack.countOfResourcesExpected && this.props.progress && this.props.progress.countOfResourcesCompleted < this.props.progress.countOfResourcesExpected) ? { type: 'ionicon', name: 'ios-map', color: theme.red } : null}
               title={pack.name}
               subtitle={
                 (pack.countOfResourcesCompleted < pack.countOfResourcesExpected && this.props.progress) ?
@@ -57,9 +59,20 @@ class OfflineMapsView extends React.Component {
                   <Text>{prettysize(pack.countOfBytesCompleted)}, {pack.metadata.annotations.length} spots saved.</Text>
               }
               hideChevron={true}
-              onPress={() => this.props.dispatch(showDeletingPackModal(pack.name))}
+              onPress={() => {
+                // if it's still progressing, clicking on it means cancel
+                if (pack.countOfResourcesCompleted < pack.countOfResourcesExpected && this.props.progress && this.props.progress.countOfResourcesCompleted < this.props.progress.countOfResourcesExpected)
+                  this.props.dispatch(deleteOfflineMap(pack.name));
+                else
+                  this.props.dispatch(showDeletingPackModal(pack.name));
+              }}
             />
           ))}
+          {this.props.packs.length === 0 &&
+            <View style={styles.center}>
+              <Text style={{ color: theme.darkGrey }}>No offline map saved. Hint: go to the Map and click on the  <Icon name="ios-cloud-download" size={24} type="ionicon" />  button to save maps.</Text>
+            </View>
+          }
         </View>
         <Modal
           isOpen={!!this.props.deletingPack}
@@ -88,7 +101,14 @@ class OfflineMapsView extends React.Component {
 
 const styles = StyleSheet.create({
   fullScreen: {
-    flex: 1
+    flex: 1,
+  },
+  center: {
+    paddingTop: 200,
+    paddingLeft: 50,
+    paddingRight: 50,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   modal: {
     height: 66

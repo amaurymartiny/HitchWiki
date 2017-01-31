@@ -25,7 +25,7 @@ class SettingsView extends React.Component {
         <List>
           <ListItem
             title="Offline Maps"
-            leftIcon={{ name: 'cloud-download' }}
+            leftIcon={{ type: 'ionicon', name: 'ios-cloud-download' }}
             onPress={this.goToOfflineMaps}
           />
         </List>

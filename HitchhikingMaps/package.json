@@ -39,6 +39,7 @@
     "react-native-connection-info": "^1.1.0",
     "react-native-elements": "amaurymartiny/react-native-elements",
     "react-native-mapbox-gl": "github:sntran/react-native-mapbox-gl",
+    "react-native-modalbox": "^1.3.8",
     "react-native-progress": "^3.2.0",
     "react-native-star-rating": "^1.0.6",
     "react-native-vector-icons": "^4.0.0",

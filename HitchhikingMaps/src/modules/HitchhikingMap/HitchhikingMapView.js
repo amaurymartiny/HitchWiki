@@ -94,7 +94,8 @@ class HitchhikingMapView extends React.Component {
               {this.props.connection.isConnected && <Icon
                 reverse
                 raised
-                name="cloud-download"
+                type="ionicon"
+                name="ios-cloud-download"
                 color={theme.red}
                 onPress={() => {
                   this._map.getBounds(bounds => {

@@ -14,6 +14,9 @@ export const DELETE_OFFLINE_MAP_REQUEST = 'DELETE_OFFLINE_MAP_REQUEST';
 export const DELETE_OFFLINE_MAP_SUCCESS = 'DELETE_OFFLINE_MAP_SUCCESS';
 export const DELETE_OFFLINE_MAP_FAILURE = 'DELETE_OFFLINE_MAP_FAILURE';
 
+export const SHOW_DELETING_PACK_MODAL = 'SHOW_DELETING_PACK_MODAL';
+export const HIDE_DELETING_PACK_MODAL = 'HIDE_DELETING_PACK_MODAL';
+
 // ======================================================
 // Action Creators
 // ======================================================
@@ -49,6 +52,19 @@ export function deleteOfflineMap(packName) {
   };
 }
 
+export function showDeletingPackModal(packName) {
+  return {
+    type: SHOW_DELETING_PACK_MODAL,
+    payload: packName
+  };
+}
+
+export function hideDeletingPackModal() {
+  return {
+    type: HIDE_DELETING_PACK_MODAL
+  };
+}
+
 // ======================================================
 // Reducers
 // ======================================================
@@ -57,6 +73,7 @@ export function deleteOfflineMap(packName) {
 const initialState = {
   packs: [],
   offlineAnnotations: [],
+  deletingPack: null,
   progress: null
 };
 
@@ -77,7 +94,17 @@ export default function OfflineMapsStateReducer(state = initialState, action = {
       return {
         ...state,
         progress: null
-      }
+      };
+    case SHOW_DELETING_PACK_MODAL:
+      return {
+        ...state,
+        deletingPack: action.payload
+      };
+    case HIDE_DELETING_PACK_MODAL:
+      return {
+        ...state,
+        deletingPack: null
+      };
     default:
       return state;
   }

@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { List, ListItem, Text, Button } from 'react-native-elements';
+import { ListItem, Text, Button } from 'react-native-elements';
 import ProgressBar from 'react-native-progress/Bar';
 import Modal from 'react-native-modalbox';
 import prettysize from 'prettysize';
 
 import Mapbox from '../../services/Mapbox';
-import { fetchOfflineMaps, saveOfflineMapProgress, deleteOfflineMap } from './OfflineMapsState';
+import { fetchOfflineMaps, saveOfflineMapProgress, deleteOfflineMap, showDeletingPackModal, hideDeletingPackModal } from './OfflineMapsState';
 import theme from '../../services/ThemeService';
 
 class OfflineMapsView extends React.Component {
@@ -37,7 +37,7 @@ class OfflineMapsView extends React.Component {
   render() {
     return (
       <View style={styles.fullScreen}>
-        <List>
+        <View>
           {this.props.packs.map((pack, index) => (
             <ListItem
               key={index}
@@ -56,18 +56,28 @@ class OfflineMapsView extends React.Component {
                 :
                   <Text>{prettysize(pack.countOfBytesCompleted)}, {pack.metadata.annotations.length} spots saved.</Text>
               }
-              onPress={this.refs.deletePackModal.open}
+              hideChevron={true}
+              onPress={() => this.props.dispatch(showDeletingPackModal(pack.name))}
             />
           ))}
-        </List>
-        <Modal ref={'deletePackModal'} style={styles.modal} position="bottom">
+        </View>
+        <Modal
+          isOpen={!!this.props.deletingPack}
+          ref={'deletePackModal'}
+          style={styles.modal}
+          position="bottom"
+          onClosed={() => this.props.dispatch(hideDeletingPackModal())}
+        >
           <View style={styles.deleteButton}>
             <Button
               icon={{type: 'ionicon', name: 'ios-trash'}}
               backgroundColor={theme.red}
               title="Delete Offline Map"
               raised={true}
-              onPress={() => this.props.dispatch(deleteOfflineMap("pack.name"))}
+              onPress={() => {
+                this.props.dispatch(hideDeletingPackModal());
+                this.props.dispatch(deleteOfflineMap(this.props.deletingPack));
+              }}
             />
           </View>
         </Modal>

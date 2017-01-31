@@ -52,7 +52,7 @@ class OfflineMapsView extends React.Component {
                       width={200}
                     />
                   :
-                    <Text>{prettysize(this.props.progress.countOfBytesCompleted)}</Text>
+                    <Text>{prettysize(this.props.progress.countOfBytesCompleted)}, {pack.metadata.annotations.length} spots saved.</Text>
                 :
                   <Text>{prettysize(pack.countOfBytesCompleted)}, {pack.metadata.annotations.length} spots saved.</Text>
               }

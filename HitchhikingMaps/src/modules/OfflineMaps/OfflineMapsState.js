@@ -65,7 +65,8 @@ export default function OfflineMapsStateReducer(state = initialState, action = {
     case FETCH_OFFLINE_MAPS_SUCCESS:
       return {
         ...state,
-        packs: action.payload,
+        packs: action.payload.packs,
+        offlineAnnotations: action.payload.offlineAnnotations
       };
     case SAVE_OFFLINE_MAP_PROGRESS:
       return {

@@ -15,7 +15,12 @@ import ApiRequest from '../../services/Api';
 function* fetchOfflineMapsSaga() {
   try {
     const packs = yield call(Mapbox.getOfflinePacks);
-    yield put({ type: FETCH_OFFLINE_MAPS_SUCCESS, payload: packs });
+    // get annotations from all packs and concat them into one single array
+    let offlineAnnotations = [];
+    for (let i = packs.length - 1; i >= 0; i--) {
+      offlineAnnotations = offlineAnnotations.concat(packs[i].metadata.annotations);
+    }
+    yield put({ type: FETCH_OFFLINE_MAPS_SUCCESS, payload: { packs, offlineAnnotations } });
   } catch (error) {
     yield put({ type: FETCH_OFFLINE_MAPS_FAILURE, error });
   }

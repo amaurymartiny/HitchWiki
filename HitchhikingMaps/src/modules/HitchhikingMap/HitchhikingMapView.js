@@ -7,7 +7,7 @@ import { withConnection, connectionShape } from 'react-native-connection-info';
 
 import Mapbox from '../../services/Mapbox';
 import { fetchSpots, getLocation, setLocation, setZoomLevel, } from './HitchhikingMapState';
-import { saveOfflineMap, saveOfflineMapProgress } from '../OfflineMaps/OfflineMapsState';
+import { fetchOfflineMaps, saveOfflineMap, saveOfflineMapProgress } from '../OfflineMaps/OfflineMapsState';
 import theme from '../../services/ThemeService';
 
 @withConnection
@@ -30,11 +30,18 @@ class HitchhikingMapView extends React.Component {
   }
 
   componentDidMount() {
+    // Subsribe to downloading offline map progress
     // didn't find a way to do this inside saga
     this._offlineProgressSubscription = Mapbox.addOfflinePackProgressListener(progress => {
       this.props.dispatch(saveOfflineMapProgress(progress));
     });
   }
+
+  componentWillReceiveProps(nextProps) {
+    // detect a network change, fetch offline annotations if no internet
+    (this.props.connection.isConnected && !nextProps.connection.isConnected) && this.props.dispatch(fetchOfflineMaps());
+  }
+
 
   componentWillUnmount() {
     this._offlineProgressSubscription.remove();
@@ -48,7 +55,7 @@ class HitchhikingMapView extends React.Component {
           initialCenterCoordinate={this.props.location}
           style={styles.fullScreen}
           showsUserLocation
-          annotations={this.props.annotations}
+          annotations={this.props.connection.isConnected ? this.props.annotations : this.props.offlineAnnotations}
           onRightAnnotationTapped={payload => this.props.navigator.push('spotDetails', { spotId: payload.id })}
           // onRegionWillChange={payload => {
           //   // maximum zoomLevel is 16

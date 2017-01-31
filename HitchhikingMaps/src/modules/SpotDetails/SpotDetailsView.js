@@ -51,10 +51,10 @@ class SpotDetailsView extends React.Component {
         <Card
           title={
             <Text>
-              <Text h3 style={styles.primaryColor}>{this.props.Cities.length ? this.props.Cities[this.props.Cities.length - 1] : (this.props.title || '-')}</Text>
+              <Text h3 style={styles.primaryColor}>{this.props.Cities.length ? this.props.Cities[0] : (this.props.title || '-')}</Text>
               {'\n'}
               <Text>
-                {this.props.Cities.slice(0, -1).map(city => `${city}, `)}
+                {this.props.Cities.slice(1).map(city => `${city}, `)}
                 {this.props.Country.length ? this.props.Country[0] : '-'}
               </Text>
             </Text>

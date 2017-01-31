@@ -40,15 +40,6 @@ class HitchhikingMapView extends React.Component {
     this._offlineProgressSubscription.remove();
   }
 
-  // TODO I don't like this
-  goToSpotDetails = (spotId) => {
-    this.props.navigator.push('spotDetails', { spotId });
-  }
-
-  goToOfflineMaps = () => {
-    this.props.navigator.push('offlineMaps');
-  }
-
   render() {
     return (
       <View style={styles.fullScreen}>
@@ -58,7 +49,7 @@ class HitchhikingMapView extends React.Component {
           style={styles.fullScreen}
           showsUserLocation
           annotations={this.props.annotations}
-          onRightAnnotationTapped={payload => this.goToSpotDetails(payload.id)}
+          onRightAnnotationTapped={payload => this.props.navigator.push('spotDetails', { spotId: payload.id })}
           // onRegionWillChange={payload => {
           //   // maximum zoomLevel is 16
           //   if (payload.zoomLevel > 16) {
@@ -80,7 +71,7 @@ class HitchhikingMapView extends React.Component {
         />
         <View style={styles.fbaBottomLeft}>
           {(this.props.progress && this.props.progress.countOfResourcesCompleted < this.props.progress.countOfResourcesExpected) ?
-            <TouchableOpacity style={styles.progress} onPress={this.goToOfflineMaps}>
+            <TouchableOpacity style={styles.progress} onPress={() => this.props.navigator.push('offlineMaps')}>
               <ProgressPie
                 style={styles.raised}
                 indeterminate={!this.props.progress.countOfResourcesCompleted}

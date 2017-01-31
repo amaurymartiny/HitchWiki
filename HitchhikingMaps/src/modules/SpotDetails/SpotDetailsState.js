@@ -39,6 +39,8 @@ const initialState = {
 
 export default function SpotDetailsStateReducer(state = initialState, action = {}) {
   switch (action.type) {
+    case FETCH_SPOT_DETAILS_REQUEST:
+      return initialState;
     case FETCH_SPOT_DETAILS_SUCCESS:
       return {
         ...state,

@@ -106,30 +106,6 @@ class SpotDetailsView extends React.Component {
             }
           </List>
         </Card>
-
-        {/*
-        <Tile styleName='xl-gutter'>
-          <Heading></Heading>
-          <Subtitle>
-
-
-          </Subtitle>
-          <View styleName='horizontal space-between'>
-            <Text><RNIcon name='thumbs-o-up' size={20} /> {this.props.rating_count}</Text>
-            <Text><RNIcon name='comments-o' size={20} /> {this.props.comment_count}</Text>
-            <Text><RNIcon name='hourglass-half' size={20} /> {this.props.waiting_time_average}</Text>
-          </View>
-        </Tile>
-
-        <Divider styleName='section-header' />
-
-        <Tile styleName='md-gutter'>
-          <Title></Title>
-          <Text styleName='md-gutter-vertical'></Text>
-
-
-        </Tile>
-      */}
       </ScrollView>
     );
   }

@@ -36,6 +36,7 @@
     "react": "~15.4.2",
     "react-dom": "~15.4.2",
     "react-native": "~0.40.0",
+    "react-native-connection-info": "^1.1.0",
     "react-native-elements": "amaurymartiny/react-native-elements",
     "react-native-mapbox-gl": "github:sntran/react-native-mapbox-gl",
     "react-native-progress": "^3.2.0",
@@ -44,8 +45,7 @@
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "redux-logger": "^2.7.4",
-    "redux-saga": "^0.14.3",
-    "redux-thunk": "^2.2.0"
+    "redux-saga": "^0.14.3"
   },
   "devDependencies": {
     "babel-core": "^6.22.1",

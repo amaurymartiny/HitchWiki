@@ -3,12 +3,14 @@ import { View, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import { Icon, Text } from 'react-native-elements';
 import { MapView } from 'react-native-mapbox-gl';
 import ProgressPie from 'react-native-progress/Pie';
+import { withConnection, connectionShape } from 'react-native-connection-info';
 
 import Mapbox from '../../services/Mapbox';
 import { fetchSpots, getLocation, setLocation, setZoomLevel, } from './HitchhikingMapState';
 import { saveOfflineMap, saveOfflineMapProgress } from '../OfflineMaps/OfflineMapsState';
 import theme from '../../services/ThemeService';
 
+@withConnection
 class HitchhikingMapView extends React.Component {
 
   static route = {
@@ -24,6 +26,7 @@ class HitchhikingMapView extends React.Component {
     location: PropTypes.object.isRequired,
     zoomLevel: PropTypes.number.isRequired,
     dispatch: PropTypes.func.isRequired,
+    connection: connectionShape
   }
 
   componentDidMount() {
@@ -68,7 +71,7 @@ class HitchhikingMapView extends React.Component {
             this.props.dispatch(setZoomLevel(payload.zoomLevel));
             // this.props.dispatch(setLocation(payload.latitude, payload.longitude));
             // update spots in between bounds
-            payload.zoomLevel > 10 && this._map.getBounds(bounds => {
+            this.props.connection.isConnected && payload.zoomLevel > 8 && this._map.getBounds(bounds => {
               this.props.dispatch(fetchSpots(bounds));
             });
           }}
@@ -89,17 +92,19 @@ class HitchhikingMapView extends React.Component {
               />
             </TouchableOpacity>
           :
-            <Icon
-              reverse
-              raised
-              name="cloud-download"
-              color={theme.red}
-              onPress={() => {
-                this._map.getBounds(bounds => {
-                  this.props.dispatch(saveOfflineMap(bounds, this.props.zoomLevel, this.props.annotations))
-                });
-              }}
-            />
+            <View>
+              {this.props.connection.isConnected && <Icon
+                reverse
+                raised
+                name="cloud-download"
+                color={theme.red}
+                onPress={() => {
+                  this._map.getBounds(bounds => {
+                    this.props.dispatch(saveOfflineMap(bounds, this.props.zoomLevel, this.props.annotations))
+                  });
+                }}
+              />}
+            </View>
           }
         </View>
         <View style={styles.fbaBottomRight}>

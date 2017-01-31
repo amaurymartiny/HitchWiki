@@ -56,6 +56,7 @@ export function deleteOfflineMap(packName) {
 // http://beta.hitchwiki.org/en/Special:ApiSandbox#action=hwspotidapi&format=json&page_id=22231&properties=Cities%2CCountry%2CCardinalDirection&user_id=0
 const initialState = {
   packs: [],
+  offlineAnnotations: [],
   progress: null
 };
 

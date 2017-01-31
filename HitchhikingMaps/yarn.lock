@@ -3959,6 +3959,10 @@ react-native-button@^1.6.0:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/react-native-button/-/react-native-button-1.7.1.tgz#0c3fb34e7f99dc2c9a8166094be878eb7cb3c36e"
 
+react-native-connection-info@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-connection-info/-/react-native-connection-info-1.1.0.tgz#570bd16f01ff26dc167c073d43434f98149dde7c"
+
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-dismiss-keyboard/-/react-native-dismiss-keyboard-1.0.0.tgz#32886242b3f2317e121f3aeb9b0a585e2b879b49"
@@ -4250,10 +4254,6 @@ redux-logger@^2.7.4:
 redux-saga@^0.14.3:
   version "0.14.3"
   resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.14.3.tgz#28cd2c5b49cf780a1de25875765724150c630513"
-
-redux-thunk@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.2.0.tgz#e615a16e16b47a19a515766133d1e3e99b7852e5"
 
 redux@^3.5.2, redux@^3.6.0:
   version "3.6.0"

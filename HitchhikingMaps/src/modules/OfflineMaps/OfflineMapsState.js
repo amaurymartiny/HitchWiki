@@ -23,13 +23,14 @@ export function fetchOfflineMaps() {
   };
 }
 
-export function saveOfflineMap(bounds, zoomLevel) {
+export function saveOfflineMap(bounds, zoomLevel, annotations) {
   // bounds from Mapbox is [ latitudeSW, longitudeSW, latitudeNE, longitudeNE ]
   return {
     type: SAVE_OFFLINE_MAP_REQUEST,
     payload: {
       bounds,
-      zoomLevel
+      zoomLevel,
+      annotations
     }
   }
 }

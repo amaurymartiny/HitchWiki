@@ -51,7 +51,7 @@ class OfflineMapsView extends React.Component {
                 :
                   <Text>{prettysize(this.props.progress.countOfBytesCompleted)}</Text>
               :
-                <Text>{prettysize(pack.countOfBytesCompleted)}</Text>
+                <Text>{prettysize(pack.countOfBytesCompleted)}, {pack.metadata.annotations.length} spots saved.</Text>
             }
             rightIcon={{ name: 'delete' }}
             onPress={() => this.props.dispatch(deleteOfflineMap(pack.name))}

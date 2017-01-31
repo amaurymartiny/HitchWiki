@@ -1,5 +1,4 @@
 import { call, cps, put, takeLatest } from 'redux-saga/effects';
-import moment from 'moment';
 
 import {
   FETCH_OFFLINE_MAPS_REQUEST, FETCH_OFFLINE_MAPS_SUCCESS, FETCH_OFFLINE_MAPS_FAILURE,
@@ -11,7 +10,6 @@ import ApiRequest from '../../services/Api';
 
 /**
  * Saga which fetches all offline maps
- * @param {[type]} action        action.payload is a { bounds, zoomLevel } object
  * @yield {[type]} [description]
  */
 function* fetchOfflineMapsSaga() {
@@ -25,16 +23,18 @@ function* fetchOfflineMapsSaga() {
 
 /**
  * Saga which saves offline map
- * @param {[type]} action        action.payload is a { bounds, zoomLevel } object
+ * @param {[type]} action        action.payload is a { bounds, zoomLevel, annotations } object
  * @yield {[type]} [description]
  */
 function* saveOfflineMapSaga(action) {
+  const packName = `@Pack:${new Date().getTime()}`; // name of the pack to save = now's timestamp
   try {
     const response = yield call(Mapbox.addOfflinePack, {
-      name: moment().format('DD/MM/YYYY-HH:mm:ss'), // required
+      name: packName, // required
       type: 'bbox', // required, only type currently supported
       metadata: { // optional. You can put any information in here that may be useful to you
           date: new Date(),
+          annotations: action.payload.annotations
       },
       bounds: action.payload.bounds,
       minZoomLevel: action.payload.zoomLevel, // required

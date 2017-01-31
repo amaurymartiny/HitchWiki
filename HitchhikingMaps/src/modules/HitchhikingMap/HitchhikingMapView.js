@@ -96,7 +96,7 @@ class HitchhikingMapView extends React.Component {
               color={theme.red}
               onPress={() => {
                 this._map.getBounds(bounds => {
-                  this.props.dispatch(saveOfflineMap(bounds, this.props.zoomLevel))
+                  this.props.dispatch(saveOfflineMap(bounds, this.props.zoomLevel, this.props.annotations))
                 });
               }}
             />

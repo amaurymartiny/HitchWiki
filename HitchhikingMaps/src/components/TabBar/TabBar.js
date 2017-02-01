@@ -2,11 +2,12 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons'
-import { StackNavigation, TabNavigation, TabNavigationItem as TabItem, withNavigation } from '@exponent/ex-navigation';
+import { StackNavigation, TabNavigation, TabNavigationItem as TabItem } from '@exponent/ex-navigation';
+import { withConnection, connectionShape } from 'react-native-connection-info';
 
 import theme from '../../services/ThemeService';
 
-@withNavigation
+@withConnection
 class TabBar extends React.Component {
   static route = {
     navigationBar: {
@@ -23,6 +24,9 @@ class TabBar extends React.Component {
 
         <Text style={styles.tabTitleText} numberOfLines={1}>
           {title}
+          {(!this.props.connection.isConnected && title === 'Map') &&
+            <Text style={{ color: theme.red }}> [Offline]</Text>
+          }
         </Text>
       </View>
     );

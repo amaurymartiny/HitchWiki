@@ -12,10 +12,14 @@ export default function request(endpoint, method = 'GET', body) {
   })
   .then(response => response.json())
   .then((response) => {
-    if (!response.query) {
-      throw new Error('Error retrieving from API.');
+
+    if (response.error) {
+      throw error;
     }
-    return response.query;
+    if (response.query) {
+      return response.query;
+    }
+    return response;
   })
   .catch((error) => { throw error; });
 }

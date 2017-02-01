@@ -13,12 +13,8 @@ class SettingsView extends React.Component {
     },
   }
 
-  // static propTypes = {
-  //   dispatch: PropTypes.func.isRequired,
-  // }
-
-  goToOfflineMaps = () => {
-    this.props.navigator.push('offlineMaps');
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
   }
 
   render() {
@@ -28,7 +24,13 @@ class SettingsView extends React.Component {
           title="Offline Maps"
           leftIcon={{ type: 'ionicon', name: 'ios-cloud-download' }}
           badge={this.props.offlineMapsCount ? { value: this.props.offlineMapsCount, badgeContainerStyle: styles.badge } : null}
-          onPress={this.goToOfflineMaps}
+          onPress={() => this.props.navigator.push('offlineMaps')}
+        />
+        <ListItem
+          title="Offline Spots"
+          leftIcon={{ type: 'ionicon', name: 'ios-bookmarks' }}
+          badge={this.props.offlineMapsCount ? { value: this.props.offlineMapsCount, badgeContainerStyle: styles.badge } : null}
+          onPress={() => this.props.navigator.push('offlineSpots')}
         />
       </View>
     );

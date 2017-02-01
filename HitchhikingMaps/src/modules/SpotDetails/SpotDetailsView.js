@@ -21,6 +21,10 @@ class SpotDetailsView extends React.Component {
     spot: PropTypes.any.isRequired
   }
 
+  getSpot = () => {
+    return this.props.offlineSpot || this.props.spot;
+  }
+
   componentDidMount() {
     // fetch offline and online spot
     this.props.dispatch(fetchOfflineSpot(this.props.route.params.spotId));
@@ -40,11 +44,11 @@ class SpotDetailsView extends React.Component {
         <Card
           title={
             <Text>
-              <Text h3 style={styles.primaryColor}>{this.props.spot.Cities.length ? this.props.spot.Cities[0] : (this.props.spot.title || '-')}</Text>
+              <Text h3 style={styles.primaryColor}>{this.getSpot().Cities.length ? this.getSpot().Cities[0] : (this.getSpot().title || '-')}</Text>
               {'\n'}
               <Text>
-                {this.props.spot.Cities.slice(1).map(city => `${city}, `)}
-                {this.props.spot.Country.length ? this.props.spot.Country[0] : '-'}
+                {this.getSpot().Cities.slice(1).map(city => `${city}, `)}
+                {this.getSpot().Country.length ? this.getSpot().Country[0] : '-'}
               </Text>
             </Text>
           }
@@ -53,26 +57,26 @@ class SpotDetailsView extends React.Component {
           <View style={[styles.horizontal, styles.flexStart, styles.mdGutterVertical]}>
             <StarRating
               disabled
-              rating={this.props.spot.rating_average}
+              rating={this.getSpot().rating_average}
               starSize={25}
               starColor={theme.secondary}
               selectedStar={() => {}}
             />
-            <Text style={[styles.secondaryColor, styles.h5]}> {this.props.spot.rating_average}/5</Text>
+            <Text style={[styles.secondaryColor, styles.h5]}> {this.getSpot().rating_average}/5</Text>
           </View>
 
           <View style={[styles.horizontal, styles.spaceBetween, styles.lgGutterVertical]}>
-            <Text><FontAwesomeIcon name="thumbs-up" size={20} color={theme.secondary} /> {this.props.spot.rating_count ? `${this.props.spot.rating_count} rating${this.props.spot.rating_count > 1 ? 's' : ''}` : '-'}</Text>
-            <Text><FontAwesomeIcon name="hourglass-half" size={20} color={theme.secondary} /> {this.props.spot.waiting_time_average ? `${this.props.spot.waiting_time_average} min` : '-'}</Text>
-            <Text><FontAwesomeIcon name="comments" size={20} color={theme.secondary} /> {this.props.spot.comment_count ? `${this.props.spot.comment_count} comment${this.props.spot.comment_count > 1 ? 's' : ''}` : '-'}</Text>
+            <Text><FontAwesomeIcon name="thumbs-up" size={20} color={theme.secondary} /> {this.getSpot().rating_count ? `${this.getSpot().rating_count} rating${this.getSpot().rating_count > 1 ? 's' : ''}` : '-'}</Text>
+            <Text><FontAwesomeIcon name="hourglass-half" size={20} color={theme.secondary} /> {this.getSpot().waiting_time_average ? `${this.getSpot().waiting_time_average} min` : '-'}</Text>
+            <Text><FontAwesomeIcon name="comments" size={20} color={theme.secondary} /> {this.getSpot().comment_count ? `${this.getSpot().comment_count} comment${this.getSpot().comment_count > 1 ? 's' : ''}` : '-'}</Text>
           </View>
 
           <Text style={[styles.h5, styles.mdGutterVertical]}>
             <FontAwesomeIcon name="file-image-o" size={22} color={theme.secondary} />  Description
           </Text>
-          <Text>{this.props.spot.Description || 'No description available.'}</Text>
+          <Text>{this.getSpot().Description || 'No description available.'}</Text>
           <List containerStyle={styles.list}>
-            {this.props.spot.comments.map((comment, index) => (
+            {this.getSpot().comments.map((comment, index) => (
               <ListItem
                 key={comment.comment_id}
                 leftIcon={{
@@ -99,7 +103,7 @@ class SpotDetailsView extends React.Component {
             title={this.props.offlineSpot ? 'Saved' : 'Save Offline'}
             icon={{ 'type': 'ionicon', name: this.props.offlineSpot ? 'ios-checkmark-circle-outline' :'ios-bookmarks' }}
             disabled={!!this.props.offlineSpot}
-            onPress={() => this.props.dispatch(saveOfflineSpot(this.props.route.params.spotId, this.props.spot))}
+            onPress={() => this.props.dispatch(saveOfflineSpot(this.props.route.params.spotId, this.getSpot()))}
           />
         </Card>
       </ScrollView>

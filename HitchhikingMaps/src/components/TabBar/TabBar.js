@@ -1,5 +1,10 @@
 import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Text } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/Ionicons'
 import { StackNavigation, TabNavigation, TabNavigationItem as TabItem, withNavigation } from '@exponent/ex-navigation';
+
+import theme from '../../services/ThemeService';
 
 @withNavigation
 class TabBar extends React.Component {
@@ -7,6 +12,20 @@ class TabBar extends React.Component {
     navigationBar: {
       visible: false,
     },
+  }
+
+  renderIcon = (title: string, iconName: string, isSelected: bool) => {
+    const iconNameSelected = isSelected ? iconName : `${iconName}-outline`;
+
+    return (
+      <View style={styles.tabItemContainer}>
+        <Icon name={iconNameSelected} size={32} color={theme.darkGrey} />
+
+        <Text style={styles.tabTitleText} numberOfLines={1}>
+          {title}
+        </Text>
+      </View>
+    );
   }
 
   render() {
@@ -18,7 +37,7 @@ class TabBar extends React.Component {
       >
         <TabItem
           id="hitchhikingMap"
-          title="Map"
+          renderIcon={isSelected => this.renderIcon('Map', 'ios-map', isSelected)}
         >
           <StackNavigation
             id="hitchhikingMap"
@@ -29,7 +48,7 @@ class TabBar extends React.Component {
 
         <TabItem
           id="settings"
-          title="Settings"
+          renderIcon={isSelected => this.renderIcon('Settings', 'ios-settings', isSelected)}
         >
           <StackNavigation
             id="Settings"
@@ -41,5 +60,21 @@ class TabBar extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  tabItemContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  tabTitleText: {
+    fontSize: 11,
+    color: theme.darkGrey
+  },
+});
+
 
 export default TabBar;

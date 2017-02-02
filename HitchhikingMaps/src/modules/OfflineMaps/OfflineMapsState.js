@@ -89,8 +89,9 @@ export default function OfflineMapsStateReducer(state = initialState, action = {
       return {
         ...state,
         progress: action.payload
-      }
+      };
     case DELETE_OFFLINE_MAP_REQUEST:
+    case DELETE_OFFLINE_MAP_SUCCESS:
       return {
         ...state,
         progress: null

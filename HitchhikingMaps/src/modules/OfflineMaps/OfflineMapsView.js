@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import prettysize from 'prettysize';
 
 import Mapbox from '../../services/Mapbox';
+import EmptyScreen from '../../components/EmptyScreen/EmptyScreen';
 import { fetchOfflineMaps, saveOfflineMapProgress, deleteOfflineMap, showDeletingPackModal, hideDeletingPackModal } from './OfflineMapsState';
 import theme from '../../services/ThemeService';
 
@@ -39,9 +40,7 @@ class OfflineMapsView extends React.Component {
     return (
       <View style={styles.fullScreen}>
         {this.props.packs.length === 0 ?
-          <View style={styles.center}>
-            <Text style={{ color: theme.darkGrey }}>No offline map saved. Hint: go to the Map and click on the  <Icon name="ios-cloud-download" size={24} type="ionicon" />  button to save maps.</Text>
-          </View>
+          <EmptyScreen title={<Text>No offline map saved. Hint: go to the Map and click on the  <Icon name="ios-cloud-download" size={24} type="ionicon" />  button to save maps.</Text>} />
         :
           <List>
             {this.props.packs.map((pack, index) => (
@@ -103,13 +102,6 @@ class OfflineMapsView extends React.Component {
 const styles = StyleSheet.create({
   fullScreen: {
     flex: 1,
-  },
-  center: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingLeft: 50,
-    paddingRight: 50
   },
   modal: {
     height: 66

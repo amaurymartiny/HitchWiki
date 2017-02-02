@@ -15,7 +15,7 @@ import {
 function* fetchOfflineSpotsSaga() {
   try {
     const spots = yield call(AsyncStorage.getItem, '@SPOT:All');
-    yield put({ type: FETCH_OFFLINE_SPOTS_SUCCESS, payload: JSON.parse(spots) });
+    yield put({ type: FETCH_OFFLINE_SPOTS_SUCCESS, payload: JSON.parse(spots) || [] }); // defaults to [] is spots is null
   } catch (error) {
     yield put({ type: FETCH_OFFLINE_SPOTS_FAILURE, error });
   }

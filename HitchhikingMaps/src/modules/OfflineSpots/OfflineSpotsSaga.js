@@ -2,6 +2,7 @@ import { AsyncStorage } from 'react-native';
 import { call, cps, put, takeLatest } from 'redux-saga/effects';
 
 import {
+  FETCH_OFFLINE_SPOTS_REQUEST, FETCH_OFFLINE_SPOTS_SUCCESS, FETCH_OFFLINE_SPOTS_FAILURE,
   FETCH_OFFLINE_SPOT_REQUEST, FETCH_OFFLINE_SPOT_SUCCESS, FETCH_OFFLINE_SPOT_FAILURE,
   DELETE_OFFLINE_SPOT_REQUEST, DELETE_OFFLINE_SPOT_SUCCESS, DELETE_OFFLINE_SPOT_FAILURE,
   SAVE_OFFLINE_SPOT_REQUEST, SAVE_OFFLINE_SPOT_SUCCESS, SAVE_OFFLINE_SPOT_FAILURE
@@ -14,8 +15,8 @@ import {
  */
 function* fetchOfflineSpotSaga(action) {
   try {
-    const spotObject = yield call(AsyncStorage.getItem, `@SPOT:${action.payload}`);
-    yield put({ type: FETCH_OFFLINE_SPOT_SUCCESS, payload: JSON.parse(spotObject) });
+    const currentSpot = yield call(AsyncStorage.getItem, `@SPOT:${action.payload}`);
+    yield put({ type: FETCH_OFFLINE_SPOT_SUCCESS, payload: JSON.parse(currentSpot) });
   } catch (error) {
     yield put({ type: FETCH_OFFLINE_SPOT_FAILURE, error });
   }
@@ -23,14 +24,19 @@ function* fetchOfflineSpotSaga(action) {
 
 /**
  * Saga which saves offline a spot
- * @param {[type]} action        action.payload is a { spotId, spotObject } object
+ * @param {[type]} action        action.payload is a { spotId, currentSpot } object
  * @yield {[type]} [description]
  */
 function* saveOfflineSpotsaga(action) {
   const packName = `@Pack:${new Date().getTime()}`; // name of the pack to save = now's timestamp
   try {
-    yield call(AsyncStorage.setItem, `@SPOT:${action.payload.spotId}`, JSON.stringify(action.payload.spotObject));
-    yield put({ type: SAVE_OFFLINE_SPOT_SUCCESS, payload: action.payload.spotObject });
+    // Get array of all spots to add new one
+    let spots = yield call(AsyncStorage.getItem, '@SPOT:All');
+    spots = JSON.parse(spots) || [];
+    spots.push(action.payload.spotId);
+    yield call(AsyncStorage.setItem, `@SPOT:${action.payload.spotId}`, JSON.stringify(action.payload.currentSpot));
+    yield call(AsyncStorage.setItem, `@SPOT:All`, JSON.stringify(spots));
+    yield put({ type: SAVE_OFFLINE_SPOT_SUCCESS, payload: { currentSpot: action.payload.currentSpot, spots } });
   } catch (error) {
     yield put({ type: SAVE_OFFLINE_SPOT_FAILURE, error });
   }

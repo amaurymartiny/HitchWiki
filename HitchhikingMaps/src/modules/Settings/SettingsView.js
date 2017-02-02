@@ -29,7 +29,7 @@ class SettingsView extends React.Component {
         <ListItem
           title="Offline Spots"
           leftIcon={{ type: 'ionicon', name: 'ios-bookmarks' }}
-          badge={this.props.offlineMapsCount ? { value: this.props.offlineMapsCount, badgeContainerStyle: styles.badge } : null}
+          badge={this.props.offlineSpotsCount ? { value: this.props.offlineSpotsCount, badgeContainerStyle: styles.badge } : null}
           onPress={() => this.props.navigator.push('offlineSpots')}
         />
       </View>

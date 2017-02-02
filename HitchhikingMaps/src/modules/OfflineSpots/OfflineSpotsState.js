@@ -22,6 +22,12 @@ export const DELETE_OFFLINE_SPOT_FAILURE = 'DELETE_OFFLINE_SPOT_FAILURE';
 // ======================================================
 // Action Creators
 // ======================================================
+export function fetchOfflineSpots() {
+  return {
+    type: FETCH_OFFLINE_SPOTS_REQUEST
+  };
+}
+
 export function fetchOfflineSpot(spotId) {
   return {
     type: FETCH_OFFLINE_SPOT_REQUEST,
@@ -61,7 +67,7 @@ export default function OfflineSpotsStateReducer(state = initialState, action = 
       return {
         ...state,
         spots: action.payload
-      }
+      };
     case SAVE_OFFLINE_SPOT_SUCCESS:
       return {
         ...state,

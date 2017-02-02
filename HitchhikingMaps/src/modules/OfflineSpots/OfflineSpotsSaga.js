@@ -9,6 +9,19 @@ import {
 } from './OfflineSpotsState';
 
 /**
+ * Saga which fetch all offline spots (only their ids)
+ * @yield {[type]} [description]
+ */
+function* fetchOfflineSpotsSaga() {
+  try {
+    const spots = yield call(AsyncStorage.getItem, '@SPOT:All');
+    yield put({ type: FETCH_OFFLINE_SPOTS_SUCCESS, payload: JSON.parse(spots) });
+  } catch (error) {
+    yield put({ type: FETCH_OFFLINE_SPOTS_FAILURE, error });
+  }
+}
+
+/**
  * Saga which fetch a specific offline spot in AsyncStorage
  * @param {object} action action.payload is spotId
  * @yield {[type]} [description]
@@ -58,6 +71,7 @@ function* deleteOfflineSpotsaga(action) {
 
 export default function* OfflineSpotsSaga() {
   yield [
+    takeLatest(FETCH_OFFLINE_SPOTS_REQUEST, fetchOfflineSpotsSaga),
     takeLatest(FETCH_OFFLINE_SPOT_REQUEST, fetchOfflineSpotSaga),
     takeLatest(SAVE_OFFLINE_SPOT_REQUEST, saveOfflineSpotsaga),
     takeLatest(DELETE_OFFLINE_SPOT_REQUEST, deleteOfflineSpotsaga),

@@ -86,15 +86,13 @@ function spotsToAnnotations(spots) {
 
   const annotations = [];
   for (let i = spots.length - 1; i >= 0; i -= 1) {
-    const averageRating = Math.floor(Math.random() * (5 + 1)); // TODO fix API
     annotations.push({
       id: spots[i].id,
       coordinates: spots[i].location,
-      title: `Spot: ${drawStars(averageRating)}`,
-      // subtitle: drawStars(averageRating),
+      title: `Spot: ${drawStars(Math.round(spots[i].average_rating))}`,
       type: 'point',
       annotationImage: {
-        source: getAnnotationImage(averageRating),
+        source: getAnnotationImage(Math.round(spots[i].average_rating)),
         height: 25,
         width: 18,
       },

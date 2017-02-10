@@ -22,14 +22,14 @@ class SettingsView extends React.Component {
       <View>
         <ListItem
           title="Offline Maps"
-          leftIcon={{ type: 'ionicon', name: 'ios-cloud-download' }}
-          badge={this.props.offlineMapsCount ? { value: this.props.offlineMapsCount, badgeContainerStyle: styles.badge } : null}
+          titleStyle={theme.styles.textColor}
+          leftIcon={{ type: 'ionicon', name: 'ios-cloud-download', color: theme.darkGrey }}
           onPress={() => this.props.navigator.push('offlineMaps')}
         />
         <ListItem
           title="Offline Spots"
-          leftIcon={{ type: 'ionicon', name: 'ios-bookmarks' }}
-          badge={this.props.offlineSpotsCount ? { value: this.props.offlineSpotsCount, badgeContainerStyle: styles.badge } : null}
+          titleStyle={theme.styles.textColor}
+          leftIcon={{ type: 'ionicon', name: 'ios-bookmarks', color: theme.darkGrey }}
           onPress={() => this.props.navigator.push('offlineSpots')}
         />
       </View>

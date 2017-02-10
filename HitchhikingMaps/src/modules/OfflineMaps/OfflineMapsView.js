@@ -36,6 +36,26 @@ class OfflineMapsView extends React.Component {
     this._offlineProgressSubscription.remove();
   }
 
+  // Selectors
+  /**
+   * isPackDownloading is true when current pack is currently downloading.
+   * In this case, there's a progress object in the state which show the download progress
+   * @param  {[type]} pack [description]
+   * @return {[type]}      [description]
+   */
+  isPackDownloading = pack => {
+    return pack.countOfResourcesCompleted < pack.countOfResourcesExpected && this.props.progress;
+  }
+
+  /**
+   * isProgressDownloading is only used when isPackDownloading is true.
+   * It then represents if the progress of the download is finished or not
+   * @return {[type]} [description]
+   */
+  isProgressDownloading = () => {
+    return this.props.progress.countOfResourcesCompleted < this.props.progress.countOfResourcesExpected;
+  }
+
   render() {
     return (
       <View style={styles.fullScreen}>
@@ -46,29 +66,35 @@ class OfflineMapsView extends React.Component {
             {this.props.packs.map((pack, index) => (
               <ListItem
                 key={index}
-                leftIcon={{ type: 'ionicon', name: 'ios-map'}}
+                leftIcon={{ type: 'ionicon', name: 'ios-map', color: theme.darkGrey }}
                 rightIcon={{ type: 'ionicon', name: 'ios-close-circle-outline', color: theme.red }}
-                hideChevron={!(pack.countOfResourcesCompleted < pack.countOfResourcesExpected && this.props.progress && this.props.progress.countOfResourcesCompleted < this.props.progress.countOfResourcesExpected)}
-                title={pack.name}
+                hideChevron={true /*!(this.isPackDownloading(pack) && this.isProgressDownloading())*/}
+                title={`Pack #${index + 1}`}
+                titleStyle={theme.styles.textColor}
                 subtitle={
-                  (pack.countOfResourcesCompleted < pack.countOfResourcesExpected && this.props.progress) ?
-                    (this.props.progress.countOfResourcesCompleted < this.props.progress.countOfResourcesExpected) ?
+                  this.isPackDownloading(pack) ?
+                    this.isProgressDownloading() ?
                       <ProgressBar
                         indeterminate={!this.props.progress.countOfResourcesCompleted}
                         progress={this.props.progress.countOfResourcesCompleted / this.props.progress.countOfResourcesExpected}
                         width={200}
                       />
                     :
-                      <Text>{prettysize(this.props.progress.countOfBytesCompleted)}, {pack.metadata.annotations.length} spots saved.</Text>
+                      <Text style={theme.styles.secondaryTextColor}>{prettysize(this.props.progress.countOfBytesCompleted)}, {pack.metadata.annotations.length} spots saved.</Text>
                   :
-                    <Text>{prettysize(pack.countOfBytesCompleted)}, {pack.metadata.annotations.length} spots saved.</Text>
+                    <Text style={theme.styles.secondaryTextColor}>{prettysize(pack.countOfBytesCompleted)}, {pack.metadata.annotations.length} spots saved.</Text>
                 }
                 onPress={() => {
-                  // if it's still progressing, clicking on it means cancel
-                  if (pack.countOfResourcesCompleted < pack.countOfResourcesExpected && this.props.progress && this.props.progress.countOfResourcesCompleted < this.props.progress.countOfResourcesExpected)
-                    this.props.dispatch(deleteOfflineMap(pack.name));
-                  else
+                  // TODO Cancelling doesn't work on this version of mapbox-gl
+                  // https://github.com/mapbox/react-native-mapbox-gl/issues/496
+                  // if (this.isPackDownloading(pack) && this.isProgressDownloading()) {
+                  //   this.props.dispatch(deleteOfflineMap(pack.name));
+                  // } else {
+                  //   this.props.dispatch(showDeletingPackModal(pack.name));
+                  // }
+                  if (!(this.isPackDownloading(pack) && this.isProgressDownloading())) {
                     this.props.dispatch(showDeletingPackModal(pack.name));
+                  }
                 }}
               />
             ))}

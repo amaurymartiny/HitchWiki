@@ -33,7 +33,8 @@ class OfflineSpotsView extends React.Component {
               <ListItem
                 key={index}
                 title={`Spot #${index + 1}`}
-                leftIcon={{ type: 'ionicon', name: 'ios-pin' }}
+                titleStyle={theme.styles.textColor}
+                leftIcon={{ type: 'ionicon', name: 'ios-pin', color: theme.darkGrey }}
                 onPress={() => this.props.navigator.push('spotDetails', { spotId: spot })}
               />
             ))}

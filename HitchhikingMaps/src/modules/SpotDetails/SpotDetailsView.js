@@ -38,6 +38,12 @@ class SpotDetailsView extends React.Component {
     return `${day}.${month}.${year}`;
   }
 
+  // TODO the API is giving back HTML, so for now we strip tags
+  // We remove line breaks, remove everythign between <div></div>, and strip tags
+  stripTags(string) {
+    return string.replace(/\r?\n|\r/g, '').replace(/<div.*div>/ig, '').replace(/(<([^>]+)>)/ig, '');
+  }
+
   render() {
     return (
       <ScrollView>
@@ -74,7 +80,7 @@ class SpotDetailsView extends React.Component {
           <Text style={[styles.h5, styles.mdGutterVertical]}>
             <FontAwesomeIcon name="file-image-o" size={22} color={theme.secondary} />  Description
           </Text>
-          <Text>{this.getSpot().Description || 'No description available.'}</Text>
+          <Text>{this.stripTags(this.getSpot().Description) || 'No description available.'}</Text>
           <List containerStyle={styles.list}>
             {this.getSpot().comments.map((comment, index) => (
               <ListItem
@@ -90,7 +96,7 @@ class SpotDetailsView extends React.Component {
                 wrapperStyle={styles.alignTop}
                 subtitle={
                   <View>
-                    <Text>{comment.commenttext}</Text>
+                    <Text>{this.stripTags(comment.commenttext)}</Text>
                   </View>
                   }
                 hideChevron

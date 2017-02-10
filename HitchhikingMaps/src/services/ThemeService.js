@@ -4,7 +4,7 @@ const palette = {
   red: '#EB7260',
   blue: '#3A9AD9',
   green: '#29ABA4',
-  lightGrey: '#E9E0D6',
+  lightGrey: '#AAAAAA',
   darkGrey: '#354458',
 };
 

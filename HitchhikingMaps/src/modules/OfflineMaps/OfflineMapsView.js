@@ -69,7 +69,7 @@ class OfflineMapsView extends React.Component {
                 leftIcon={{ type: 'ionicon', name: 'ios-map', color: theme.darkGrey }}
                 rightIcon={{ type: 'ionicon', name: 'ios-close-circle-outline', color: theme.red }}
                 hideChevron={true /*!(this.isPackDownloading(pack) && this.isProgressDownloading())*/}
-                title={`Pack #${index + 1}`}
+                title={`Offline Map #${index + 1}`}
                 titleStyle={theme.styles.textColor}
                 subtitle={
                   this.isPackDownloading(pack) ?

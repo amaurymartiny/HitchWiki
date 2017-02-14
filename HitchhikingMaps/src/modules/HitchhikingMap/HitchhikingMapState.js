@@ -63,6 +63,9 @@ export function getLocation(mapView) {
  * @return {array}        Array of annotations understandable by mapbox
  */
 function spotsToAnnotations(spots) {
+  // bye bye if no spots returned
+  if (!spots) return;
+
   // Print as text number of stars
   function drawStars(number) {
     return '★'.repeat(number) + '☆'.repeat(5 - number);

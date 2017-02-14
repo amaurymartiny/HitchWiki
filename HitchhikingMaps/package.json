@@ -36,6 +36,7 @@
     "react": "~15.4.2",
     "react-dom": "~15.4.2",
     "react-native": "~0.41.2",
+    "react-native-action-button": "^2.0.22",
     "react-native-connection-info": "^1.1.0",
     "react-native-elements": "amaurymartiny/react-native-elements",
     "react-native-mapbox-gl": "github:sntran/react-native-mapbox-gl",

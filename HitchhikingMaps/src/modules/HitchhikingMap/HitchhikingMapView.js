@@ -3,6 +3,7 @@ import { View, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import { Icon, Text } from 'react-native-elements';
 import { MapView } from 'react-native-mapbox-gl';
 import ProgressPie from 'react-native-progress/Pie';
+import ActionButton from 'react-native-action-button';
 import { withConnection, connectionShape } from 'react-native-connection-info';
 
 import Mapbox from '../../services/Mapbox';
@@ -76,9 +77,13 @@ class HitchhikingMapView extends React.Component {
           logoIsHidden={true}
           ref={map => { this._map = map; }}
         />
-        <View style={styles.fbaBottomLeft}>
+        {this.props.connection.isConnected && <ActionButton position="left" buttonColor={theme.red}>
           {(this.props.progress && this.props.progress.countOfResourcesCompleted < this.props.progress.countOfResourcesExpected) ?
-            <TouchableOpacity style={styles.progress} onPress={() => this.props.navigator.push('offlineMaps')}>
+            <ActionButton.Item
+              buttonColor={theme.red}
+              title="Download Offline Map"
+              onPress={() => this.props.navigator.push('offlineMaps')}
+            >
               <ProgressPie
                 style={styles.raised}
                 indeterminate={!this.props.progress.countOfResourcesCompleted}
@@ -86,35 +91,31 @@ class HitchhikingMapView extends React.Component {
                 unfilledColor="white"
                 showsText={true}
                 progress={this.props.progress.countOfResourcesCompleted / this.props.progress.countOfResourcesExpected}
-                size={52}
+                size={56}
               />
-            </TouchableOpacity>
+            </ActionButton.Item>
           :
-            <View>
-              {this.props.connection.isConnected && <Icon
-                reverse
-                raised
-                type="ionicon"
-                name="ios-cloud-download"
-                color={theme.red}
-                onPress={() => {
-                  this._map.getBounds(bounds => {
-                    this.props.dispatch(saveOfflineMap(bounds, this.props.zoomLevel, this.props.annotations))
-                  });
-                }}
-              />}
-            </View>
+            <ActionButton.Item
+              buttonColor={theme.red}
+              title="Download Offline Map"
+              onPress={() => {
+                this._map.getBounds(bounds => {
+                  this.props.dispatch(saveOfflineMap(bounds, this.props.zoomLevel, this.props.annotations))
+                });
+              }}
+            >
+              <Icon type="ionicon" name="ios-cloud-download" color="white" />
+            </ActionButton.Item>
           }
-        </View>
-        <View style={styles.fbaBottomRight}>
-          <Icon
-            reverse={!this.props.location.isFetching}
-            raised
-            name="my-location"
-            color={theme.red}
-            onPress={() => this.props.dispatch(getLocation(this._map))}
-          />
-        </View>
+        </ActionButton>}
+        <ActionButton
+          position="right"
+          buttonColor={theme.red}
+          icon={
+            <Icon name="my-location" color="white" />
+          }
+          onPress={() => this.props.dispatch(getLocation(this._map))}
+        />
       </View>
     );
   }
@@ -123,23 +124,7 @@ class HitchhikingMapView extends React.Component {
 const styles = StyleSheet.create({
   fullScreen: {
     flex: 1,
-    alignSelf: 'stretch',
-  },
-  fbaBottomRight: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    position: 'absolute',
-    right: 20,
-    bottom: 20
-  },
-  fbaBottomLeft: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    position: 'absolute',
-    left: 20,
-    bottom: 20
+    alignItems: 'stretch'
   },
   progress: {
     left: 8,

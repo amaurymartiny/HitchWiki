@@ -64,7 +64,7 @@ export function getLocation(mapView) {
  */
 function spotsToAnnotations(spots) {
   // bye bye if no spots returned
-  if (!spots) return;
+  if (!spots) return [];
 
   // Print as text number of stars
   function drawStars(number) {

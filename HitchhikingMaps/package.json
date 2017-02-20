@@ -1,79 +1,22 @@
 {
-  "name": "HitchhikingMaps",
-  "author": "Futurice",
-  "description": "React Native App Starter Kit for Android and iOS",
-  "license": "MIT",
-  "homepage": "http://getpepperoni.com",
-  "bugs": "https://github.com/futurice/pepperoni-app-kit/issues",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/futurice/pepperoni-app-kit"
-  },
-  "keywords": [
-    "React Native",
-    "Starter Kit",
-    "Bitrise",
-    "Redux",
-    "Auth0"
-  ],
-  "version": "1.0.0",
-  "private": false,
-  "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "bundle:ios": "node ./node_modules/react-native/local-cli/cli.js bundle --platform ios --entry-file index.ios.js --bundle-output ios/HitchhikingMaps/main.jsbundle --dev=false --minify --verbose",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "lint": "eslint src test",
-    "coverage": "rimraf coverage && jest --coverage"
-  },
-  "jest": {
-    "preset": "jest-react-native"
-  },
-  "dependencies": {
-    "@exponent/ex-navigation": "^2.9.1",
-    "moment": "^2.17.1",
-    "prettysize": "^0.0.3",
-    "react": "~15.4.2",
-    "react-dom": "~15.4.2",
-    "react-native": "~0.41.2",
-    "react-native-action-button": "^2.0.22",
-    "react-native-connection-info": "^1.1.0",
-    "react-native-elements": "amaurymartiny/react-native-elements",
-    "react-native-mapbox-gl": "github:sntran/react-native-mapbox-gl",
-    "react-native-modalbox": "^1.3.9",
-    "react-native-progress": "^3.2.0",
-    "react-native-star-rating": "^1.0.6",
-    "react-native-vector-icons": "^4.0.0",
-    "react-navigation": "^1.0.0-beta.5",
-    "react-redux": "^5.0.2",
-    "redux": "^3.6.0",
-    "redux-logger": "^2.8.1",
-    "redux-saga": "^0.14.3"
-  },
-  "devDependencies": {
-    "babel-core": "^6.22.1",
-    "babel-eslint": "^7.1.1",
-    "babel-jest": "^18.0.0",
-    "babel-polyfill": "^6.22.0",
-    "babel-preset-react-native": "^1.9.1",
-    "babel-preset-react-native-stage-0": "^1.0.1",
-    "babel-preset-stage-0": "^6.22.0",
-    "babel-register": "^6.22.0",
-    "enzyme": "^2.7.1",
-    "eslint": "^3.15.0",
-    "eslint-config-airbnb": "^14.1.0",
-    "eslint-plugin-babel": "^4.0.1",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.9.0",
-    "fetch-mock": "^5.9.3",
-    "istanbul": "1.0.0-alpha.2",
-    "jest": "^18.1.0",
-    "jest-react-native": "~18.0.0",
-    "lodash": "^4.17.4",
-    "react-addons-test-utils": "~15.4.2",
-    "react-native-mock": "~0.3.1",
-    "react-test-renderer": "^15.4.2",
-    "rimraf": "^2.5.4"
-  }
+	"name": "HitchhikingMaps",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"start": "node node_modules/react-native/local-cli/cli.js start",
+		"test": "jest"
+	},
+	"dependencies": {
+		"react": "~15.4.0",
+		"react-native": "0.41.2"
+	},
+	"devDependencies": {
+		"babel-jest": "18.0.0",
+		"babel-preset-react-native": "1.9.1",
+		"jest": "18.1.0",
+		"react-test-renderer": "~15.4.0"
+	},
+	"jest": {
+		"preset": "react-native"
+	}
 }

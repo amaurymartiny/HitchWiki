@@ -13,11 +13,8 @@ import theme from '../../services/ThemeService';
 
 class OfflineMapsView extends React.Component {
 
-  static route = {
-    navigationBar: {
-      visible: true,
-      title: 'Offline Maps',
-    },
+  static navigationOptions = {
+    title: 'Offline Maps'
   }
 
   static propTypes = {

@@ -14,13 +14,9 @@ import theme from '../../services/ThemeService';
 @withConnection
 class HitchhikingMapView extends React.Component {
 
-  static route = {
-    navigationBar: {
-      visible: false,
-    },
+  static navigationOptions = {
+    title: 'Offline Spots'
   }
-
-  _map: Object = null
 
   static propTypes = {
     annotations: PropTypes.array.isRequired,
@@ -55,16 +51,9 @@ class HitchhikingMapView extends React.Component {
           initialZoomLevel={this.props.zoomLevel}
           initialCenterCoordinate={this.props.location}
           style={styles.fullScreen}
-          showsUserLocation
+          showsUserLocation={true}
           annotations={this.props.connection.isConnected ? this.props.annotations : this.props.offlineAnnotations}
-          onRightAnnotationTapped={payload => this.props.navigator.push('spotDetails', { spotId: payload.id })}
-          // onRegionWillChange={payload => {
-          //   // maximum zoomLevel is 16
-          //   if (payload.zoomLevel > 16) {
-          //     console.log('3234')
-          //     this._map.setZoomLevel(16);
-          //   }
-          // }}
+          onRightAnnotationTapped={payload => this.props.navigation.navigate('spotDetails', { spotId: payload.id })}
           onRegionDidChange={payload => {
             // update current location and zoomLevel
             this.props.dispatch(setZoomLevel(payload.zoomLevel));
@@ -82,7 +71,7 @@ class HitchhikingMapView extends React.Component {
             <ActionButton.Item
               buttonColor={theme.red}
               title="Download Offline Map"
-              onPress={() => this.props.navigator.push('offlineMaps')}
+              onPress={() => this.props.navigation.navigate('offlineMaps')}
             >
               <ProgressPie
                 style={styles.raised}
@@ -110,9 +99,9 @@ class HitchhikingMapView extends React.Component {
         </ActionButton>}
         <ActionButton
           position="right"
-          buttonColor={theme.red}
+          buttonColor={this.props.location.isFetching ? 'white' : theme.red}
           icon={
-            <Icon name="my-location" color="white" />
+            <Icon name="my-location" color={this.props.location.isFetching ? theme.red : 'white'} />
           }
           onPress={() => this.props.dispatch(getLocation(this._map))}
         />

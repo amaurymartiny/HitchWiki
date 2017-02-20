@@ -10,11 +10,8 @@ import { fetchOfflineSpot, saveOfflineSpot } from '../OfflineSpots/OfflineSpotsS
 
 class SpotDetailsView extends React.Component {
 
-  static route = {
-    navigationBar: {
-      visible: true,
-      title: 'Spot Details',
-    },
+  static navigationOptions = {
+    title: 'Spot Details',
   }
 
   static propTypes = {
@@ -27,8 +24,8 @@ class SpotDetailsView extends React.Component {
 
   componentDidMount() {
     // fetch offline and online spot
-    this.props.dispatch(fetchOfflineSpot(this.props.route.params.spotId));
-    this.props.dispatch(fetchSpotDetails(this.props.route.params.spotId));
+    this.props.dispatch(fetchOfflineSpot(this.props.navigation.state.params.spotId));
+    this.props.dispatch(fetchSpotDetails(this.props.navigation.state.params.spotId));
   }
 
   formatDate(timestamp) {

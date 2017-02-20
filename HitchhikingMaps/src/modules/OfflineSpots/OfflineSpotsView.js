@@ -8,11 +8,8 @@ import theme from '../../services/ThemeService';
 
 class OfflineSpotsView extends React.Component {
 
-  static route = {
-    navigationBar: {
-      visible: true,
-      title: 'Offline Spots',
-    },
+  static navigationOptions = {
+    title: 'Offline Spots'
   }
 
   static propTypes = {
@@ -35,7 +32,7 @@ class OfflineSpotsView extends React.Component {
                 title={`Spot #${index + 1}`}
                 titleStyle={theme.styles.textColor}
                 leftIcon={{ type: 'ionicon', name: 'ios-pin', color: theme.darkGrey }}
-                onPress={() => this.props.navigator.push('spotDetails', { spotId: spot })}
+                onPress={() => this.props.navigation.navigate('spotDetailsSettings', { spotId: spot })}
               />
             ))}
           </View>

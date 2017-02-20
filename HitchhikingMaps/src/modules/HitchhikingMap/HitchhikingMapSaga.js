@@ -39,6 +39,7 @@ function* getLocationSaga(action) {
   }
   
   try {
+    yield;
     const position = yield cps(getCurrentPosition);
     // TODO not sure if to put here
     // action.payload here is a reference to the <MapView />

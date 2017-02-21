@@ -36,6 +36,7 @@
 		D48371E6FC7243F8A5B47D4B /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD7909FFF2E34296BDA9EA5D /* Octicons.ttf */; };
 		13EDF9AD91DF4E008E7A4FB0 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B0B94F6A20944B6A24BCA07 /* SimpleLineIcons.ttf */; };
 		DC3A36EE3FB741848DB6443F /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6C83A7ABA064A519EB38EF1 /* Zocial.ttf */; };
+		BD88D06D08384F2792C065D7 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11438A556058442FB3C1602D /* libAirMaps.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -261,6 +262,8 @@
 		DD7909FFF2E34296BDA9EA5D /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		1B0B94F6A20944B6A24BCA07 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		A6C83A7ABA064A519EB38EF1 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6B9BD2FD87E84EBBBBE3C93A /* AirMaps.xcodeproj */ = {isa = PBXFileReference; name = "AirMaps.xcodeproj"; path = "../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		11438A556058442FB3C1602D /* libAirMaps.a */ = {isa = PBXFileReference; name = "libAirMaps.a"; path = "libAirMaps.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,6 +293,7 @@
 				901B0C9A9DD24E679125D8A7 /* libCodePush.a in Frameworks */,
 				D376C915ED5B4E699531B47F /* libz.tbd in Frameworks */,
 				518C6BAB1D5842EFAF711075 /* libRNVectorIcons.a in Frameworks */,
+				BD88D06D08384F2792C065D7 /* libAirMaps.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +440,7 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				D2A23B979B1C4DC8928813F8 /* CodePush.xcodeproj */,
 				306018C2EBB54267A5F48346 /* RNVectorIcons.xcodeproj */,
+				6B9BD2FD87E84EBBBBE3C93A /* AirMaps.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -907,6 +912,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -927,6 +933,7 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HitchhikingMaps.app/HitchhikingMaps";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);

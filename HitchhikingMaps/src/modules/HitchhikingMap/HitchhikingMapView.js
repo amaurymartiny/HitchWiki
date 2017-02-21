@@ -5,8 +5,9 @@ import { Icon, Text } from 'react-native-elements';
 import ProgressPie from 'react-native-progress/Pie';
 import ActionButton from 'react-native-action-button';
 // import { withConnection, connectionShape } from 'react-native-connection-info';
+import MapView from 'react-native-maps';
 
-// import Mapbox from '../../services/Mapbox';
+
 import { fetchSpots, getLocation, setLocation, setZoomLevel, } from './HitchhikingMapState';
 import { fetchOfflineMaps, saveOfflineMap, saveOfflineMapProgress } from '../OfflineMaps/OfflineMapsState';
 import theme from '../../services/ThemeService';
@@ -47,6 +48,15 @@ class HitchhikingMapView extends React.Component {
   render() {
     return (
       <View style={styles.fullScreen}>
+  <MapView
+    style={styles.fullScreen}
+    initialRegion={{
+      latitude: 37.78825,
+      longitude: -122.4324,
+      latitudeDelta: 0.0922,
+      longitudeDelta: 0.0421,
+    }}
+  />
         {/*<MapView
           initialZoomLevel={this.props.zoomLevel}
           initialCenterCoordinate={this.props.location}

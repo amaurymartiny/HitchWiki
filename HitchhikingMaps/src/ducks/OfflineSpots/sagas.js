@@ -1,12 +1,7 @@
 import { AsyncStorage } from 'react-native';
 import { call, cps, put, takeLatest } from 'redux-saga/effects';
 
-import {
-  FETCH_OFFLINE_SPOTS_REQUEST, FETCH_OFFLINE_SPOTS_SUCCESS, FETCH_OFFLINE_SPOTS_FAILURE,
-  FETCH_OFFLINE_SPOT_REQUEST, FETCH_OFFLINE_SPOT_SUCCESS, FETCH_OFFLINE_SPOT_FAILURE,
-  DELETE_OFFLINE_SPOT_REQUEST, DELETE_OFFLINE_SPOT_SUCCESS, DELETE_OFFLINE_SPOT_FAILURE,
-  SAVE_OFFLINE_SPOT_REQUEST, SAVE_OFFLINE_SPOT_SUCCESS, SAVE_OFFLINE_SPOT_FAILURE
-} from './OfflineSpotsState';
+import types from './types';
 
 /**
  * Saga which fetch all offline spots (only their ids)
@@ -15,9 +10,9 @@ import {
 function* fetchOfflineSpotsSaga() {
   try {
     const spots = yield call(AsyncStorage.getItem, '@SPOT:All');
-    yield put({ type: FETCH_OFFLINE_SPOTS_SUCCESS, payload: JSON.parse(spots) || [] }); // defaults to [] is spots is null
+    yield put({ type: types.FETCH_OFFLINE_SPOTS_SUCCESS, payload: JSON.parse(spots) || [] }); // defaults to [] is spots is null
   } catch (error) {
-    yield put({ type: FETCH_OFFLINE_SPOTS_FAILURE, error });
+    yield put({ type: types.FETCH_OFFLINE_SPOTS_FAILURE, error });
   }
 }
 
@@ -29,9 +24,9 @@ function* fetchOfflineSpotsSaga() {
 function* fetchOfflineSpotSaga(action) {
   try {
     const currentSpot = yield call(AsyncStorage.getItem, `@SPOT:${action.payload}`);
-    yield put({ type: FETCH_OFFLINE_SPOT_SUCCESS, payload: JSON.parse(currentSpot) });
+    yield put({ type: types.FETCH_OFFLINE_SPOT_SUCCESS, payload: JSON.parse(currentSpot) });
   } catch (error) {
-    yield put({ type: FETCH_OFFLINE_SPOT_FAILURE, error });
+    yield put({ type: types.FETCH_OFFLINE_SPOT_FAILURE, error });
   }
 }
 
@@ -49,9 +44,9 @@ function* saveOfflineSpotsaga(action) {
     spots.push(action.payload.spotId);
     yield call(AsyncStorage.setItem, `@SPOT:${action.payload.spotId}`, JSON.stringify(action.payload.currentSpot));
     yield call(AsyncStorage.setItem, `@SPOT:All`, JSON.stringify(spots));
-    yield put({ type: SAVE_OFFLINE_SPOT_SUCCESS, payload: { currentSpot: action.payload.currentSpot, spots } });
+    yield put({ type: types.SAVE_OFFLINE_SPOT_SUCCESS, payload: { currentSpot: action.payload.currentSpot, spots } });
   } catch (error) {
-    yield put({ type: SAVE_OFFLINE_SPOT_FAILURE, error });
+    yield put({ type: types.SAVE_OFFLINE_SPOT_FAILURE, error });
   }
 }
 
@@ -63,17 +58,17 @@ function* saveOfflineSpotsaga(action) {
 function* deleteOfflineSpotsaga(action) {
   try {
     const info = yield call(AsyncStorage.removeItem, `@SPOT:${action.payload}`);
-    yield put({ type: DELETE_OFFLINE_SPOT_SUCCESS });
+    yield put({ type: types.DELETE_OFFLINE_SPOT_SUCCESS });
   } catch (error) {
-    yield put({ type: DELETE_OFFLINE_SPOT_FAILURE, error });
+    yield put({ type: types.DELETE_OFFLINE_SPOT_FAILURE, error });
   }
 }
 
 export default function* OfflineSpotsSaga() {
   yield [
-    takeLatest(FETCH_OFFLINE_SPOTS_REQUEST, fetchOfflineSpotsSaga),
-    takeLatest(FETCH_OFFLINE_SPOT_REQUEST, fetchOfflineSpotSaga),
-    takeLatest(SAVE_OFFLINE_SPOT_REQUEST, saveOfflineSpotsaga),
-    takeLatest(DELETE_OFFLINE_SPOT_REQUEST, deleteOfflineSpotsaga),
+    takeLatest(types.FETCH_OFFLINE_SPOTS_REQUEST, fetchOfflineSpotsSaga),
+    takeLatest(types.FETCH_OFFLINE_SPOT_REQUEST, fetchOfflineSpotSaga),
+    takeLatest(types.SAVE_OFFLINE_SPOT_REQUEST, saveOfflineSpotsaga),
+    takeLatest(types.DELETE_OFFLINE_SPOT_REQUEST, deleteOfflineSpotsaga),
   ];
 }

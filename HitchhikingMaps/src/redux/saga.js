@@ -3,14 +3,13 @@ import { fork } from 'redux-saga/effects';
 import { HitchhikingMapSagas } from '../ducks/HitchhikingMap';
 import { SpotDetailsSagas } from '../ducks/SpotDetails';
 import { SnapshotsSagas } from '../ducks/Snapshots';
-
-import OfflineSpotsSaga from '../containers/OfflineSpots/OfflineSpotsSaga';
+import { OfflineSpotsSagas } from '../ducks/OfflineSpots';
 
 export default function* rootSaga() {
   yield [
     fork(HitchhikingMapSagas),
     fork(SpotDetailsSagas),
     fork(SnapshotsSagas),
-    fork(OfflineSpotsSaga)
+    fork(OfflineSpotsSagas)
   ];
 }

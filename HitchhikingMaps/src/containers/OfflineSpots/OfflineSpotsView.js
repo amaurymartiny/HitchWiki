@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { ListItem, Text } from 'react-native-elements';
 
-import { fetchOfflineSpots } from './OfflineSpotsState';
+import { OfflineSpotsActions } from '../../ducks/OfflineSpots';
 import EmptyScreen from '../../components/EmptyScreen/EmptyScreen';
 import theme from '../../services/ThemeService';
 
@@ -17,7 +17,7 @@ class OfflineSpotsView extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(fetchOfflineSpots());
+    this.props.dispatch(OfflineSpotsActions.fetchOfflineSpots());
   }
 
   render() {
@@ -25,7 +25,7 @@ class OfflineSpotsView extends React.Component {
     return (
       <View style={styles.fullScreen}>
         {this.props.spots.length ?
-          <View>
+          <View style={{ backgroundColor: 'white' }}>
             {this.props.spots.map((spot, index) => (
               <ListItem
                 key={index}
@@ -46,7 +46,7 @@ class OfflineSpotsView extends React.Component {
 
 const styles = StyleSheet.create({
   fullScreen: {
-    flex: 1,
+    flex: 1
   },
 });
 

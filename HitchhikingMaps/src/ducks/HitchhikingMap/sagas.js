@@ -1,4 +1,5 @@
 import { call, cps, put, takeLatest } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
 import types from './types';
 import actions from './actions';
 import ApiService from '../../services/ApiService';
@@ -55,7 +56,7 @@ function* getLocationSaga(action) {
   }
   
   try {
-    // yield delay(1);
+    yield delay(1000); // TODO needs this to change button white, for better UX.
     const position = yield cps(getCurrentPosition);
     // Create a new region to zoom into
     const newRegion = {

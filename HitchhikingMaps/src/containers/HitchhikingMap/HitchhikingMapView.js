@@ -4,7 +4,6 @@ import { Icon } from 'react-native-elements';
 // import { MapView } from 'react-native-mapbox-gl';
 // import ProgressPie from 'react-native-progress/Pie';
 import ActionButton from 'react-native-action-button';
-// import { withConnection, connectionShape } from 'react-native-connection-info';
 import MapView from 'react-native-maps';
 
 
@@ -12,7 +11,6 @@ import { HitchhikingMapActions } from '../../ducks/HitchhikingMap';
 // import { fetchOfflineMaps, saveOfflineMap, saveOfflineMapProgress } from '../OfflineMaps/OfflineMapsState';
 import theme from '../../services/ThemeService';
 
-// @withConnection
 class HitchhikingMapView extends React.Component {
 
   static navigationOptions = {
@@ -24,30 +22,11 @@ class HitchhikingMapView extends React.Component {
     // region: PropTypes.object.isRequired,
     isFetchingGPS: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
-    // connection: connectionShape
   }
 
   componentDidMount() {
     this.props.dispatch(HitchhikingMapActions.getLocation(this.refs.map));
   }
-
-  // componentDidMount() {
-  //   // Subsribe to downloading offline map progress
-  //   // didn't find a way to do this inside saga
-  //   this._offlineProgressSubscription = Mapbox.addOfflinePackProgressListener(progress => {
-  //     this.props.dispatch(saveOfflineMapProgress(progress));
-  //   });
-  // }
-
-  // componentWillReceiveProps(nextProps) {
-  //   // detect a network change, fetch offline annotations if no internet
-  //   (this.props.connection.isConnected && !nextProps.connection.isConnected) && this.props.dispatch(fetchOfflineMaps());
-  // }
-
-
-  // componentWillUnmount() {
-  //   this._offlineProgressSubscription.remove();
-  // }
 
   render() {
     // Some helper functions to show correctly the markers
@@ -93,7 +72,7 @@ class HitchhikingMapView extends React.Component {
           style={styles.fullScreen}
           showsUserLocation
           onRegionChange={region => {
-            if (region.latitudeDelta > 1 || region.longitudeDelta > 1) return;
+            if (region.latitudeDelta > 0.7 || region.longitudeDelta > 0.7) return;
             this.props.dispatch(HitchhikingMapActions.fetchSpots(region));
           }}
         >
@@ -108,39 +87,6 @@ class HitchhikingMapView extends React.Component {
             />
           ))}
         </MapView>
-        {/*
-        {this.props.connection.isConnected && <ActionButton position="left" buttonColor={theme.red}>
-          {(this.props.progress && this.props.progress.countOfResourcesCompleted < this.props.progress.countOfResourcesExpected) ?
-            <ActionButton.Item
-              buttonColor={theme.red}
-              title="Download Offline Map"
-              onPress={() => this.props.navigation.navigate('offlineMaps')}
-            >
-              <ProgressPie
-                style={styles.raised}
-                indeterminate={!this.props.progress.countOfResourcesCompleted}
-                color={theme.red}
-                unfilledColor="white"
-                showsText={true}
-                progress={this.props.progress.countOfResourcesCompleted / this.props.progress.countOfResourcesExpected}
-                size={56}
-              />
-            </ActionButton.Item>
-          :
-            <ActionButton.Item
-              buttonColor={theme.red}
-              title="Download Offline Map"
-              onPress={() => {
-                this._map.getBounds(bounds => {
-                  this.props.dispatch(saveOfflineMap(bounds, this.props.zoomLevel, this.props.annotations))
-                });
-              }}
-            >
-              <Icon type="ionicon" name="ios-cloud-download" color="white" />
-            </ActionButton.Item>
-          }
-        </ActionButton>}
-        */}
         <ActionButton
           position="right"
           buttonColor={this.props.isFetchingGPS ? 'white' : theme.red}
@@ -156,8 +102,7 @@ class HitchhikingMapView extends React.Component {
 
 const styles = StyleSheet.create({
   fullScreen: {
-    flex: 1,
-    alignItems: 'stretch'
+    ...StyleSheet.absoluteFillObject,
   },
   progress: {
     left: 8,

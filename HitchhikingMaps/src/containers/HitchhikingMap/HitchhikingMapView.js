@@ -11,7 +11,7 @@ import theme from '../../services/ThemeService';
 class HitchhikingMapView extends React.Component {
 
   static navigationOptions = {
-    title: 'Map',
+    title: 'Hitchhiking Map',
     header: (navigation, defaultHeader) => ({
       ...defaultHeader,
       visible: false,

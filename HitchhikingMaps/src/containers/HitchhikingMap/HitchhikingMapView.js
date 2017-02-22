@@ -48,11 +48,22 @@ class HitchhikingMapView extends React.Component {
   render() {
     return (
       <View style={styles.fullScreen}>
-      <MapView
-        style={styles.fullScreen}
-        region={this.props.region}
-        onRegionChange={(region) => this.props.dispatch(HitchhikingMapActions.setRegion(region))}
-      />
+        <MapView
+          style={styles.fullScreen}
+          region={this.props.region}
+          onRegionChange={region => {
+            this.props.dispatch(HitchhikingMapActions.setRegion(region));
+            this.props.dispatch(HitchhikingMapActions.fetchSpots(region));
+          }}
+        >
+          {this.props.markers.map(marker => (
+            <MapView.Marker
+              key={marker.id}
+              coordinate={marker.latlng}
+              title={marker.title}
+            />
+          ))}
+        </MapView>
         {/*<MapView
           initialZoomLevel={this.props.zoomLevel}
           initialCenterCoordinate={this.props.location}

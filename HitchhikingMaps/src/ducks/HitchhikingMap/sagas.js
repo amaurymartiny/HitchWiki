@@ -6,13 +6,57 @@ import ApiService from '../../services/ApiService';
 
 /**
  * Saga which fetches the spots inside bounds from HitchWiki API 
- * @param {[type]} action        action.payload is a [ SWLat, SWLon, NELat, NELon ] array
+ * @param {[type]} action        action.payload is a region object
  * @yield {[type]} [description]
  */
 function* fetchSpotsSaga(action) {
   try {
-    const response = yield call(ApiService, `action=hwmapapi&format=json&SWlat=${action.payload.bounds[0]}&SWlon=${action.payload.bounds[1]}&NElat=${action.payload.bounds[2]}&NElon=${action.payload.bounds[3]}`);
-    yield put({ type: types.FETCH_SPOTS_SUCCESS, payload: response.spots });
+    // First step is to make the API call with correct bounds
+
+    const response = yield call(ApiService, `action=hwmapapi&format=json&SWlat=${action.payload.latitude - Math.min(action.payload.latitudeDelta, 1)}&SWlon=${action.payload.longitude - Math.min(action.payload.longitudeDelta, 1)}&NElat=${action.payload.latitude + Math.min(action.payload.latitudeDelta, 1)}&NElon=${action.payload.longitude + Math.min(action.payload.longitudeDelta, 1)}`);
+    console.log(response)
+
+    // Second step is to transfrom Hitchwiki Spots to Map Markers
+    function spotsToMarkers(spots) {
+      if (!spots) return [];
+
+      // Print as text number of stars
+      function drawStars(number) {
+        return '★'.repeat(number) + '☆'.repeat(5 - number);
+      }
+      // Find the right marker image according to rating
+      // Note: the require needs to be static
+      function getMarkerImage(number) {
+        switch (number) {
+          case 5:
+            return require('../../../images/annotation5.png'); // eslint-disable-line
+          case 4:
+            return require('../../../images/annotation4.png'); // eslint-disable-line
+          case 3:
+            return require('../../../images/annotation3.png'); // eslint-disable-line
+          case 2:
+            return require('../../../images/annotation2.png'); // eslint-disable-line
+          default:
+            return require('../../../images/annotation1.png'); // eslint-disable-line
+        }
+      }
+
+      const markers = [];
+      for (let i = spots.length - 1; i >= 0; i -= 1) {
+        markers.push({
+          id: spots[i].id,
+          latlng: {
+            latitude: parseFloat(spots[i].location[0]),
+            longitude: parseFloat(spots[i].location[1])
+          },
+          title: `Spot: ${drawStars(Math.round(spots[i].average_rating))}`,
+          image: getMarkerImage(Math.round(spots[i].average_rating))
+        });
+      }
+      return markers;
+    }
+
+    yield put({ type: types.FETCH_SPOTS_SUCCESS, payload: spotsToMarkers(response.spots) });
   } catch (error) {
     yield put({ type: types.FETCH_SPOTS_FAILURE, error });
   }
@@ -20,10 +64,9 @@ function* fetchSpotsSaga(action) {
 
 /**
  * Saga which get the current GPS location
- * @param {[type]} action        action.payload is a <MapView /> to setCoordinates on
  * @yield {[type]} [description]
  */
-function* getLocationSaga(action) {
+function* getLocationSaga() {
   // geolocation.getCurrentPosition's footprint is (dataCallback, errorCallback, options)
   // cps needs a function whose footprint is (err, data) => ...
   // this function makes the change

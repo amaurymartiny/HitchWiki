@@ -1,7 +1,7 @@
 import types from './types';
 
 const fetchSpots = (region) => {
-  // bounds from Mapbox is [ latitudeSW, longitudeSW, latitudeNE, longitudeNE ]
+  
   return {
     type: types.FETCH_SPOTS_REQUEST,
     payload: region

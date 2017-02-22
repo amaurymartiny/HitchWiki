@@ -10,7 +10,17 @@ import theme from '../../services/ThemeService';
 class HitchhikingMapView extends React.Component {
 
   static navigationOptions = {
-    title: 'Offline Spots'
+    title: 'Map',
+    header: (navigation, defaultHeader) => ({
+      ...defaultHeader,
+      visible: false,
+    }),
+    tabBar: {
+      icon: ({ tintColor }) => (
+        <Icon type="ionicon" name="ios-map" color={tintColor} />
+      ),
+      visible: true
+    },
   }
 
   static propTypes = {

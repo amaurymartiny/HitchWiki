@@ -1,13 +1,22 @@
 import React, { PropTypes } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { ListItem } from 'react-native-elements';
+import { ListItem, Icon } from 'react-native-elements';
 
 import theme from '../../services/ThemeService';
 
 class SettingsView extends React.Component {
 
   static navigationOptions = {
-    title: 'Settings'
+    title: 'Settings',
+    header: {
+      visible: true,
+    },
+    tabBar: {
+      icon: ({ tintColor }) => (
+        <Icon type="ionicon" name="ios-settings" color={tintColor} />
+      ),
+      visible: true
+    },
   }
 
   static propTypes = {

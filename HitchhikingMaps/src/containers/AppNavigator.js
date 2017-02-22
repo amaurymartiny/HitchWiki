@@ -6,36 +6,32 @@ import OfflineMapsViewContainer from './OfflineMaps/OfflineMapsViewContainer';
 import OfflineSpotsViewContainer from './OfflineSpots/OfflineSpotsViewContainer';
 
 const HitchhikingMapNavigator = StackNavigator({
-  hitchhikingMap: {
-    screen: HitchhikingMapViewContainer
-  },
-  spotDetails: {
-    screen: SpotDetailsViewContainer
+  hitchhikingMap: { screen: HitchhikingMapViewContainer },
+  spotDetails: { screen: SpotDetailsViewContainer }
+}, {
+  navigationOptions: {
+    header: {
+      visible: false
+    }
   }
 });
 
 const SettingsNavigator = StackNavigator({
-  settings: {
-    screen: SettingsViewContainer
-  },
-  offlineMaps: {
-    screen: OfflineMapsViewContainer
-  },
-  offlineSpots: {
-    screen: OfflineSpotsViewContainer
-  },
-  spotDetailsSettings: {
-    screen: SpotDetailsViewContainer
+  settings: { screen: SettingsViewContainer },
+  offlineMaps: { screen: OfflineMapsViewContainer },
+  offlineSpots: { screen: OfflineSpotsViewContainer },
+  spotDetailsSettings: { screen: SpotDetailsViewContainer }
+}, {
+  navigationOptions: {
+    header: {
+      visible: true
+    }
   }
 });
 
 export default AppNavigator = TabNavigator({
-  Map: {
-    screen: HitchhikingMapNavigator
-  },
-  Settings: {
-    screen: SettingsNavigator
-  }
+  hitchhikingMap: { screen: HitchhikingMapNavigator },
+  settings: { screen: SettingsNavigator }
 }, {
   navigationOptions: {
     header: {

@@ -6,7 +6,8 @@ import MapView from 'react-native-maps';
 
 import { HitchhikingMapActions } from '../../ducks/HitchhikingMap';
 import { SnapshotsActions } from '../../ducks/Snapshots';
-import MessageBarViewContainer from '../MessageBar/MessageBarViewContainer';
+
+import Background from '../../components/Background/Background';
 import theme from '../../services/ThemeService';
 
 class HitchhikingMapView extends React.Component {
@@ -83,7 +84,7 @@ class HitchhikingMapView extends React.Component {
     }
 
     return (
-      <View style={styles.fullScreen}>
+      <Background>
         <MapView
           ref="map"
           style={styles.fullScreen}
@@ -127,8 +128,7 @@ class HitchhikingMapView extends React.Component {
           }
           onPress={() => this.props.dispatch(HitchhikingMapActions.getLocation(this.refs.map))}
         />
-        <MessageBarViewContainer />
-      </View>
+      </Background>
     );
   }
 }

@@ -5,6 +5,8 @@ import Gallery from 'react-native-gallery';
 import moment from 'moment';
 
 import { SnapshotsActions } from '../../ducks/Snapshots';
+
+import Background from '../../components/Background/Background';
 import EmptyScreen from '../../components/EmptyScreen/EmptyScreen';
 import theme from '../../services/ThemeService';
 
@@ -24,7 +26,7 @@ class OfflinesnapshotsView extends React.Component {
 
   render() {
     return (
-      <View style={styles.fullScreen}>
+      <Background>
         {this.props.snapshots.length ?
           <View style={styles.fullScreen}>
             <Gallery
@@ -37,14 +39,14 @@ class OfflinesnapshotsView extends React.Component {
         :
           <EmptyScreen title="No snapshots taken yet. Hint: go to the Map, click on the '+' button, and take a snapshot to see it here." />
         }
-      </View>
+      </Background>
     );
   }
 }
 
 const styles = StyleSheet.create({
   fullScreen: {
-    flex: 1,
+    ...StyleSheet.absoluteFillObject,
   },
   caption: {
     position: 'absolute',

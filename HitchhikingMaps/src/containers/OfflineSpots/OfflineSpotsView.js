@@ -3,6 +3,8 @@ import { View, StyleSheet } from 'react-native';
 import { ListItem, Text } from 'react-native-elements';
 
 import { OfflineSpotsActions } from '../../ducks/OfflineSpots';
+
+import Background from '../../components/Background/Background';
 import EmptyScreen from '../../components/EmptyScreen/EmptyScreen';
 import theme from '../../services/ThemeService';
 
@@ -21,9 +23,8 @@ class OfflineSpotsView extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
-      <View style={styles.fullScreen}>
+      <Background>
         {this.props.spots.length ?
           <View style={{ backgroundColor: 'white' }}>
             {this.props.spots.map((spot, index) => (
@@ -39,15 +40,9 @@ class OfflineSpotsView extends React.Component {
         :
           <EmptyScreen title="No offline spots saved. Hint: go to the Map,  click on a spot to see its description, and click on the 'Save Offline' button to save a spot" />
         }
-      </View>
+      </Background>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  fullScreen: {
-    flex: 1
-  },
-});
 
 export default OfflineSpotsView;

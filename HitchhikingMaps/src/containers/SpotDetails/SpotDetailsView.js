@@ -4,9 +4,11 @@ import { Card, Text, List, ListItem, Button } from 'react-native-elements';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 // import StarRating from 'react-native-star-rating';
 
-import theme from '../../services/ThemeService';
 import { SpotDetailsActions } from '../../ducks/SpotDetails';
 import { OfflineSpotsActions } from '../../ducks/OfflineSpots';
+
+import Background from '../../components/Background/Background';
+import theme from '../../services/ThemeService';
 
 class SpotDetailsView extends React.Component {
 
@@ -43,73 +45,75 @@ class SpotDetailsView extends React.Component {
 
   render() {
     return (
-      <ScrollView>
-        <Card
-          title={
-            <Text>
-              <Text h3 style={styles.primaryColor}>{this.getSpot().Cities.length ? this.getSpot().Cities[0] : (this.getSpot().title || '-')}</Text>
-              {'\n'}
+      <Background>
+        <ScrollView>
+          <Card
+            title={
               <Text>
-                {this.getSpot().Cities.slice(1).map(city => `${city}, `)}
-                {this.getSpot().Country.length ? this.getSpot().Country[0] : '-'}
+                <Text h3 style={styles.primaryColor}>{this.getSpot().Cities.length ? this.getSpot().Cities[0] : (this.getSpot().title || '-')}</Text>
+                {'\n'}
+                <Text>
+                  {this.getSpot().Cities.slice(1).map(city => `${city}, `)}
+                  {this.getSpot().Country.length ? this.getSpot().Country[0] : '-'}
+                </Text>
               </Text>
-            </Text>
-          }
-        >
-
-          <View style={[styles.horizontal, styles.flexStart, styles.mdGutterVertical]}>
-            {/*<StarRating
-              disabled
-              rating={this.getSpot().rating_average}
-              starSize={25}
-              starColor={theme.secondary}
-              selectedStar={() => {}}
-            />*/}
-            <Text style={[styles.secondaryColor, styles.h5]}> {this.getSpot().rating_average}/5</Text>
-          </View>
-
-          <View style={[styles.horizontal, styles.spaceBetween, styles.lgGutterVertical]}>
-            <Text><FontAwesomeIcon name="thumbs-up" size={20} color={theme.secondary} /> {this.getSpot().rating_count ? `${this.getSpot().rating_count} rating${this.getSpot().rating_count > 1 ? 's' : ''}` : '-'}</Text>
-            <Text><FontAwesomeIcon name="hourglass-half" size={20} color={theme.secondary} /> {this.getSpot().waiting_time_average ? `${this.getSpot().waiting_time_average} min` : '-'}</Text>
-            <Text><FontAwesomeIcon name="comments" size={20} color={theme.secondary} /> {this.getSpot().comment_count ? `${this.getSpot().comment_count} comment${this.getSpot().comment_count > 1 ? 's' : ''}` : '-'}</Text>
-          </View>
-
-          <Text style={[styles.h5, styles.mdGutterVertical]}>
-            <FontAwesomeIcon name="file-image-o" size={22} color={theme.secondary} />  Description
-          </Text>
-          <Text>{this.stripTags(this.getSpot().Description) || 'No description available.'}</Text>
-          <List containerStyle={styles.list}>
-            {this.getSpot().comments.map((comment, index) => (
-              <ListItem
-                key={comment.comment_id}
-                leftIcon={{
-                  name: 'comment-o',
-                  type: 'font-awesome',
-                  color: theme.secondary,
-                  style: styles.alignTop,
-                }}
-                title={`${comment.user_name || 'Anonymous User'} on ${this.formatDate(comment.timestamp)}`}
-                titleStyle={styles.caption}
-                wrapperStyle={styles.alignTop}
-                subtitle={
-                  <View>
-                    <Text>{this.stripTags(comment.commenttext)}</Text>
-                  </View>
-                  }
-                hideChevron
-              />
-              ))
             }
-          </List>
-          <Button
-            backgroundColor={theme.blue}
-            title={this.props.offlineSpot ? 'Saved' : 'Save Offline'}
-            icon={{ 'type': 'ionicon', name: this.props.offlineSpot ? 'ios-checkmark-circle-outline' :'ios-bookmarks' }}
-            disabled={!!this.props.offlineSpot}
-            onPress={() => this.props.dispatch(OfflineSpotsActions.saveOfflineSpot(this.props.navigation.state.params.spotId, this.getSpot()))}
-          />
-        </Card>
-      </ScrollView>
+          >
+
+            <View style={[styles.horizontal, styles.flexStart, styles.mdGutterVertical]}>
+              {/*<StarRating
+                disabled
+                rating={this.getSpot().rating_average}
+                starSize={25}
+                starColor={theme.secondary}
+                selectedStar={() => {}}
+              />*/}
+              <Text style={[styles.secondaryColor, styles.h5]}> {this.getSpot().rating_average}/5</Text>
+            </View>
+
+            <View style={[styles.horizontal, styles.spaceBetween, styles.lgGutterVertical]}>
+              <Text><FontAwesomeIcon name="thumbs-up" size={20} color={theme.secondary} /> {this.getSpot().rating_count ? `${this.getSpot().rating_count} rating${this.getSpot().rating_count > 1 ? 's' : ''}` : '-'}</Text>
+              <Text><FontAwesomeIcon name="hourglass-half" size={20} color={theme.secondary} /> {this.getSpot().waiting_time_average ? `${this.getSpot().waiting_time_average} min` : '-'}</Text>
+              <Text><FontAwesomeIcon name="comments" size={20} color={theme.secondary} /> {this.getSpot().comment_count ? `${this.getSpot().comment_count} comment${this.getSpot().comment_count > 1 ? 's' : ''}` : '-'}</Text>
+            </View>
+
+            <Text style={[styles.h5, styles.mdGutterVertical]}>
+              <FontAwesomeIcon name="file-image-o" size={22} color={theme.secondary} />  Description
+            </Text>
+            <Text>{this.stripTags(this.getSpot().Description) || 'No description available.'}</Text>
+            <List containerStyle={styles.list}>
+              {this.getSpot().comments.map((comment, index) => (
+                <ListItem
+                  key={comment.comment_id}
+                  leftIcon={{
+                    name: 'comment-o',
+                    type: 'font-awesome',
+                    color: theme.secondary,
+                    style: styles.alignTop,
+                  }}
+                  title={`${comment.user_name || 'Anonymous User'} on ${this.formatDate(comment.timestamp)}`}
+                  titleStyle={styles.caption}
+                  wrapperStyle={styles.alignTop}
+                  subtitle={
+                    <View>
+                      <Text>{this.stripTags(comment.commenttext)}</Text>
+                    </View>
+                    }
+                  hideChevron
+                />
+                ))
+              }
+            </List>
+            <Button
+              backgroundColor={theme.blue}
+              title={this.props.offlineSpot ? 'Saved' : 'Save Offline'}
+              icon={{ 'type': 'ionicon', name: this.props.offlineSpot ? 'ios-checkmark-circle-outline' :'ios-bookmarks' }}
+              disabled={!!this.props.offlineSpot}
+              onPress={() => this.props.dispatch(OfflineSpotsActions.saveOfflineSpot(this.props.navigation.state.params.spotId, this.getSpot()))}
+            />
+          </Card>
+        </ScrollView>
+      </Background>
     );
   }
 }

@@ -21,7 +21,8 @@ class MessageBarView extends React.Component {
       alertType: 'info',
       message: this.props.message,
       messageStyle: { color: 'white', fontSize: 14, textAlign: 'center', padding: 0 },
-      stylesheetInfo : { backgroundColor : 'rgba(0, 0, 0, 0.7)', strokeColor : 'rgba(0, 0, 0, 0.7)' }, // Default are blue colors
+      stylesheetInfo : { backgroundColor : 'rgba(0, 0, 0, 0.7)', strokeColor : 'rgba(0, 0, 0, 0.7)' },
+      shouldHideAfterDelay: this.props.shouldHideAfterDelay
     });
     // Clear message after showing it
     this.props.dispatch(MessageBarActions.setMessage(''));

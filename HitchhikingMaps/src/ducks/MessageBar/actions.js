@@ -1,9 +1,12 @@
 import types from './types';
 
-const setMessage = message => {
+const setMessage = (message, shouldHideAfterDelay = true) => {
   return {
     type: types.SET_MESSAGE,
-    payload: message
+    payload: {
+      message,
+      shouldHideAfterDelay
+    }
   }
 }
 

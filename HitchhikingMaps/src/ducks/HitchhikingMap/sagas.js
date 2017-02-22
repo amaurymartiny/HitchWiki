@@ -1,5 +1,4 @@
 import { call, cps, put, takeLatest } from 'redux-saga/effects';
-
 import types from './types';
 import actions from './actions';
 import ApiService from '../../services/ApiService';
@@ -56,6 +55,7 @@ function* getLocationSaga(action) {
   }
   
   try {
+    // yield delay(1);
     const position = yield cps(getCurrentPosition);
     // Create a new region to zoom into
     const newRegion = {
@@ -67,7 +67,7 @@ function* getLocationSaga(action) {
 
     // Navigate to new position
     // yield put({ type: types.SET_REGION, payload: newRegion});
-    action.payload.animateToRegion(newRegion);
+    yield action.payload.animateToRegion(newRegion);
     yield put({ type: types.GET_LOCATION_SUCCESS });
   } catch(error) {
     yield put({ type: types.GET_LOCATION_FAILURE, error });

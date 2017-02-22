@@ -1,9 +1,8 @@
 import { call, cps, put, takeLatest } from 'redux-saga/effects';
-import {
-  FETCH_SPOTS_REQUEST, FETCH_SPOTS_SUCCESS, FETCH_SPOTS_FAILURE,
-  GET_LOCATION_REQUEST, GET_LOCATION_SUCCESS, GET_LOCATION_FAILURE
-} from './HitchhikingMapState';
-import ApiRequest from '../../services/ApiService';
+
+import types from './types';
+import actions from './actions';
+import ApiService from '../../services/ApiService';
 
 /**
  * Saga which fetches the spots inside bounds from HitchWiki API 
@@ -12,10 +11,10 @@ import ApiRequest from '../../services/ApiService';
  */
 function* fetchSpotsSaga(action) {
   try {
-    const response = yield call(ApiRequest, `action=hwmapapi&format=json&SWlat=${action.payload.bounds[0]}&SWlon=${action.payload.bounds[1]}&NElat=${action.payload.bounds[2]}&NElon=${action.payload.bounds[3]}`);
-    yield put({ type: FETCH_SPOTS_SUCCESS, payload: response.spots });
+    const response = yield call(ApiService, `action=hwmapapi&format=json&SWlat=${action.payload.bounds[0]}&SWlon=${action.payload.bounds[1]}&NElat=${action.payload.bounds[2]}&NElon=${action.payload.bounds[3]}`);
+    yield put({ type: types.FETCH_SPOTS_SUCCESS, payload: response.spots });
   } catch (error) {
-    yield put({ type: FETCH_SPOTS_FAILURE, error });
+    yield put({ type: types.FETCH_SPOTS_FAILURE, error });
   }
 }
 
@@ -25,7 +24,6 @@ function* fetchSpotsSaga(action) {
  * @yield {[type]} [description]
  */
 function* getLocationSaga(action) {
-
   // geolocation.getCurrentPosition's footprint is (dataCallback, errorCallback, options)
   // cps needs a function whose footprint is (err, data) => ...
   // this function makes the change
@@ -40,19 +38,23 @@ function* getLocationSaga(action) {
   try {
     yield;
     const position = yield cps(getCurrentPosition);
-    // TODO not sure if to put here
-    // action.payload here is a reference to the <MapView />
-    // used to called setCoordinates in saga side effect
-    action.payload.setCenterCoordinate(position.coords.latitude, position.coords.longitude);
-    yield put({ type: GET_LOCATION_SUCCESS, payload: position });
+    // create a new region to zoom into
+    const newRegion = {
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
+      latitudeDelta: 0.5,
+      longitudeDelta: 0.5
+    };
+    yield put({ type: types.SET_REGION, payload: newRegion});
+    yield put({ type: types.GET_LOCATION_SUCCESS });
   } catch(error) {
-    yield put({ type: GET_LOCATION_FAILURE, error });
+    yield put({ type: types.GET_LOCATION_FAILURE, error });
   }
 }
 
 export default function* HitchhikingMapSaga() {
   yield [
-    takeLatest(FETCH_SPOTS_REQUEST, fetchSpotsSaga),
-    takeLatest(GET_LOCATION_REQUEST, getLocationSaga)
+    takeLatest(types.FETCH_SPOTS_REQUEST, fetchSpotsSaga),
+    takeLatest(types.GET_LOCATION_REQUEST, getLocationSaga)
   ];
 }

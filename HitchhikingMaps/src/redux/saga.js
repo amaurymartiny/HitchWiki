@@ -1,12 +1,13 @@
 import { fork } from 'redux-saga/effects';
-import HitchhikingMapSaga from '../modules/HitchhikingMap/HitchhikingMapSaga';
-import SpotDetailsSaga from '../modules/SpotDetails/SpotDetailsSaga';
-import OfflineMapsSaga from '../modules/OfflineMaps/OfflineMapsSaga';
-import OfflineSpotsSaga from '../modules/OfflineSpots/OfflineSpotsSaga';
+// import HitchhikingMapSaga from '../containers/HitchhikingMap/HitchhikingMapSaga';
+import { HitchhikingMapSagas } from '../ducks/HitchhikingMap';
+import SpotDetailsSaga from '../containers/SpotDetails/SpotDetailsSaga';
+import OfflineMapsSaga from '../containers/OfflineMaps/OfflineMapsSaga';
+import OfflineSpotsSaga from '../containers/OfflineSpots/OfflineSpotsSaga';
 
 export default function* rootSaga() {
   yield [
-    fork(HitchhikingMapSaga),
+    fork(HitchhikingMapSagas),
     fork(SpotDetailsSaga),
     fork(OfflineMapsSaga),
     fork(OfflineSpotsSaga)

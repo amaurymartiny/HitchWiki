@@ -3,7 +3,7 @@ import {AppRegistry} from 'react-native';
 import codePush from "react-native-code-push";
 import {Provider} from 'react-redux';
 import store from './src/redux/store';
-import AppViewContainer from './src/modules/AppViewContainer';
+import AppViewContainer from './src/containers/AppViewContainer';
 
 class HitchhikingMaps extends React.Component {
   render() {

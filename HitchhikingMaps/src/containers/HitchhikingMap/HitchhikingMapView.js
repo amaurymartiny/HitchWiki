@@ -1,15 +1,15 @@
 import React, { PropTypes } from 'react';
-import { View, TouchableOpacity, StyleSheet, Platform } from 'react-native';
-import { Icon, Text } from 'react-native-elements';
+import { View, StyleSheet } from 'react-native';
+import { Icon } from 'react-native-elements';
 // import { MapView } from 'react-native-mapbox-gl';
-import ProgressPie from 'react-native-progress/Pie';
+// import ProgressPie from 'react-native-progress/Pie';
 import ActionButton from 'react-native-action-button';
 // import { withConnection, connectionShape } from 'react-native-connection-info';
 import MapView from 'react-native-maps';
 
 
-import { fetchSpots, getLocation, setLocation, setZoomLevel, } from './HitchhikingMapState';
-import { fetchOfflineMaps, saveOfflineMap, saveOfflineMapProgress } from '../OfflineMaps/OfflineMapsState';
+import { HitchhikingMapActions } from '../../ducks/HitchhikingMap';
+// import { fetchOfflineMaps, saveOfflineMap, saveOfflineMapProgress } from '../OfflineMaps/OfflineMapsState';
 import theme from '../../services/ThemeService';
 
 // @withConnection
@@ -20,9 +20,9 @@ class HitchhikingMapView extends React.Component {
   }
 
   static propTypes = {
-    annotations: PropTypes.array.isRequired,
-    location: PropTypes.object.isRequired,
-    zoomLevel: PropTypes.number.isRequired,
+    markers: PropTypes.array.isRequired,
+    region: PropTypes.object.isRequired,
+    isFetchingGPS: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
     // connection: connectionShape
   }
@@ -41,22 +41,18 @@ class HitchhikingMapView extends React.Component {
   // }
 
 
-  componentWillUnmount() {
-    this._offlineProgressSubscription.remove();
-  }
+  // componentWillUnmount() {
+  //   this._offlineProgressSubscription.remove();
+  // }
 
   render() {
     return (
       <View style={styles.fullScreen}>
-  <MapView
-    style={styles.fullScreen}
-    initialRegion={{
-      latitude: 37.78825,
-      longitude: -122.4324,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421,
-    }}
-  />
+      <MapView
+        style={styles.fullScreen}
+        region={this.props.region}
+        onRegionChange={(region) => this.props.dispatch(HitchhikingMapActions.setRegion(region))}
+      />
         {/*<MapView
           initialZoomLevel={this.props.zoomLevel}
           initialCenterCoordinate={this.props.location}
@@ -111,11 +107,11 @@ class HitchhikingMapView extends React.Component {
         */}
         <ActionButton
           position="right"
-          buttonColor={this.props.location.isFetching ? 'white' : theme.red}
+          buttonColor={this.props.isFetchingGPS ? 'white' : theme.red}
           icon={
-            <Icon name="my-location" color={this.props.location.isFetching ? theme.red : 'white'} />
+            <Icon name="my-location" color={this.props.isFetchingGPS ? theme.red : 'white'} />
           }
-          onPress={() => this.props.dispatch(getLocation(this._map))}
+          onPress={() => this.props.dispatch(HitchhikingMapActions.getLocation())}
         />
       </View>
     );
@@ -131,19 +127,6 @@ const styles = StyleSheet.create({
     left: 8,
     bottom: 8,
     zIndex: 10
-  },
-  raised: { // https://github.com/react-native-community/react-native-elements/blob/master/src/icons/Icon.js
-    ...Platform.select({
-      ios: {
-        shadowColor: 'rgba(0,0,0, .4)',
-        shadowOffset: {height: 1, width: 1},
-        shadowOpacity: 1,
-        shadowRadius: 1
-      },
-      android: {
-        elevation: 2
-      }
-    })
   }
 });
 

@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
-import HitchhikingMapStateReducer from '../modules/HitchhikingMap/HitchhikingMapState';
-import SpotDetailsStateReducer from '../modules/SpotDetails/SpotDetailsState';
-import OfflineMapsStateReducer from '../modules/OfflineMaps/OfflineMapsState';
-import OfflineSpotsStateReducer from '../modules/OfflineSpots/OfflineSpotsState';
+// import HitchhikingMapStateReducer from '../containers/HitchhikingMap/HitchhikingMapState';
+import HitchhikingMapReducer from '../ducks/HitchhikingMap';
+import SpotDetailsStateReducer from '../containers/SpotDetails/SpotDetailsState';
+import OfflineMapsStateReducer from '../containers/OfflineMaps/OfflineMapsState';
+import OfflineSpotsStateReducer from '../containers/OfflineSpots/OfflineSpotsState';
 
 const rootReducer = combineReducers({
-  hitchhikingMap: HitchhikingMapStateReducer,
+  hitchhikingMap: HitchhikingMapReducer,
   spotDetails: SpotDetailsStateReducer,
   offlineMaps: OfflineMapsStateReducer,
   offlineSpots: OfflineSpotsStateReducer,

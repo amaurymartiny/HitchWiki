@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { ListItem, Text } from 'react-native-elements';
 
 import { OfflineSpotsActions } from '../../ducks/OfflineSpots';
@@ -26,7 +26,7 @@ class OfflineSpotsView extends React.Component {
     return (
       <Background>
         {this.props.spots.length ?
-          <View style={{ backgroundColor: 'white' }}>
+          <ScrollView style={{ backgroundColor: 'white' }}>
             {this.props.spots.map((spot, index) => (
               <ListItem
                 key={index}
@@ -36,7 +36,7 @@ class OfflineSpotsView extends React.Component {
                 onPress={() => this.props.navigation.navigate('spotDetailsSettings', { spotId: spot })}
               />
             ))}
-          </View>
+          </ScrollView>
         :
           <EmptyScreen title="No offline spots saved. Hint: go to the Map,  click on a spot to see its description, and click on the 'Save Offline' button to save a spot" />
         }

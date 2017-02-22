@@ -27,16 +27,22 @@ class SettingsView extends React.Component {
     return (
       <View>
         <ListItem
-          title="Offline Maps"
+          title="Snapshots"
           titleStyle={theme.styles.textColor}
-          leftIcon={{ type: 'ionicon', name: 'ios-cloud-download', color: theme.darkGrey }}
-          onPress={() => this.props.navigation.navigate('offlineMaps')}
+          leftIcon={{ type: 'ionicon', name: 'ios-camera', color: theme.darkGrey }}
+          onPress={() => this.props.navigation.navigate('snapshots')}
         />
         <ListItem
           title="Offline Spots"
           titleStyle={theme.styles.textColor}
           leftIcon={{ type: 'ionicon', name: 'ios-bookmarks', color: theme.darkGrey }}
           onPress={() => this.props.navigation.navigate('offlineSpots')}
+        />
+        <ListItem
+          title="Offline Maps"
+          titleStyle={theme.styles.textColor}
+          leftIcon={{ type: 'ionicon', name: 'ios-cloud-download', color: theme.darkGrey }}
+          onPress={() => this.props.navigation.navigate('offlineMaps')}
         />
       </View>
     );

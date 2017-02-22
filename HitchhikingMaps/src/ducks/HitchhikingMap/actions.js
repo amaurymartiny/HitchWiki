@@ -15,11 +15,11 @@ const fetchSpots = (region) => {
 //   };
 // }
 
-const getLocation = (map) => {
-  // map is a reference to the MapView object
+const getLocation = (mapView) => {
+  // mapView is a reference to the MapView object
   return {
     type: types.GET_LOCATION_REQUEST,
-    payload: map
+    payload: mapView
   }
 }
 

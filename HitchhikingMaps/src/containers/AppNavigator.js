@@ -1,8 +1,8 @@
 import { StackNavigator, TabNavigator } from 'react-navigation';
-import SettingsViewContainer from './Settings/SettingsViewContainer';
 import HitchhikingMapViewContainer from './HitchhikingMap/HitchhikingMapViewContainer';
 import SpotDetailsViewContainer from './SpotDetails/SpotDetailsViewContainer';
-import OfflineMapsViewContainer from './OfflineMaps/OfflineMapsViewContainer';
+import SettingsViewContainer from './Settings/SettingsViewContainer';
+import SnapshotsViewContainer from './Snapshots/SnapshotsViewContainer';
 import OfflineSpotsViewContainer from './OfflineSpots/OfflineSpotsViewContainer';
 
 const HitchhikingMapNavigator = StackNavigator({
@@ -18,7 +18,7 @@ const HitchhikingMapNavigator = StackNavigator({
 
 const SettingsNavigator = StackNavigator({
   settings: { screen: SettingsViewContainer },
-  offlineMaps: { screen: OfflineMapsViewContainer },
+  snapshots: { screen: SnapshotsViewContainer },
   offlineSpots: { screen: OfflineSpotsViewContainer },
   spotDetailsSettings: { screen: SpotDetailsViewContainer }
 }, {

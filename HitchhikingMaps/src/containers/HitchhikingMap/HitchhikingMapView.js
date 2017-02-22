@@ -5,6 +5,7 @@ import ActionButton from 'react-native-action-button';
 import MapView from 'react-native-maps';
 
 import { HitchhikingMapActions } from '../../ducks/HitchhikingMap';
+import { SnapshotsActions } from '../../ducks/Snapshots';
 import theme from '../../services/ThemeService';
 
 class HitchhikingMapView extends React.Component {
@@ -32,6 +33,21 @@ class HitchhikingMapView extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(HitchhikingMapActions.getLocation(this.refs.map));
+  }
+
+  takeSnapshot () {
+    // 'takeSnapshot' takes a config object with the
+    // following options
+    const snapshot = this.refs.map.takeSnapshot({
+      width: 300,      // optional, when omitted the view-width is used
+      height: 300,     // optional, when omitted the view-height is used
+      format: 'png',   // image formats: 'png', 'jpg' (default: 'png')
+      quality: 0.8,    // image quality: 0..1 (only relevant for jpg, default: 1)
+      result: 'file'   // result types: 'file', 'base64' (default: 'file')
+    });
+    snapshot.then((uri) => {
+      console.log(uri)
+    });
   }
 
   render() {
@@ -93,6 +109,21 @@ class HitchhikingMapView extends React.Component {
             />
           ))}
         </MapView>
+        <ActionButton position="left" buttonColor={theme.red}>
+          {/*<ActionButton.Item
+            buttonColor={theme.red}
+            title="Download Offline Map"
+          >
+            <Icon type="ionicon" name="ios-cloud-download" color="white" />
+          </ActionButton.Item>*/}
+          <ActionButton.Item
+            buttonColor={theme.red}
+            title="Take Snapshot"
+            onPress={() => this.props.dispatch(SnapshotsActions.saveSnapshot(this.refs.map))}
+          >
+            <Icon type="ionicon" name="ios-camera" color="white" />
+          </ActionButton.Item>
+        </ActionButton>
         <ActionButton
           position="right"
           buttonColor={this.props.isFetchingGPS ? 'white' : theme.red}

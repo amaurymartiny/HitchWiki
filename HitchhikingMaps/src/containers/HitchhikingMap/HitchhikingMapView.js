@@ -21,7 +21,7 @@ class HitchhikingMapView extends React.Component {
 
   static propTypes = {
     markers: PropTypes.array.isRequired,
-    region: PropTypes.object.isRequired,
+    // region: PropTypes.object.isRequired,
     isFetchingGPS: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
     // connection: connectionShape
@@ -50,6 +50,42 @@ class HitchhikingMapView extends React.Component {
   // }
 
   render() {
+    // Some helper functions to show correctly the markers
+
+    // Print as text number of stars
+    function drawStars(number) {
+      return '★'.repeat(number) + '☆'.repeat(5 - number);
+    }
+    // // Find the right marker image according to rating
+    // function getMarkerImage(number) {
+    //   switch (number) {
+    //     case 5:
+    //       return require('../../../images/annotation5.png'); // eslint-disable-line
+    //     case 4:
+    //       return require('../../../images/annotation4.png'); // eslint-disable-line
+    //     case 3:
+    //       return require('../../../images/annotation3.png'); // eslint-disable-line
+    //     case 2:
+    //       return require('../../../images/annotation2.png'); // eslint-disable-line
+    //     default:
+    //       return require('../../../images/annotation1.png'); // eslint-disable-line
+    //   }
+    // }
+    function getPinColor(number) {
+      switch (number) {
+        case 2:
+          return 'pink';
+        case 3:
+          return 'yellow';
+        case 4:
+          return 'green';
+        case 5:
+          return 'blue';
+        default:
+          return 'red';
+      }
+    }
+
     return (
       <View style={styles.fullScreen}>
         <MapView
@@ -65,29 +101,13 @@ class HitchhikingMapView extends React.Component {
             <MapView.Marker
               key={marker.id}
               coordinate={marker.latlng}
-              title={marker.title}
+              description="See Description &rarr;"
+              title={drawStars(marker.rating)}
+              pinColor={getPinColor(marker.rating)}
+              onCalloutPress={() => this.props.navigation.navigate('spotDetails', { spotId: marker.id })}
             />
           ))}
         </MapView>
-        {/*<MapView
-          initialZoomLevel={this.props.zoomLevel}
-          initialCenterCoordinate={this.props.location}
-          style={styles.fullScreen}
-          showsUserLocation={true}
-          annotations={this.props.connection.isConnected ? this.props.annotations : this.props.offlineAnnotations}
-          onRightAnnotationTapped={payload => this.props.navigation.navigate('spotDetails', { spotId: payload.id })}
-          onRegionDidChange={payload => {
-            // update current location and zoomLevel
-            this.props.dispatch(setZoomLevel(payload.zoomLevel));
-            // this.props.dispatch(setLocation(payload.latitude, payload.longitude));
-            // update spots in between bounds
-            this.props.connection.isConnected && payload.zoomLevel > 8 && this._map.getBounds(bounds => {
-              this.props.dispatch(fetchSpots(bounds));
-            });
-          }}
-          logoIsHidden={true}
-          ref={map => { this._map = map; }}
-        />*/}
         {/*
         {this.props.connection.isConnected && <ActionButton position="left" buttonColor={theme.red}>
           {(this.props.progress && this.props.progress.countOfResourcesCompleted < this.props.progress.countOfResourcesExpected) ?

@@ -18,27 +18,6 @@ function* fetchSpotsSaga(action) {
     function spotsToMarkers(spots) {
       if (!spots) return [];
 
-      // Print as text number of stars
-      function drawStars(number) {
-        return '★'.repeat(number) + '☆'.repeat(5 - number);
-      }
-      // Find the right marker image according to rating
-      // Note: the require needs to be static
-      function getMarkerImage(number) {
-        switch (number) {
-          case 5:
-            return require('../../../images/annotation5.png'); // eslint-disable-line
-          case 4:
-            return require('../../../images/annotation4.png'); // eslint-disable-line
-          case 3:
-            return require('../../../images/annotation3.png'); // eslint-disable-line
-          case 2:
-            return require('../../../images/annotation2.png'); // eslint-disable-line
-          default:
-            return require('../../../images/annotation1.png'); // eslint-disable-line
-        }
-      }
-
       const markers = [];
       for (let i = spots.length - 1; i >= 0; i -= 1) {
         markers.push({
@@ -47,8 +26,7 @@ function* fetchSpotsSaga(action) {
             latitude: parseFloat(spots[i].location[0]),
             longitude: parseFloat(spots[i].location[1])
           },
-          title: `Spot: ${drawStars(Math.round(spots[i].average_rating))}`,
-          image: getMarkerImage(Math.round(spots[i].average_rating))
+          rating: Math.round(spots[i].average_rating)
         });
       }
       return markers;

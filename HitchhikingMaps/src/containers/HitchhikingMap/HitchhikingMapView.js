@@ -1,14 +1,10 @@
 import React, { PropTypes } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
-// import { MapView } from 'react-native-mapbox-gl';
-// import ProgressPie from 'react-native-progress/Pie';
 import ActionButton from 'react-native-action-button';
 import MapView from 'react-native-maps';
 
-
 import { HitchhikingMapActions } from '../../ducks/HitchhikingMap';
-// import { fetchOfflineMaps, saveOfflineMap, saveOfflineMapProgress } from '../OfflineMaps/OfflineMapsState';
 import theme from '../../services/ThemeService';
 
 class HitchhikingMapView extends React.Component {

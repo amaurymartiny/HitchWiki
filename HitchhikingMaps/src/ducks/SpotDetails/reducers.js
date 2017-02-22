@@ -1,23 +1,5 @@
-// ======================================================
-// Actions
-// ======================================================
-export const FETCH_SPOT_DETAILS_REQUEST = 'FETCH_SPOT_DETAILS_REQUEST';
-export const FETCH_SPOT_DETAILS_SUCCESS = 'FETCH_SPOT_DETAILS_SUCCESS';
-export const FETCH_SPOT_DETAILS_FAILURE = 'FETCH_SPOT_DETAILS_FAILURE';
+import types from './types';
 
-// ======================================================
-// Action Creators
-// ======================================================
-export function fetchSpotDetails(spotId) {
-  return {
-    type: FETCH_SPOT_DETAILS_REQUEST,
-    spotId,
-  };
-}
-
-// ======================================================
-// Reducers
-// ======================================================
 // To get an idea of the API response:
 // http://beta.hitchwiki.org/en/Special:ApiSandbox#action=hwspotidapi&format=json&page_id=22231&properties=Cities%2CCountry%2CCardinalDirection&user_id=0
 export const initialState = {
@@ -41,9 +23,9 @@ export const initialState = {
 
 export default function SpotDetailsStateReducer(state = initialState, action = {}) {
   switch (action.type) {
-    case FETCH_SPOT_DETAILS_REQUEST:
+    case types.FETCH_SPOT_DETAILS_REQUEST:
       return initialState;
-    case FETCH_SPOT_DETAILS_SUCCESS:
+    case types.FETCH_SPOT_DETAILS_SUCCESS:
       return {
         ...state,
         spot: action.payload,

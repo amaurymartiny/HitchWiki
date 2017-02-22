@@ -1,13 +1,12 @@
 import { combineReducers } from 'redux';
-// import HitchhikingMapStateReducer from '../containers/HitchhikingMap/HitchhikingMapState';
 import HitchhikingMapReducer from '../ducks/HitchhikingMap';
-import SpotDetailsStateReducer from '../containers/SpotDetails/SpotDetailsState';
+import SpotDetailsReducer from '../ducks/SpotDetails';
 import OfflineMapsStateReducer from '../containers/OfflineMaps/OfflineMapsState';
 import OfflineSpotsStateReducer from '../containers/OfflineSpots/OfflineSpotsState';
 
 const rootReducer = combineReducers({
   hitchhikingMap: HitchhikingMapReducer,
-  spotDetails: SpotDetailsStateReducer,
+  spotDetails: SpotDetailsReducer,
   offlineMaps: OfflineMapsStateReducer,
   offlineSpots: OfflineSpotsStateReducer,
 });

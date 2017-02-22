@@ -1,4 +1,4 @@
-import { initialState as spotInitialState } from '../SpotDetails/SpotDetailsState';
+// import { initialState as spotInitialState } from '../SpotDetails/SpotDetailsState';
 
 // ======================================================
 // Actions

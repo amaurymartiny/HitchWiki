@@ -5,8 +5,9 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 // import StarRating from 'react-native-star-rating';
 
 import theme from '../../services/ThemeService';
-import { fetchSpotDetails } from './SpotDetailsState';
-import { fetchOfflineSpot, saveOfflineSpot } from '../OfflineSpots/OfflineSpotsState';
+import { SpotDetailsActions } from '../../ducks/SpotDetails';
+
+// import { fetchOfflineSpot, saveOfflineSpot } from '../OfflineSpots/OfflineSpotsState';
 
 class SpotDetailsView extends React.Component {
 
@@ -24,8 +25,8 @@ class SpotDetailsView extends React.Component {
 
   componentDidMount() {
     // fetch offline and online spot
-    this.props.dispatch(fetchOfflineSpot(this.props.navigation.state.params.spotId));
-    this.props.dispatch(fetchSpotDetails(this.props.navigation.state.params.spotId));
+    // this.props.dispatch(fetchOfflineSpot(this.props.navigation.state.params.spotId));
+    this.props.dispatch(SpotDetailsActions.fetchSpotDetails(this.props.navigation.state.params.spotId));
   }
 
   formatDate(timestamp) {
@@ -106,7 +107,7 @@ class SpotDetailsView extends React.Component {
             title={this.props.offlineSpot ? 'Saved' : 'Save Offline'}
             icon={{ 'type': 'ionicon', name: this.props.offlineSpot ? 'ios-checkmark-circle-outline' :'ios-bookmarks' }}
             disabled={!!this.props.offlineSpot}
-            onPress={() => this.props.dispatch(saveOfflineSpot(this.props.route.params.spotId, this.getSpot()))}
+            onPress={() => {}/*() => this.props.dispatch(saveOfflineSpot(this.props.route.params.spotId, this.getSpot()))*/}
           />
         </Card>
       </ScrollView>

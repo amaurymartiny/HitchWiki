@@ -7,6 +7,7 @@ import SpotDetailsViewContainer from './SpotDetails/SpotDetailsViewContainer';
 import SettingsViewContainer from './Settings/SettingsViewContainer';
 import SnapshotsViewContainer from './Snapshots/SnapshotsViewContainer';
 import OfflineSpotsViewContainer from './OfflineSpots/OfflineSpotsViewContainer';
+import AboutPage from '../components/AboutPage/AboutPage';
 
 const HitchhikingMapNavigator = StackNavigator({
   hitchhikingMap: { screen: HitchhikingMapViewContainer },
@@ -30,7 +31,8 @@ const SettingsNavigator = StackNavigator({
   settings: { screen: SettingsViewContainer },
   snapshots: { screen: SnapshotsViewContainer },
   offlineSpots: { screen: OfflineSpotsViewContainer },
-  spotDetailsSettings: { screen: SpotDetailsViewContainer }
+  spotDetailsSettings: { screen: SpotDetailsViewContainer },
+  about: { screen: AboutPage }
 }, {
   navigationOptions: {
     header: {

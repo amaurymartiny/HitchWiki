@@ -32,8 +32,17 @@ class SettingsView extends React.Component {
         <ListItem
           title="Offline Maps"
           titleStyle={theme.styles.textColor}
+          containerStyle={{ backgroundColor: theme.iosBackgroundGrey }}
           leftIcon={{ type: 'ionicon', name: 'ios-cloud-download', color: theme.darkGrey }}
+          hideChevron={true}
+          badge={{ value: 'Coming Soon!', badgeContainerStyle: { backgroundColor: theme.red } }}
           onPress={() => this.props.navigation.navigate('offlineMaps')}
+        />
+        <ListItem
+          title="About"
+          titleStyle={theme.styles.textColor}
+          leftIcon={{ type: 'ionicon', name: 'ios-information-circle', color: theme.darkGrey }}
+          onPress={() => this.props.navigation.navigate('about')}
         />
       </View>
     );

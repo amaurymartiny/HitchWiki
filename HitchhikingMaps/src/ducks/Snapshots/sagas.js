@@ -26,12 +26,7 @@ function* saveSnapshotSaga(action) {
     // Get array of all snapshots to add new one
     let snapshots = yield call(AsyncStorage.getItem, '@SNAPSHOTS');
     snapshots = JSON.parse(snapshots) || [];
-    console.log(action.payload.takeSnapshot)
-    const snapshotUri = yield call([action.payload, action.payload.takeSnapshot], {
-      format: 'png',   // image formats: 'png', 'jpg' (default: 'png')
-      quality: 0.8,    // image quality: 0..1 (only relevant for jpg, default: 1)
-      result: 'file'   // result types: 'file', 'base64' (default: 'file')
-    });
+    const snapshotUri = yield call([action.payload, action.payload.takeSnapshot], {});
     snapshots.push(snapshotUri);
     yield call(AsyncStorage.setItem, '@SNAPSHOTS', JSON.stringify(snapshots));
     yield put({ type: types.SAVE_SNAPSHOT_SUCCESS });

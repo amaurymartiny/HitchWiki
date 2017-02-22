@@ -27,6 +27,10 @@ class HitchhikingMapView extends React.Component {
     // connection: connectionShape
   }
 
+  componentWillMount() {
+    this.props.dispatch(HitchhikingMapActions.getLocation());
+  }
+
   // componentDidMount() {
   //   // Subsribe to downloading offline map progress
   //   // didn't find a way to do this inside saga
@@ -50,11 +54,12 @@ class HitchhikingMapView extends React.Component {
       <View style={styles.fullScreen}>
         <MapView
           style={styles.fullScreen}
+          showsUserLocation
+          followsUserLocation
+          showsMyLocationButton
           region={this.props.region}
-          onRegionChange={region => {
-            this.props.dispatch(HitchhikingMapActions.setRegion(region));
-            this.props.dispatch(HitchhikingMapActions.fetchSpots(region));
-          }}
+          onRegionChange={region => this.props.dispatch(HitchhikingMapActions.setRegion(region))}
+          onRegionChangeComplete={region => this.props.dispatch(HitchhikingMapActions.fetchSpots(region))}
         >
           {this.props.markers.map(marker => (
             <MapView.Marker

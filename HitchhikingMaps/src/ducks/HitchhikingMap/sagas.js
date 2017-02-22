@@ -12,9 +12,7 @@ import ApiService from '../../services/ApiService';
 function* fetchSpotsSaga(action) {
   try {
     // First step is to make the API call with correct bounds
-
     const response = yield call(ApiService, `action=hwmapapi&format=json&SWlat=${action.payload.latitude - Math.min(action.payload.latitudeDelta, 1)}&SWlon=${action.payload.longitude - Math.min(action.payload.longitudeDelta, 1)}&NElat=${action.payload.latitude + Math.min(action.payload.latitudeDelta, 1)}&NElon=${action.payload.longitude + Math.min(action.payload.longitudeDelta, 1)}`);
-    console.log(response)
 
     // Second step is to transfrom Hitchwiki Spots to Map Markers
     function spotsToMarkers(spots) {
@@ -85,8 +83,8 @@ function* getLocationSaga() {
     const newRegion = {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,
-      latitudeDelta: 0.5,
-      longitudeDelta: 0.5
+      latitudeDelta: 0.005,
+      longitudeDelta: 0.005
     };
     yield put({ type: types.SET_REGION, payload: newRegion});
     yield put({ type: types.GET_LOCATION_SUCCESS });

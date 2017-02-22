@@ -1,7 +1,6 @@
 import types from './types';
 
 const fetchSpots = (region) => {
-  
   return {
     type: types.FETCH_SPOTS_REQUEST,
     payload: region

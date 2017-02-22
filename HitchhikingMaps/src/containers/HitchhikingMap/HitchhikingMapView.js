@@ -27,8 +27,8 @@ class HitchhikingMapView extends React.Component {
     // connection: connectionShape
   }
 
-  componentWillMount() {
-    this.props.dispatch(HitchhikingMapActions.getLocation());
+  componentDidMount() {
+    this.props.dispatch(HitchhikingMapActions.getLocation(this.refs.map));
   }
 
   // componentDidMount() {
@@ -53,13 +53,13 @@ class HitchhikingMapView extends React.Component {
     return (
       <View style={styles.fullScreen}>
         <MapView
+          ref="map"
           style={styles.fullScreen}
           showsUserLocation
-          followsUserLocation
-          showsMyLocationButton
-          region={this.props.region}
-          onRegionChange={region => this.props.dispatch(HitchhikingMapActions.setRegion(region))}
-          onRegionChangeComplete={region => this.props.dispatch(HitchhikingMapActions.fetchSpots(region))}
+          onRegionChange={region => {
+            if (region.latitudeDelta > 1 || region.longitudeDelta > 1) return;
+            this.props.dispatch(HitchhikingMapActions.fetchSpots(region));
+          }}
         >
           {this.props.markers.map(marker => (
             <MapView.Marker
@@ -127,7 +127,7 @@ class HitchhikingMapView extends React.Component {
           icon={
             <Icon name="my-location" color={this.props.isFetchingGPS ? theme.red : 'white'} />
           }
-          onPress={() => this.props.dispatch(HitchhikingMapActions.getLocation())}
+          onPress={() => this.props.dispatch(HitchhikingMapActions.getLocation(this.refs.map))}
         />
       </View>
     );

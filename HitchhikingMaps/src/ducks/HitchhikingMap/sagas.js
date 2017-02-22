@@ -62,12 +62,13 @@ function* fetchSpotsSaga(action) {
 
 /**
  * Saga which get the current GPS location
+ * @param {[type]} action        action.payload is a the reference to the MapView object
  * @yield {[type]} [description]
  */
-function* getLocationSaga() {
+function* getLocationSaga(action) {
   // geolocation.getCurrentPosition's footprint is (dataCallback, errorCallback, options)
   // cps needs a function whose footprint is (err, data) => ...
-  // this function makes the change
+  // This function makes the change
   function getCurrentPosition(callback) {
     return navigator.geolocation.getCurrentPosition(
       position => { return callback(null, position); },
@@ -77,16 +78,18 @@ function* getLocationSaga() {
   }
   
   try {
-    yield;
     const position = yield cps(getCurrentPosition);
-    // create a new region to zoom into
+    // Create a new region to zoom into
     const newRegion = {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,
-      latitudeDelta: 0.005,
-      longitudeDelta: 0.005
+      latitudeDelta: 0.01,
+      longitudeDelta: 0.01
     };
-    yield put({ type: types.SET_REGION, payload: newRegion});
+
+    // Navigate to new position
+    // yield put({ type: types.SET_REGION, payload: newRegion});
+    action.payload.animateToRegion(newRegion);
     yield put({ type: types.GET_LOCATION_SUCCESS });
   } catch(error) {
     yield put({ type: types.GET_LOCATION_FAILURE, error });

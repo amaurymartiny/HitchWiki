@@ -7,22 +7,24 @@ const fetchSpots = (region) => {
   };
 }
 
-const setRegion = (region) => {
-  console.log(region)
-  return {
-    type: types.SET_REGION,
-    payload: region
-  };
-}
+// const setRegion = (region) => {
+//   console.log(region)
+//   return {
+//     type: types.SET_REGION,
+//     payload: region
+//   };
+// }
 
-const getLocation = () => {
+const getLocation = (map) => {
+  // map is a reference to the MapView object
   return {
-    type: types.GET_LOCATION_REQUEST
+    type: types.GET_LOCATION_REQUEST,
+    payload: map
   }
 }
 
 export default {
   fetchSpots,
-  setRegion,
+  // setRegion,
   getLocation
 }

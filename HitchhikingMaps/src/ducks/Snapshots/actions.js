@@ -13,7 +13,15 @@ const saveSnapshot = mapView => {
   };
 }
 
+const setPage = page => {
+  return {
+    type: types.SET_PAGE,
+    payload: page
+  }
+}
+
 export default {
   fetchSnapshots,
   saveSnapshot,
+  setPage,
 }

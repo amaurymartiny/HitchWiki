@@ -16,7 +16,7 @@ class SettingsView extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.background}>
         <ListItem
           title="Snapshots"
           titleStyle={theme.styles.textColor}
@@ -41,6 +41,9 @@ class SettingsView extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  background: {
+    backgroundColor: 'white'
+  },
   badge: {
     backgroundColor: theme.green
   }

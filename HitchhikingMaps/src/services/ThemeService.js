@@ -4,6 +4,7 @@ const palette = {
   red: '#EB7260',
   blue: '#3A9AD9',
   green: '#29ABA4',
+  iosBackgroundGrey: '#E9E9F0',
   lightGrey: '#AAAAAA',
   darkGrey: '#354458',
 };

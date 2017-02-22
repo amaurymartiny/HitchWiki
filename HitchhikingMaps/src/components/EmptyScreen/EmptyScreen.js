@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingLeft: 50,
     paddingRight: 50,
-    backgroundColor: '#eee'
+    backgroundColor: theme.iosBackgroundGrey
   }
 });
 

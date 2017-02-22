@@ -27,7 +27,7 @@ function* saveSnapshotSaga(action) {
     let snapshots = yield call(AsyncStorage.getItem, '@SNAPSHOTS');
     snapshots = JSON.parse(snapshots) || [];
     const snapshotUri = yield call([action.payload, action.payload.takeSnapshot], {});
-    snapshots.push({
+    snapshots.unshift({
       uri: snapshotUri,
       date: new Date(),
     });

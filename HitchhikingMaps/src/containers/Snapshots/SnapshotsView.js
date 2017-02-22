@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import { ListItem, Text } from 'react-native-elements';
 import Gallery from 'react-native-gallery';
+import moment from 'moment';
 
 import { SnapshotsActions } from '../../ducks/Snapshots';
 import EmptyScreen from '../../components/EmptyScreen/EmptyScreen';
@@ -29,8 +30,9 @@ class OfflinesnapshotsView extends React.Component {
             <Gallery
               style={{flex: 1}}
               images={this.props.snapshots.map(item => item.uri)}
+              onPageSelected={page => this.props.dispatch(SnapshotsActions.setPage(page))}
             />
-            <Text>Hello</Text>
+            <Text style={styles.caption}>{moment(this.props.snapshots[this.props.currentPage].date).calendar()}</Text>
           </View>
         :
           <EmptyScreen title="No snapshots taken yet. Hint: go to the Map, click on the '+' button, and take a snapshot to see it here." />
@@ -44,6 +46,14 @@ const styles = StyleSheet.create({
   fullScreen: {
     flex: 1,
   },
+  caption: {
+    position: 'absolute',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    color: 'white',
+    fontSize: 14,
+    bottom: 40,
+    padding: 10
+  }
 });
 
 export default OfflinesnapshotsView;

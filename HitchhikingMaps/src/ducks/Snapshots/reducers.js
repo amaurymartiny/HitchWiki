@@ -1,7 +1,8 @@
 import types from './types';
 
 export const initialState = {
-  snapshots: []
+  snapshots: [],
+  currentPage: 0
 };
 
 export default function SnapshotReducer(state = initialState, action = {}) {
@@ -10,6 +11,11 @@ export default function SnapshotReducer(state = initialState, action = {}) {
       return {
         ...state,
         snapshots: action.payload,
+      };
+    case types.SET_PAGE:
+      return {
+        ...state,
+        currentPage: action.payload
       };
     default:
       return state;

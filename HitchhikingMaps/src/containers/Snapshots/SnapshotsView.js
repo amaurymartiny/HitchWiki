@@ -25,10 +25,13 @@ class OfflinesnapshotsView extends React.Component {
     return (
       <View style={styles.fullScreen}>
         {this.props.snapshots.length ?
-          <Gallery
-            style={styles.fullScreen}
-            images={this.props.snapshots}
-          />
+          <View style={styles.fullScreen}>
+            <Gallery
+              style={{flex: 1}}
+              images={this.props.snapshots.map(item => item.uri)}
+            />
+            <Text>Hello</Text>
+          </View>
         :
           <EmptyScreen title="No snapshots taken yet. Hint: go to the Map, click on the '+' button, and take a snapshot to see it here." />
         }

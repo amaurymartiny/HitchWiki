@@ -8,15 +8,6 @@ class SettingsView extends React.Component {
 
   static navigationOptions = {
     title: 'Settings',
-    header: {
-      visible: true,
-    },
-    tabBar: {
-      icon: ({ tintColor }) => (
-        <Icon type="ionicon" name="ios-settings" color={tintColor} />
-      ),
-      visible: true
-    },
   }
 
   static propTypes = {

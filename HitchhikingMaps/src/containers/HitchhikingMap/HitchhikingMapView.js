@@ -16,12 +16,6 @@ class HitchhikingMapView extends React.Component {
       ...defaultHeader,
       visible: false,
     }),
-    tabBar: {
-      icon: ({ tintColor }) => (
-        <Icon type="ionicon" name="ios-map" color={tintColor} />
-      ),
-      visible: true
-    },
   }
 
   static propTypes = {

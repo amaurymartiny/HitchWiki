@@ -1,4 +1,7 @@
+import React from 'react';
+import { Icon } from 'react-native-elements';
 import { StackNavigator, TabNavigator } from 'react-navigation';
+
 import HitchhikingMapViewContainer from './HitchhikingMap/HitchhikingMapViewContainer';
 import SpotDetailsViewContainer from './SpotDetails/SpotDetailsViewContainer';
 import SettingsViewContainer from './Settings/SettingsViewContainer';
@@ -12,7 +15,14 @@ const HitchhikingMapNavigator = StackNavigator({
   navigationOptions: {
     header: {
       visible: false
-    }
+    },
+    tabBar: {
+      label: 'Map',
+      icon: ({ tintColor }) => (
+        <Icon type="ionicon" name="ios-map" color={tintColor} />
+      ),
+      visible: true
+    },
   }
 });
 
@@ -25,7 +35,14 @@ const SettingsNavigator = StackNavigator({
   navigationOptions: {
     header: {
       visible: true
-    }
+    },
+    tabBar: {
+      label: 'Settings',
+      icon: ({ tintColor }) => (
+        <Icon type="ionicon" name="ios-settings" color={tintColor} />
+      ),
+      visible: true
+    },
   }
 });
 

@@ -10,7 +10,7 @@ class Background extends React.Component {
     return (
       <View style={styles.fullScreen}>
         {this.props.children}
-        <MessageBarViewContainer style={{ zIndex: 99 }}/>
+        <MessageBarViewContainer />
       </View>
     );
   }

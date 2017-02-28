@@ -14,10 +14,10 @@ export default function OfflineSpotsStateReducer(state = initialState, action = 
         message: action.payload.message,
         shouldHideAfterDelay: action.payload.shouldHideAfterDelay,
       };
-    case SnapshotsTypes.SAVE_SNAPSHOT_SUCCESS:
+    case types.CLEAR_MESSAGE:
       return {
         ...state,
-        message: 'Snapshot taken successfully.'
+        message: ''
       };
     case OfflineSpotsTypes.SAVE_OFFLINE_SPOT_SUCCESS:
       return {

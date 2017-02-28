@@ -2,6 +2,7 @@ import { AsyncStorage } from 'react-native';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 import types from './types';
+import MessageBarTypes from '../MessageBar/types';
 
 /**
  * Saga which fetch all snapshots'
@@ -33,6 +34,7 @@ function* saveSnapshotSaga(action) {
     });
     yield call(AsyncStorage.setItem, '@SNAPSHOTS', JSON.stringify(snapshots));
     yield put({ type: types.SAVE_SNAPSHOT_SUCCESS });
+    yield put({ type: MessageBarTypes.SET_MESSAGE, payload: { message: 'Snapshot taken successfully.' }});
   } catch (error) {
     yield put({ type: types.SAVE_SNAPSHOT_FAILURE, error });
   }

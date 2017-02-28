@@ -10,6 +10,13 @@ const setMessage = (message, shouldHideAfterDelay = true) => {
   }
 }
 
+const clearMessage = () => {
+  return {
+    type: types.CLEAR_MESSAGE
+  };
+}
+
 export default {
   setMessage,
+  clearMessage,
 }

@@ -25,7 +25,7 @@ class MessageBarView extends React.Component {
       shouldHideAfterDelay: this.props.shouldHideAfterDelay
     });
     // Clear message after showing it
-    this.props.dispatch(MessageBarActions.setMessage(''));
+    this.props.dispatch(MessageBarActions.clearMessage());
   }
 
   componentWillUnmount() {

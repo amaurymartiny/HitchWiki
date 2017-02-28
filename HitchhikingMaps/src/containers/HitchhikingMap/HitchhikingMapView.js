@@ -14,10 +14,9 @@ class HitchhikingMapView extends React.Component {
 
   static navigationOptions = {
     title: 'Hitchhiking Map',
-    header: (navigation, defaultHeader) => ({
-      ...defaultHeader,
+    header: {
       visible: false,
-    }),
+    },
   }
 
   static propTypes = {

@@ -34,7 +34,6 @@ class SettingsView extends React.Component {
           <ListItem
             title="Offline Maps"
             titleStyle={theme.styles.textColor}
-            containerStyle={{ backgroundColor: theme.iosBackgroundGrey }}
             leftIcon={{ type: 'ionicon', name: 'ios-cloud-download', color: theme.darkGrey }}
             hideChevron={true}
             badge={{ value: 'Coming Soon!', badgeContainerStyle: { backgroundColor: theme.red } }}

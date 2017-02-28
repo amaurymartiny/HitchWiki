@@ -27,12 +27,8 @@ class TabBar extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  about: {
-    flex: 1,
-    padding: 10
-  },
   button: {
-    marginTop: 20
+    marginTop: 20,
   }
 });
 

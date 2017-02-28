@@ -2,12 +2,12 @@ import types from './types';
 
 const initialState = {
   markers: [],
-  // region: {
-  //   latitude: 37.78825,
-  //   longitude: -122.4324,
-  //   latitudeDelta: 0.0922,
-  //   longitudeDelta: 0.0421,
-  // },
+  region: {
+    latitude: 37.78825,
+    longitude: -122.4324,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  },
   isFetchingGPS: false
 };
 export default function HitchhikingMapStateReducer(state = initialState, action = {}) {
@@ -22,11 +22,11 @@ export default function HitchhikingMapStateReducer(state = initialState, action 
         ...state,
         isFetchingGPS: false
       }
-    // case types.SET_REGION:
-    //   return {
-    //     ...state,
-    //     region: action.payload
-    //   }
+    case types.SET_REGION:
+      return {
+        ...state,
+        region: action.payload
+      }
     case types.FETCH_SPOTS_SUCCESS:
       return {
         ...state,

@@ -56,7 +56,7 @@ function* getLocationSaga(action) {
   }
   
   try {
-    yield delay(1000); // TODO needs this to change button white, for better UX.
+    // yield delay(1000); // TODO needs this to change button white, for better UX.
     const position = yield cps(getCurrentPosition);
     // Create a new region to zoom into
     const newRegion = {
@@ -67,8 +67,8 @@ function* getLocationSaga(action) {
     };
 
     // Navigate to new position
-    // yield put({ type: types.SET_REGION, payload: newRegion});
-    yield action.payload.animateToRegion(newRegion);
+    yield put({ type: types.SET_REGION, payload: newRegion});
+    // yield action.payload.animateToRegion(newRegion);
     yield put({ type: types.GET_LOCATION_SUCCESS });
   } catch(error) {
     yield put({ type: types.GET_LOCATION_FAILURE, error });

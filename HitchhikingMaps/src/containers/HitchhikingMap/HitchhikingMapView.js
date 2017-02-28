@@ -22,28 +22,13 @@ class HitchhikingMapView extends React.Component {
 
   static propTypes = {
     markers: PropTypes.array.isRequired,
-    // region: PropTypes.object.isRequired,
+    region: PropTypes.object.isRequired,
     isFetchingGPS: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
     this.props.dispatch(HitchhikingMapActions.getLocation(this.refs.map));
-  }
-
-  takeSnapshot () {
-    // 'takeSnapshot' takes a config object with the
-    // following options
-    const snapshot = this.refs.map.takeSnapshot({
-      width: 300,      // optional, when omitted the view-width is used
-      height: 300,     // optional, when omitted the view-height is used
-      format: 'png',   // image formats: 'png', 'jpg' (default: 'png')
-      quality: 0.8,    // image quality: 0..1 (only relevant for jpg, default: 1)
-      result: 'file'   // result types: 'file', 'base64' (default: 'file')
-    });
-    snapshot.then((uri) => {
-      console.log(uri)
-    });
   }
 
   render() {
@@ -88,8 +73,10 @@ class HitchhikingMapView extends React.Component {
         <MapView
           ref="map"
           style={styles.fullScreen}
+          region={this.props.region}
           showsUserLocation
-          onRegionChange={region => {
+          onRegionChange={region => this.props.dispatch(HitchhikingMapActions.setRegion(region))}
+          onRegionChangeComplete={region => {
             if (region.latitudeDelta > 0.7 || region.longitudeDelta > 0.7) return;
             this.props.dispatch(HitchhikingMapActions.fetchSpots(region));
           }}

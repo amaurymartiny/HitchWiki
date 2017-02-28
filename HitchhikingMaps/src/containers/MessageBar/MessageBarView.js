@@ -1,4 +1,5 @@
 import React from 'react';
+import { Navigator } from 'react-native';
 import { MessageBar, MessageBarManager } from 'react-native-message-bar';
 
 import { MessageBarActions } from '../../ducks/MessageBar';
@@ -22,7 +23,8 @@ class MessageBarView extends React.Component {
       message: this.props.message,
       messageStyle: { color: 'white', fontSize: 14, textAlign: 'center', padding: 0 },
       stylesheetInfo : { backgroundColor : 'rgba(0, 0, 0, 0.7)', strokeColor : 'rgba(0, 0, 0, 0.7)' },
-      shouldHideAfterDelay: this.props.shouldHideAfterDelay
+      shouldHideAfterDelay: this.props.shouldHideAfterDelay,
+      viewTopOffset: Navigator.NavigationBar.Styles.General.TotalNavHeight
     });
     // Clear message after showing it
     this.props.dispatch(MessageBarActions.clearMessage());

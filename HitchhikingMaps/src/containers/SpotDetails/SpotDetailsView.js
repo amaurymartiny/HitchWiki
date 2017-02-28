@@ -45,7 +45,7 @@ class SpotDetailsView extends React.Component {
 
   render() {
     return (
-      <Background>
+      <View style={styles.fullScreen}>
         <ScrollView>
           <Card
             title={
@@ -113,7 +113,7 @@ class SpotDetailsView extends React.Component {
             />
           </Card>
         </ScrollView>
-      </Background>
+      </View>
     );
   }
 }

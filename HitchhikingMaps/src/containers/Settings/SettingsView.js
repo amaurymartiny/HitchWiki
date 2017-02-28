@@ -17,7 +17,7 @@ class SettingsView extends React.Component {
 
   render() {
     return (
-      <Background>
+      <View style={styles.fullScreen}>
         <View style={styles.background}>
           <ListItem
             title="Snapshots"
@@ -46,7 +46,7 @@ class SettingsView extends React.Component {
             onPress={() => this.props.navigation.navigate('about')}
           />
         </View>
-      </Background>
+      </View>
     );
   }
 }

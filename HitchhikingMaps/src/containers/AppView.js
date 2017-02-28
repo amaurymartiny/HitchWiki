@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import AppNavigator from './AppNavigator';
+import Background from '../components/Background/Background';
 
 class AppView extends React.Component {
 
@@ -9,7 +10,9 @@ class AppView extends React.Component {
 
   render() {
     return (
-      <AppNavigator />
+      <Background>
+        <AppNavigator />
+      </Background>
     );
   }
 }

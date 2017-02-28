@@ -26,7 +26,7 @@ class OfflinesnapshotsView extends React.Component {
 
   render() {
     return (
-      <Background>
+      <View style={styles.fullScreen}>
         {this.props.snapshots.length ?
           <View style={styles.fullScreen}>
             <Gallery
@@ -39,7 +39,7 @@ class OfflinesnapshotsView extends React.Component {
         :
           <EmptyScreen title="No snapshots taken yet. Hint: go to the Map, click on the '+' button, and take a snapshot to see it here." />
         }
-      </Background>
+      </View>
     );
   }
 }

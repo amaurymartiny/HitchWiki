@@ -68,7 +68,7 @@ class HitchhikingMapView extends React.Component {
     }
 
     return (
-      <Background>
+      <View style={styles.fullScreen}>
         <MapView
           ref="map"
           style={styles.fullScreen}
@@ -114,7 +114,7 @@ class HitchhikingMapView extends React.Component {
           }
           onPress={() => this.props.dispatch(HitchhikingMapActions.getLocation(this.refs.map))}
         />
-      </Background>
+      </View>
     );
   }
 }
@@ -122,11 +122,6 @@ class HitchhikingMapView extends React.Component {
 const styles = StyleSheet.create({
   fullScreen: {
     ...StyleSheet.absoluteFillObject,
-  },
-  progress: {
-    left: 8,
-    bottom: 8,
-    zIndex: 10
   }
 });
 

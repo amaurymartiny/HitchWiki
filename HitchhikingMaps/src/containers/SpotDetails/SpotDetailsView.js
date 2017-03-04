@@ -59,19 +59,18 @@ class SpotDetailsView extends React.Component {
                 selectedStar={() => {}}
               />
             </View>
-
+            
             <View style={[styles.center, styles.mdGutterVertical]}>
               <Text style={styles.h5}>{this.getSpot().Cities.join(', ')}, {this.getSpot().Country[0]}</Text>
-            </View>
+            </View> 
 
             <View style={[styles.horizontal, styles.spaceBetween, styles.xlGutterVertical]}>
-              <Text><Ionicon name="ios-thumbs-up" size={20} color={theme.secondary} /> {this.getSpot().rating_count ? `${this.getSpot().rating_count} rating${this.getSpot().rating_count > 1 ? 's' : ''}` : '-'}</Text>
+              <Text><Ionicon name="ios-thumbs-up" size={20} color={theme.secondary} /> {this.getSpot().rating_count ? `${this.getSpot().rating_count} rating${this.getSpot().rating_count > 1 ? 's' : ''}` : 'No ratings'}</Text>
               <Text><Ionicon name="ios-timer" size={20} color={theme.secondary} /> {this.getSpot().waiting_time_average ? `${this.getSpot().waiting_time_average} min` : '-'}</Text>
-              <Text><Ionicon name="ios-text" size={20} color={theme.secondary} /> {this.getSpot().comment_count ? `${this.getSpot().comment_count} comment${this.getSpot().comment_count > 1 ? 's' : ''}` : '-'}</Text>
+              <Text><Ionicon name="ios-text" size={20} color={theme.secondary} /> {this.getSpot().comment_count ? `${this.getSpot().comment_count} comment${this.getSpot().comment_count > 1 ? 's' : ''}` : 'No comments'}</Text>
             </View>
 
-            <Text style={[styles.h5, styles.xlGutterVertical]}>Description</Text>
-            <Text>{this.stripTags(this.getSpot().Description) || 'No description available.'}</Text>
+            <Text style={styles.xlGutterVertical}>{this.stripTags(this.getSpot().Description) || 'No description available.'}</Text>
             <List containerStyle={styles.list}>
               {this.getSpot().comments.map((comment, index) => (
                 <ListItem

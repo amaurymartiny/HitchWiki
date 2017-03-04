@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { Card, Text, List, ListItem, Button } from 'react-native-elements';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-// import StarRating from 'react-native-star-rating';
+import Ionicon from 'react-native-vector-icons/Ionicons';
+import StarRating from 'react-native-star-rating';
 
 import { SpotDetailsActions } from '../../ducks/SpotDetails';
 import { OfflineSpotsActions } from '../../ducks/OfflineSpots';
@@ -47,58 +47,46 @@ class SpotDetailsView extends React.Component {
     return (
       <View style={styles.fullScreen}>
         <ScrollView>
-          <Card
-            title={
-              <Text>
-                <Text h3 style={styles.primaryColor}>{this.getSpot().Cities.length ? this.getSpot().Cities[0] : (this.getSpot().title || '-')}</Text>
-                {'\n'}
-                <Text>
-                  {this.getSpot().Cities.slice(1).map(city => `${city}, `)}
-                  {this.getSpot().Country.length ? this.getSpot().Country[0] : '-'}
-                </Text>
-              </Text>
-            }
-          >
+          <Card>
 
-            <View style={[styles.horizontal, styles.flexStart, styles.mdGutterVertical]}>
-              {/*<StarRating
+            <View style={[styles.center, styles.mdGutterVertical]}>
+              <StarRating
                 disabled
+                style={styles.starRating}
                 rating={this.getSpot().rating_average}
                 starSize={25}
                 starColor={theme.secondary}
                 selectedStar={() => {}}
-              />*/}
-              <Text style={[styles.secondaryColor, styles.h5]}> {this.getSpot().rating_average}/5</Text>
+              />
             </View>
 
-            <View style={[styles.horizontal, styles.spaceBetween, styles.lgGutterVertical]}>
-              <Text><FontAwesomeIcon name="thumbs-up" size={20} color={theme.secondary} /> {this.getSpot().rating_count ? `${this.getSpot().rating_count} rating${this.getSpot().rating_count > 1 ? 's' : ''}` : '-'}</Text>
-              <Text><FontAwesomeIcon name="hourglass-half" size={20} color={theme.secondary} /> {this.getSpot().waiting_time_average ? `${this.getSpot().waiting_time_average} min` : '-'}</Text>
-              <Text><FontAwesomeIcon name="comments" size={20} color={theme.secondary} /> {this.getSpot().comment_count ? `${this.getSpot().comment_count} comment${this.getSpot().comment_count > 1 ? 's' : ''}` : '-'}</Text>
+            <View style={[styles.center, styles.mdGutterVertical]}>
+              <Text style={styles.h5}>{this.getSpot().Cities.join(', ')}, {this.getSpot().Country[0]}</Text>
             </View>
 
-            <Text style={[styles.h5, styles.mdGutterVertical]}>
-              <FontAwesomeIcon name="file-image-o" size={22} color={theme.secondary} />  Description
-            </Text>
+            <View style={[styles.horizontal, styles.spaceBetween, styles.xlGutterVertical]}>
+              <Text><Ionicon name="ios-thumbs-up" size={20} color={theme.secondary} /> {this.getSpot().rating_count ? `${this.getSpot().rating_count} rating${this.getSpot().rating_count > 1 ? 's' : ''}` : '-'}</Text>
+              <Text><Ionicon name="ios-timer" size={20} color={theme.secondary} /> {this.getSpot().waiting_time_average ? `${this.getSpot().waiting_time_average} min` : '-'}</Text>
+              <Text><Ionicon name="ios-text" size={20} color={theme.secondary} /> {this.getSpot().comment_count ? `${this.getSpot().comment_count} comment${this.getSpot().comment_count > 1 ? 's' : ''}` : '-'}</Text>
+            </View>
+
+            <Text style={[styles.h5, styles.xlGutterVertical]}>Description</Text>
             <Text>{this.stripTags(this.getSpot().Description) || 'No description available.'}</Text>
             <List containerStyle={styles.list}>
               {this.getSpot().comments.map((comment, index) => (
                 <ListItem
                   key={comment.comment_id}
                   leftIcon={{
-                    name: 'comment-o',
-                    type: 'font-awesome',
+                    name: 'ios-text-outline',
+                    type: 'ionicon',
                     color: theme.secondary,
                     style: styles.alignTop,
                   }}
                   title={`${comment.user_name || 'Anonymous User'} on ${this.formatDate(comment.timestamp)}`}
-                  titleStyle={styles.caption}
+                  titleStyle={styles.small}
                   wrapperStyle={styles.alignTop}
-                  subtitle={
-                    <View>
-                      <Text>{this.stripTags(comment.commenttext)}</Text>
-                    </View>
-                    }
+                  subtitle={this.stripTags(comment.commenttext)}
+                  subtitleStyle={[styles.small, styles.subtitle]}
                   hideChevron
                 />
                 ))
@@ -119,6 +107,9 @@ class SpotDetailsView extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  small: {
+    fontSize: 12
+  },
   h5: {
     fontSize: 20,
   },
@@ -132,19 +123,28 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
   },
+  center: {
+    flex: 1,
+    alignItems: 'center'
+  },
   spaceBetween: {
     justifyContent: 'space-between',
   },
   mdGutterVertical: {
-    marginTop: 5,
-    marginBottom: 5,
+    marginTop: 10,
   },
   lgGutterVertical: {
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 20,
   },
-  caption: {
-    fontSize: 12,
+  xlGutterVertical: {
+    marginTop: 40,
+  },
+  starRating: {
+    alignSelf: 'stretch',
+  },
+  subtitle: {
+    color: 'black',
+    fontWeight: 'normal'
   },
   alignTop: {
     flex: 1,

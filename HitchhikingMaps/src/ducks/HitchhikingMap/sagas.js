@@ -62,8 +62,8 @@ function* getLocationSaga(action) {
     const newRegion = {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,
-      latitudeDelta: 0.01,
-      longitudeDelta: 0.01
+      latitudeDelta: 0.05,
+      longitudeDelta: 0.05
     };
 
     // Navigate to new position

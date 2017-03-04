@@ -2569,7 +2569,7 @@ lodash._root@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/lodash._root/-/lodash._root-3.0.1.tgz#fba1c4524c19ee9a5f8136b4609f017cf4ded692"
 
-lodash.assign@^4.2.0:
+lodash.assign@^4.0.3, lodash.assign@^4.0.6, lodash.assign@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.assign/-/lodash.assign-4.2.0.tgz#0d99f3ccd7a6d261d19bdaeb9245005d285808e7"
 
@@ -3172,6 +3172,10 @@ react-native-action-button@^2.0.22:
   version "2.0.22"
   resolved "https://registry.yarnpkg.com/react-native-action-button/-/react-native-action-button-2.0.22.tgz#af7829149e1ade853a2983eb20b7d9f619c952d5"
 
+react-native-button@^1.6.0:
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/react-native-button/-/react-native-button-1.8.2.tgz#49e5cadd22ee443adea52a85539d288aa2117ade"
+
 react-native-code-push@^1.17.0-beta:
   version "1.17.0-beta"
   resolved "https://registry.yarnpkg.com/react-native-code-push/-/react-native-code-push-1.17.0-beta.tgz#a9f2ca52bceba1d8a91e65455959dd250fbb4492"
@@ -3237,6 +3241,13 @@ react-native-side-menu@^0.20.1:
   version "0.20.1"
   resolved "https://registry.yarnpkg.com/react-native-side-menu/-/react-native-side-menu-0.20.1.tgz#df21b4bb9d8a1aa3bae53d74ddf8a739eb59bfc5"
 
+react-native-star-rating@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/react-native-star-rating/-/react-native-star-rating-1.0.7.tgz#18da97ff52065c789a93c34fb20cf703cd995a96"
+  dependencies:
+    react-native-button "^1.6.0"
+    react-native-vector-icons "^2.0.3"
+
 react-native-tab-navigator@^0.3.3:
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/react-native-tab-navigator/-/react-native-tab-navigator-0.3.3.tgz#b222bad21fbe773c8d28f9a0de30ce62b08724d3"
@@ -3252,6 +3263,13 @@ react-native-transformable-image@0.0.18:
   resolved "https://registry.yarnpkg.com/react-native-transformable-image/-/react-native-transformable-image-0.0.18.tgz#00229f2410c443a3a6b5fa53714121ecd882396f"
   dependencies:
     react-native-view-transformer "0.0.28"
+
+react-native-vector-icons@^2.0.3:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-2.1.0.tgz#37ff40e2fc753a56624846e7471282b818b92edc"
+  dependencies:
+    lodash "^4.0.0"
+    yargs "^4.7.0"
 
 react-native-vector-icons@^4.0.0:
   version "4.0.0"
@@ -4146,6 +4164,10 @@ window-size@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.1.0.tgz#5438cd2ea93b202efa3a19fe8887aee7c94f9c9d"
 
+window-size@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.2.0.tgz#b4315bb4214a3d7058ebeee892e13fa24d98b075"
+
 wordwrap@0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-0.0.2.tgz#b79669bb42ecb409f83d583cad52ca17eaa1643f"
@@ -4231,11 +4253,37 @@ yallist@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-2.0.0.tgz#306c543835f09ee1a4cb23b7bce9ab341c91cdd4"
 
+yargs-parser@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-2.4.1.tgz#85568de3cf150ff49fa51825f03a8c880ddcc5c4"
+  dependencies:
+    camelcase "^3.0.0"
+    lodash.assign "^4.0.6"
+
 yargs-parser@^4.2.0:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-4.2.1.tgz#29cceac0dc4f03c6c87b4a9f217dd18c9f74871c"
   dependencies:
     camelcase "^3.0.0"
+
+yargs@^4.7.0:
+  version "4.8.1"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-4.8.1.tgz#c0c42924ca4aaa6b0e6da1739dfb216439f9ddc0"
+  dependencies:
+    cliui "^3.2.0"
+    decamelize "^1.1.1"
+    get-caller-file "^1.0.1"
+    lodash.assign "^4.0.3"
+    os-locale "^1.4.0"
+    read-pkg-up "^1.0.1"
+    require-directory "^2.1.1"
+    require-main-filename "^1.0.1"
+    set-blocking "^2.0.0"
+    string-width "^1.0.1"
+    which-module "^1.0.0"
+    window-size "^0.2.0"
+    y18n "^3.2.1"
+    yargs-parser "^2.4.1"
 
 yargs@^6.3.0, yargs@^6.4.0:
   version "6.6.0"

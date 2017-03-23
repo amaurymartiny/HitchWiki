@@ -69,6 +69,8 @@ function* getLocationSaga(action) {
     // Navigate to new position
     yield put({ type: types.SET_REGION, payload: newRegion});
     // yield action.payload.animateToRegion(newRegion);
+    // yield put({ type: types.GET_LOCATION_SUCCESS }); // call this when map finishes regionChange
+    yield delay(1000); // Better UX
     yield put({ type: types.GET_LOCATION_SUCCESS });
   } catch(error) {
     yield put({ type: types.GET_LOCATION_FAILURE, error });

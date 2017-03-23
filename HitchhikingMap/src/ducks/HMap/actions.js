@@ -21,8 +21,15 @@ const getLocation = () => {
   }
 }
 
+const getLocationSuccess = () => {
+  return {
+    type: types.GET_LOCATION_SUCCESS,
+  }
+}
+
 export default {
   fetchSpots,
   setRegion,
-  getLocation
+  getLocation,
+  getLocationSuccess,
 }

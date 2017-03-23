@@ -75,8 +75,13 @@ class HMapView extends React.Component {
           region={this.props.region}
           showsUserLocation
           customMapStyle={mapStyle}
-          onRegionChange={region => this.props.dispatch(HMapActions.setRegion(region))}
+          onRegionChange={region => {
+            this.props.dispatch(HMapActions.setRegion(region));
+          }}
           onRegionChangeComplete={region => {
+            // if (this.props.isFetchingGPS) {
+            //   this.props.dispatch(HMapActions.getLocationSuccess()); // TODO Not working
+            // }
             if (region.latitudeDelta > 0.7 || region.longitudeDelta > 0.7) return;
             this.props.dispatch(HMapActions.fetchSpots(region));
           }}

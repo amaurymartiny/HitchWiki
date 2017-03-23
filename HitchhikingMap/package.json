@@ -9,7 +9,13 @@
   "dependencies": {
     "react": "~15.4.1",
     "react-native": "0.42.3",
+    "react-native-action-button": "^2.6.4",
     "react-native-code-push": "^1.17.3-beta",
+    "react-native-elements": "^0.10.2",
+    "react-native-gallery": "^0.0.17",
+    "react-native-star-rating": "^1.0.7",
+    "react-native-vector-icons": "^4.0.0",
+    "react-navigation": "^1.0.0-beta.7",
     "react-redux": "^5.0.3",
     "redux": "^3.6.0"
   },

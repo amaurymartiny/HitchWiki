@@ -37,21 +37,6 @@ class HMapView extends React.Component {
     function drawStars(number) {
       return '★'.repeat(number) + '☆'.repeat(5 - number);
     }
-    // // Find the right marker image according to rating
-    // function getMarkerImage(number) {
-    //   switch (number) {
-    //     case 5:
-    //       return require('../../../images/annotation5.png'); // eslint-disable-line
-    //     case 4:
-    //       return require('../../../images/annotation4.png'); // eslint-disable-line
-    //     case 3:
-    //       return require('../../../images/annotation3.png'); // eslint-disable-line
-    //     case 2:
-    //       return require('../../../images/annotation2.png'); // eslint-disable-line
-    //     default:
-    //       return require('../../../images/annotation1.png'); // eslint-disable-line
-    //   }
-    // }
     function getPinColor(number) {
       switch (number) {
         case 2:
@@ -80,7 +65,7 @@ class HMapView extends React.Component {
           }}
           onRegionChangeComplete={region => {
             // if (this.props.isFetchingGPS) {
-            //   this.props.dispatch(HMapActions.getLocationSuccess()); // TODO Not working
+            //   this.props.dispatch(HMapActions.getLocationSuccess()); // TODO Not working, find another way
             // }
             if (region.latitudeDelta > 0.7 || region.longitudeDelta > 0.7) return;
             this.props.dispatch(HMapActions.fetchSpots(region));
@@ -102,12 +87,6 @@ class HMapView extends React.Component {
           buttonColor={theme.red}
           icon={<Icon type="ionicon" name="ios-camera" color="white" />}
         >
-          {/*<ActionButton.Item
-            buttonColor={theme.red}
-            title="Download Offline Map"
-          >
-            <Icon type="ionicon" name="ios-cloud-download" color="white" />
-          </ActionButton.Item>*/}
           <ActionButton.Item
             buttonColor={theme.red}
             title="Take Snapshot"

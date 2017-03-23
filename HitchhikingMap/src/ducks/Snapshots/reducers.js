@@ -7,10 +7,13 @@ export const initialState = {
 
 export default function SnapshotReducer(state = initialState, action = {}) {
   switch (action.type) {
-    case types.FETCH_SNAPSHOTS_SUCCESS:
+    case types.SAVE_SNAPSHOT_SUCCESS:
       return {
         ...state,
-        snapshots: action.payload,
+        snapshots: state.snapshots.slice(0).push({
+          uri: action.payload,
+          date: new Date(),
+        }),
       };
     case types.SET_PAGE:
       return {

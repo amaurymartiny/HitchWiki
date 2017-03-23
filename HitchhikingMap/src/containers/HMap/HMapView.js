@@ -7,7 +7,6 @@ import MapView from 'react-native-maps';
 import { HMapActions } from '../../ducks/HMap';
 import { SnapshotsActions } from '../../ducks/Snapshots';
 
-import mapStyle from './mapStyle';
 import theme from '../../services/ThemeService';
 
 class HMapView extends React.Component {
@@ -59,7 +58,6 @@ class HMapView extends React.Component {
           style={styles.fullScreen}
           region={this.props.region}
           showsUserLocation
-          customMapStyle={mapStyle}
           onRegionChange={region => {
             this.props.dispatch(HMapActions.setRegion(region));
           }}
@@ -90,7 +88,15 @@ class HMapView extends React.Component {
           <ActionButton.Item
             buttonColor={theme.red}
             title="Take Snapshot"
-            onPress={() => this.props.dispatch(SnapshotsActions.saveSnapshot(this.refs.map))}
+            onPress={() => {
+              // 'takeSnapshot' takes a config object with the
+              // following options
+              const snapshot = this.refs.map.takeSnapshot({});
+              this.props.dispatch(SnapshotsActions.saveSnapshotRequest())
+              snapshot.then((uri) => {
+                this.props.dispatch(SnapshotsActions.saveSnapshotSuccess(uri))
+              });
+            }}
           >
             <Icon type="ionicon" name="ios-image" color="white" />
           </ActionButton.Item>

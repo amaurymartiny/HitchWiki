@@ -6,10 +6,23 @@ const fetchSnapshots = () => {
   };
 }
 
-const saveSnapshot = mapView => {
+const saveSnapshotRequest = () => {
   return {
     type: types.SAVE_SNAPSHOT_REQUEST,
-    payload: mapView
+  };
+}
+
+const saveSnapshotSuccess = uri => {
+  return {
+    type: types.SAVE_SNAPSHOT_SUCCESS,
+    payload: uri
+  };
+}
+
+const saveSnapshotFailure = error => {
+  return {
+    type: types.SAVE_SNAPSHOT_FAILURE,
+    error: error
   };
 }
 
@@ -22,6 +35,8 @@ const setPage = page => {
 
 export default {
   fetchSnapshots,
-  saveSnapshot,
+  saveSnapshotRequest,
+  saveSnapshotSuccess,
+  saveSnapshotFailure,
   setPage,
 }

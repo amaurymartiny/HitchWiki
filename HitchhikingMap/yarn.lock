@@ -1281,6 +1281,10 @@ decamelize@^1.0.0, decamelize@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/decamelize/-/decamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
 
+deep-diff@0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/deep-diff/-/deep-diff-0.3.4.tgz#aac5c39952236abe5f037a2349060ba01b00ae48"
+
 deep-is@~0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
@@ -3560,6 +3564,10 @@ react-native-gesture-responder@0.1.1:
   dependencies:
     react-timer-mixin "^0.13.3"
 
+react-native-maps@^0.13.1:
+  version "0.13.1"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.13.1.tgz#ed2a7e62f155a51f43c49742eba5bc313eaf2f1e"
+
 react-native-scroller@0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/react-native-scroller/-/react-native-scroller-0.0.6.tgz#dea8c89bd1ca2d2445fbb6b3a90960df6c1767ff"
@@ -3812,6 +3820,16 @@ rechoir@^0.6.2:
 reduce-component@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/reduce-component/-/reduce-component-1.0.1.tgz#e0c93542c574521bea13df0f9488ed82ab77c5da"
+
+redux-logger@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/redux-logger/-/redux-logger-3.0.0.tgz#f552052d8992d058cfcdb42b5c654fa5f7beb9cc"
+  dependencies:
+    deep-diff "0.3.4"
+
+redux-saga@^0.14.3:
+  version "0.14.3"
+  resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.14.3.tgz#28cd2c5b49cf780a1de25875765724150c630513"
 
 redux@^3.6.0:
   version "3.6.0"

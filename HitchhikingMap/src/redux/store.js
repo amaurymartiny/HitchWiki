@@ -1,26 +1,28 @@
 import { createStore, applyMiddleware, compose } from 'redux';
+import { createLogger } from 'redux-logger';
 // import { autoRehydrate } from 'redux-persist'
-// import createSagaMiddleware from 'redux-saga'
+import createSagaMiddleware from 'redux-saga'
 // import RehydrationServices from '../Services/RehydrationServices'
 // import ReduxPersist from '../Config/ReduxPersist'
 
 import rootReducer from './reducer';
+import rootSaga from './saga';
 
 // creates the store
 const configureStore = () => {
   /* ------------- Redux Configuration ------------- */
 
-  const middleware = []
+  const middleware = [createLogger()]
   const enhancers = []
 
   /* ------------- Saga Middleware ------------- */
 
-  // const sagaMiddleware = createSagaMiddleware())
-  // middleware.push(sagaMiddleware)
+  const sagaMiddleware = createSagaMiddleware()
+  middleware.push(sagaMiddleware)
 
   /* ------------- Assemble Middleware ------------- */
 
-  // enhancers.push(applyMiddleware(...middleware))
+  enhancers.push(applyMiddleware(...middleware))
 
   /* ------------- AutoRehydrate Enhancer ------------- */
 
@@ -39,8 +41,8 @@ const configureStore = () => {
   //   RehydrationServices.updateReducers(store)
   // }
 
-  // // kick off root saga
-  // sagaMiddleware.run(rootSaga)
+  // kick off root saga
+  sagaMiddleware.run(rootSaga)
 
   return store
 }

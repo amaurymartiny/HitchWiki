@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
 import ActionButton from 'react-native-action-button';
-// import MapView from 'react-native-maps';
+import MapView from 'react-native-maps';
 
 import { HMapActions } from '../../ducks/HMap';
 import { SnapshotsActions } from '../../ducks/Snapshots';
@@ -69,7 +69,7 @@ class HMapView extends React.Component {
 
     return (
       <View style={styles.fullScreen}>
-        {/*<MapView
+        <MapView
           ref="map"
           style={styles.fullScreen}
           region={this.props.region}
@@ -91,7 +91,7 @@ class HMapView extends React.Component {
               onCalloutPress={() => this.props.navigation.navigate('spotDetails', { spotId: marker.id })}
             />
           ))}
-        </MapView>*/}
+        </MapView>
         <ActionButton
           position="left"
           buttonColor={theme.red}

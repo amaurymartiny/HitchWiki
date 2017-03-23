@@ -13,11 +13,13 @@
     "react-native-code-push": "^1.17.3-beta",
     "react-native-elements": "^0.10.2",
     "react-native-gallery": "^0.0.17",
+    "react-native-maps": "^0.13.1",
     "react-native-star-rating": "^1.0.7",
     "react-native-vector-icons": "^4.0.0",
     "react-navigation": "^1.0.0-beta.7",
     "react-redux": "^5.0.3",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "redux-saga": "^0.14.3"
   },
   "devDependencies": {
     "babel-jest": "19.0.0",
@@ -28,7 +30,8 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
     "jest": "19.0.2",
-    "react-test-renderer": "~15.4.1"
+    "react-test-renderer": "~15.4.1",
+    "redux-logger": "^3.0.0"
   },
   "jest": {
     "preset": "react-native"

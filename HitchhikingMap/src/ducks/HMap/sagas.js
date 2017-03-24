@@ -82,9 +82,9 @@ function* getLocationSaga(action) {
     // yield action.payload.animateToRegion(newRegion);
     // yield put({ type: types.GET_LOCATION_SUCCESS }); // call this when map finishes regionChange
     yield delay(1000); // Better UX
-    yield put({ type: types.GET_LOCATION_SUCCESS });
+    yield put(actions.getLocationSuccess());
   } catch(error) {
-    yield put({ type: types.GET_LOCATION_FAILURE, error });
+    yield put(actions.getLocationFailure(error));
   }
 }
 

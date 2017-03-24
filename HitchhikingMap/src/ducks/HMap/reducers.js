@@ -18,10 +18,11 @@ export default function HitchhikingMapStateReducer(state = initialState, action 
         isFetchingGPS: true
       }
     case types.GET_LOCATION_SUCCESS:
+    case types.GET_LOCATION_FAILURE:
       return {
         ...state,
         isFetchingGPS: false
-      }
+      };
     case types.SET_REGION:
       return {
         ...state,

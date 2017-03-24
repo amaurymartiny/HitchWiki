@@ -26,7 +26,7 @@ class HMapView extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(HMapActions.getLocation(this.refs.map));
+    this.props.dispatch(HMapActions.getLocationRequest());
   }
 
   render() {
@@ -98,7 +98,7 @@ class HMapView extends React.Component {
           icon={
             <Icon name="my-location" color={this.props.isFetchingGPS ? theme.red : 'white'} />
           }
-          onPress={() => this.props.dispatch(HMapActions.getLocation(this.refs.map))}
+          onPress={() => this.props.dispatch(HMapActions.getLocationRequest())}
         />
       </View>
     );

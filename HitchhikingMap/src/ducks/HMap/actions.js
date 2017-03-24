@@ -21,14 +21,7 @@ const fetchSpotsFailure = (error) => {
   };
 }
 
-const setRegion = (region) => {
-  return {
-    type: types.SET_REGION,
-    payload: region
-  };
-}
-
-const getLocation = () => {
+const getLocationRequest = () => {
   return {
     type: types.GET_LOCATION_REQUEST,
     // payload: mapView
@@ -41,9 +34,26 @@ const getLocationSuccess = () => {
   }
 }
 
+const getLocationFailure = (error) => {
+  return {
+    type: types.GET_LOCATION_SUCCESS,
+    error
+  }
+}
+
+const setRegion = (region) => {
+  return {
+    type: types.SET_REGION,
+    payload: region
+  };
+}
+
 export default {
   fetchSpotsRequest,
-  setRegion,
-  getLocation,
+  fetchSpotsSuccess,
+  fetchSpotsFailure,
+  getLocationRequest,
   getLocationSuccess,
+  getLocationFailure,
+  setRegion,
 }

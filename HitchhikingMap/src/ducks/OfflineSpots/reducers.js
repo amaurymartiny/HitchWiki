@@ -8,12 +8,12 @@ export default function OfflineSpotsStateReducer(state = initialState, action = 
     case types.SAVE_OFFLINE_SPOT_SUCCESS:
       // Create new spots object with our new addition
       let spots = { ...state.spots };
-      console.log('id', action.payload.id)
-      console.log(spots)
       spots[action.payload.id] = action.payload.spot;
-      console.log(spots)
-      spots[action.payload.id].latlng = action.payload.latlng;
-      spots[action.payload.id].mapUri = action.payload.uri;
+      spots[action.payload.id].metadata = {
+        latlng: action.payload.latlng,
+        mapUri: action.payload.uri,
+        dateAdded: new Date()
+      };
       return {
         ...state,
         spots,

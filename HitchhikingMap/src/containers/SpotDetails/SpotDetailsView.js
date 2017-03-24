@@ -28,6 +28,14 @@ class SpotDetailsView extends React.Component {
     return this.props.offlineSpots[this.props.navigation.state.params.spotId] || this.props.spot;
   }
 
+  /**
+   * Get Spot selector
+   * @return {Object} Offline spot it exists, online spot otherwise
+   */
+  getIsOffline = () => {
+    return !!this.props.offlineSpots[this.props.navigation.state.params.spotId];
+  }
+
   componentDidMount() {
     // Fetch online spot
     this.props.dispatch(SpotDetailsActions.fetchSpotDetailsRequest(this.props.navigation.state.params.spotId));
@@ -72,12 +80,12 @@ class SpotDetailsView extends React.Component {
               <Text style={styles.h5}>{this.getSpot().Cities.join(', ')}, {this.getSpot().Country[0]}</Text>
             </View>
 
-            {this.getSpot().mapUri &&
+            {this.getIsOffline() &&
               <View style={[styles.center, styles.mdGutterVertical]}>
                 <CachedImage
                   resizeMode='cover'
                   style={styles.mapImage}
-                  source={{ uri: this.getSpot().mapUri }}
+                  source={{ uri: this.getSpot().metadata.mapUri }}
                 />
               </View>
             }
@@ -111,9 +119,9 @@ class SpotDetailsView extends React.Component {
             </List>
             <Button
               backgroundColor={theme.blue}
-              title={this.props.offlineSpot ? 'Saved' : 'Save Offline'}
-              icon={{ 'type': 'ionicon', name: this.props.offlineSpot ? 'ios-checkmark-circle-outline' :'ios-bookmarks' }}
-              disabled={!!this.props.offlineSpots[this.props.navigation.state.params.spotId]}
+              title={this.getIsOffline() ? 'Saved' : 'Save Offline'}
+              icon={{ 'type': 'ionicon', name: this.getIsOffline() ? 'ios-checkmark-circle-outline' :'ios-bookmarks' }}
+              disabled={this.getIsOffline()}
               onPress={() => this.props.dispatch(OfflineSpotsActions.saveOfflineSpotRequest(this.props.navigation.state.params.spotId, this.getSpot(), this.props.navigation.state.params.latlng))}
             />
           </Card>

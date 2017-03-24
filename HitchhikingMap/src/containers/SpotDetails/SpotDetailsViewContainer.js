@@ -3,7 +3,7 @@ import SpotDetailsView from './SpotDetailsView';
 
 const mapStateToProps = state => ({
   ...state.spotDetails,
-  offlineSpot: state.offlineSpots.currentSpot
+  offlineSpots: state.offlineSpots.spots
 });
 
 export default connect(mapStateToProps)(SpotDetailsView);

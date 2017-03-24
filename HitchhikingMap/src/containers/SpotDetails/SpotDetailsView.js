@@ -19,8 +19,12 @@ class SpotDetailsView extends React.Component {
     spot: PropTypes.any.isRequired
   }
 
+  /**
+   * Get Spot selector
+   * @return {Object} Offline spot it exists, online spot otherwise
+   */
   getSpot = () => {
-    return this.props.offlineSpot || this.props.spot;
+    return this.props.offlineSpots[this.props.navigation.state.params.spotId] || this.props.spot;
   }
 
   componentDidMount() {
@@ -94,7 +98,7 @@ class SpotDetailsView extends React.Component {
               backgroundColor={theme.blue}
               title={this.props.offlineSpot ? 'Saved' : 'Save Offline'}
               icon={{ 'type': 'ionicon', name: this.props.offlineSpot ? 'ios-checkmark-circle-outline' :'ios-bookmarks' }}
-              disabled={!!this.props.offlineSpot}
+              disabled={!!this.props.offlineSpots[this.props.navigation.state.params.spotId]}
               onPress={() => this.props.dispatch(OfflineSpotsActions.saveOfflineSpot(this.props.navigation.state.params.spotId, this.getSpot()))}
             />
           </Card>

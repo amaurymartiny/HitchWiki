@@ -7,7 +7,7 @@ import SpotDetailsViewContainer from './containers/SpotDetails/SpotDetailsViewCo
 import SettingsViewContainer from './containers/Settings/SettingsViewContainer';
 import SnapshotsViewContainer from './containers/Snapshots/SnapshotsViewContainer';
 import OfflineSpotsViewContainer from './containers/OfflineSpots/OfflineSpotsViewContainer';
-// import AboutPage from './components/AboutPage/AboutPage';
+import AboutPage from './components/AboutPage/AboutPage';
 
 const HMapNavigator = StackNavigator({
   HMap: { screen: HMapViewContainer },
@@ -32,7 +32,7 @@ const SettingsNavigator = StackNavigator({
   snapshots: { screen: SnapshotsViewContainer },
   offlineSpots: { screen: OfflineSpotsViewContainer },
   spotDetailsSettings: { screen: SpotDetailsViewContainer },
-  // about: { screen: AboutPage }
+  about: { screen: AboutPage }
 }, {
   navigationOptions: {
     header: {

@@ -8,12 +8,15 @@ export const initialState = {
 export default function SnapshotReducer(state = initialState, action = {}) {
   switch (action.type) {
     case types.SAVE_SNAPSHOT_SUCCESS:
+      // Clone the snapshots array and push new element
+      let snapshots = state.snapshots.slice(0);
+      snapshots.push({
+        uri: action.payload,
+        date: new Date(),
+      });
       return {
         ...state,
-        snapshots: state.snapshots.slice(0).push({
-          uri: action.payload,
-          date: new Date(),
-        }),
+        snapshots,
       };
     case types.SET_PAGE:
       return {

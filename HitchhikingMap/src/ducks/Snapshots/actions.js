@@ -1,14 +1,9 @@
 import types from './types';
 
-const fetchSnapshots = () => {
-  return {
-    type: types.FETCH_SNAPSHOTS_REQUEST
-  };
-}
-
-const saveSnapshotRequest = () => {
+const saveSnapshotRequest = snapshot => {
   return {
     type: types.SAVE_SNAPSHOT_REQUEST,
+    payload: snapshot,
   };
 }
 
@@ -34,7 +29,6 @@ const setPage = page => {
 }
 
 export default {
-  fetchSnapshots,
   saveSnapshotRequest,
   saveSnapshotSuccess,
   saveSnapshotFailure,

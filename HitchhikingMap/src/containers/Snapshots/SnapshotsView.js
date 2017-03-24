@@ -19,10 +19,6 @@ class OfflinesnapshotsView extends React.Component {
     dispatch: PropTypes.func.isRequired,
   }
 
-  componentDidMount() {
-    this.props.dispatch(SnapshotsActions.fetchSnapshots());
-  }
-
   render() {
     return (
       <View style={styles.fullScreen}>

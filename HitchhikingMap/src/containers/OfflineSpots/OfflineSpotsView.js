@@ -17,22 +17,18 @@ class OfflineSpotsView extends React.Component {
     dispatch: PropTypes.func.isRequired,
   }
 
-  componentDidMount() {
-    this.props.dispatch(OfflineSpotsActions.fetchOfflineSpots());
-  }
-
   render() {
     return (
       <View style={styles.fullScreen}>
-        {this.props.spots.length ?
+        {Object.keys(this.props.spots).length ?
           <ScrollView style={{ backgroundColor: 'white' }}>
-            {this.props.spots.map((spot, index) => (
+            {Object.keys(this.props.spots).map((spotId, index) => (
               <ListItem
                 key={index}
                 title={`Spot #${index + 1}`}
                 titleStyle={theme.styles.textColor}
                 leftIcon={{ type: 'ionicon', name: 'ios-pin', color: theme.darkGrey }}
-                onPress={() => this.props.navigation.navigate('spotDetailsSettings', { spotId: spot })}
+                onPress={() => this.props.navigation.navigate('spotDetailsSettings', { spotId: spotId })}
               />
             ))}
           </ScrollView>

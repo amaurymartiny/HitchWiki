@@ -22,12 +22,14 @@ class SettingsView extends React.Component {
             title="Snapshots"
             titleStyle={theme.styles.textColor}
             leftIcon={{ type: 'ionicon', name: 'ios-camera', color: theme.darkGrey }}
+            badge={{ value: this.props.snapshotsCount }}
             onPress={() => this.props.navigation.navigate('snapshots')}
           />
           <ListItem
             title="Offline Spots"
             titleStyle={theme.styles.textColor}
             leftIcon={{ type: 'ionicon', name: 'ios-bookmarks', color: theme.darkGrey }}
+            badge={{ value: this.props.offlineSpotsCount }}
             onPress={() => this.props.navigation.navigate('offlineSpots')}
           />
           <ListItem

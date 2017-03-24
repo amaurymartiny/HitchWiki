@@ -89,13 +89,11 @@ class HMapView extends React.Component {
             buttonColor={theme.red}
             title="Take Snapshot"
             onPress={() => {
-              // 'takeSnapshot' takes a config object with the
-              // following options
               const snapshot = this.refs.map.takeSnapshot({});
-              this.props.dispatch(SnapshotsActions.saveSnapshotRequest())
-              snapshot.then((uri) => {
-                this.props.dispatch(SnapshotsActions.saveSnapshotSuccess(uri))
-              });
+              this.props.dispatch(SnapshotsActions.saveSnapshotRequest(snapshot))
+              // snapshot
+              //   .then(uri => this.props.dispatch(SnapshotsActions.saveSnapshotSuccess(uri)))
+              //   .catch(error => this.props.dispatch(SnapshotsActions.saveSnapshotFailure(error)));
             }}
           >
             <Icon type="ionicon" name="ios-image" color="white" />

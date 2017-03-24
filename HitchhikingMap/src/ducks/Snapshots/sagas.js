@@ -1,34 +1,28 @@
 import { AsyncStorage } from 'react-native';
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 
 import types from './types';
+import actions from './actions';
 import { MessageBarActions } from '../MessageBar';
 
 /**
- * Saga which fetch all snapshots'
+ * Saga which saves a snapshot and prints a message
+ * @param {[type]} action        action.payload is snapshot Promise
  * @yield {[type]} [description]
  */
-function* fetchSnapshotsSaga() {
+function* saveSnapshotRequestSaga(action) {
   try {
-    const snapshots = yield call(AsyncStorage.getItem, '@SNAPSHOTS');
-    yield put({ type: types.FETCH_SNAPSHOTS_SUCCESS, payload: JSON.parse(snapshots) || [] }); // defaults to [] is snapshots is null
+    yield put(MessageBarActions.setMessage('Saving snapshot...', false));
+    const uri = yield action.payload;
+    yield put(actions.saveSnapshotSuccess(uri));
   } catch (error) {
-    yield put({ type: types.FETCH_SNAPSHOTS_FAILURE, error });
+    yield put(actions.saveSnapshotFailure(error));
   }
 }
 
 /**
- * Saga which saves a snapshot
- * @param {[type]} action        action.payload is the uri
- * @yield {[type]} [description]
- */
-function* saveSnapshotRequestSaga(action) {
-  yield put(MessageBarActions.setMessage('Saving snapshot...', false));
-}
-
-/**
- * Saga which saves a snapshot
- * @param {[type]} action        action.payload is the uri
+ * Saga which shows a message when snapshot is saved
+ * @param {[type]} action        action.payload is snapshot Promise
  * @yield {[type]} [description]
  */
 function* saveSnapshotSuccessSaga(action) {
@@ -37,7 +31,6 @@ function* saveSnapshotSuccessSaga(action) {
 
 export default function* SnapshotsSaga() {
   yield [
-    takeLatest(types.FETCH_SNAPSHOTS_REQUEST, fetchSnapshotsSaga),
     takeLatest(types.SAVE_SNAPSHOT_REQUEST, saveSnapshotRequestSaga),
     takeLatest(types.SAVE_SNAPSHOT_SUCCESS, saveSnapshotSuccessSaga),
   ];

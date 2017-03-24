@@ -43,9 +43,9 @@ function* fetchSpotsRequestSaga(action) {
       return markers;
     }
 
-    yield put({ type: types.FETCH_SPOTS_SUCCESS, payload: spotsToMarkers(response.spots) });
+    yield put(actions.fetchSpotsSuccess(spotsToMarkers(response.spots)));
   } catch (error) {
-    yield put({ type: types.FETCH_SPOTS_FAILURE, error });
+    yield put(actions.fetchSpotsFailure(error));
   }
 }
 

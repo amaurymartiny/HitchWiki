@@ -29,7 +29,7 @@ class OfflinesnapshotsView extends React.Component {
               images={this.props.snapshots.map(item => item.uri)}
               onPageSelected={page => this.props.dispatch(SnapshotsActions.setPage(page))}
             />
-            <Text style={styles.caption}>{moment(this.props.snapshots[this.props.currentPage].date).calendar()}</Text>
+            <Text style={styles.caption}>{moment(this.props.snapshots[this.props.currentPage].date).calendar()} ({this.props.currentPage + 1}/{this.props.snapshots.length})</Text>
           </View>
         :
           <EmptyScreen title="No snapshots taken yet. Hint: go to the Map, click on the '+' button, and take a snapshot to see it here." />

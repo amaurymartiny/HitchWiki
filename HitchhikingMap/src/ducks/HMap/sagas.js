@@ -1,15 +1,26 @@
 import { call, cps, put, takeLatest } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
+
 import types from './types';
 import actions from './actions';
 import ApiService from '../../services/ApiService';
+
+/**
+ * Saga which calls fetchSpotRequest when the region changes
+ * @param {[type]} action        action.payload is a region object
+ * @yield {[type]} [description]
+ */
+function* setRegionSaga(action) {
+  if (action.payload.latitudeDelta > 0.7 || action.payload.longitudeDelta > 0.7) return;
+    yield put(actions.fetchSpotsRequest(action.payload));
+}
 
 /**
  * Saga which fetches the spots inside bounds from HitchWiki API 
  * @param {[type]} action        action.payload is a region object
  * @yield {[type]} [description]
  */
-function* fetchSpotsSaga(action) {
+function* fetchSpotsRequestSaga(action) {
   try {
     // First step is to make the API call with correct bounds
     const response = yield call(ApiService, `action=hwmapapi&format=json&SWlat=${action.payload.latitude - Math.min(action.payload.latitudeDelta, 1)}&SWlon=${action.payload.longitude - Math.min(action.payload.longitudeDelta, 1)}&NElat=${action.payload.latitude + Math.min(action.payload.latitudeDelta, 1)}&NElon=${action.payload.longitude + Math.min(action.payload.longitudeDelta, 1)}`);
@@ -79,7 +90,8 @@ function* getLocationSaga(action) {
 
 export default function* HitchhikingMapSaga() {
   yield [
-    takeLatest(types.FETCH_SPOTS_REQUEST, fetchSpotsSaga),
+    takeLatest(types.SET_REGION, setRegionSaga),
+    takeLatest(types.FETCH_SPOTS_REQUEST, fetchSpotsRequestSaga),
     takeLatest(types.GET_LOCATION_REQUEST, getLocationSaga)
   ];
 }

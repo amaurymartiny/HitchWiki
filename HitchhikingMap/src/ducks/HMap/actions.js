@@ -1,6 +1,6 @@
 import types from './types';
 
-const fetchSpots = (region) => {
+const fetchSpotsRequest = (region) => {
   return {
     type: types.FETCH_SPOTS_REQUEST,
     payload: region
@@ -28,7 +28,7 @@ const getLocationSuccess = () => {
 }
 
 export default {
-  fetchSpots,
+  fetchSpotsRequest,
   setRegion,
   getLocation,
   getLocationSuccess,

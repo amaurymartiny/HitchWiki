@@ -1,4 +1,4 @@
-import { call, cps, put, takeLatest } from 'redux-saga/effects';
+import { call, cps, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 
 import types from './types';
@@ -90,7 +90,7 @@ function* getLocationSaga(action) {
 
 export default function* HitchhikingMapSaga() {
   yield [
-    takeLatest(types.SET_REGION, setRegionSaga),
+    takeEvery(types.SET_REGION, setRegionSaga),
     takeLatest(types.FETCH_SPOTS_REQUEST, fetchSpotsRequestSaga),
     takeLatest(types.GET_LOCATION_REQUEST, getLocationSaga)
   ];

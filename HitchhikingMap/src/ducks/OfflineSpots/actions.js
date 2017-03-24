@@ -1,36 +1,28 @@
 import types from './types';
 
-const saveOfflineSpot = (id, spot, latlng) => { 
+const saveOfflineSpotRequest = (id, spot, latlng) => {
   return {
-    type: types.SAVE_OFFLINE_SPOT,
+    type: types.SAVE_OFFLINE_SPOT_REQUEST,
     payload: { id, spot, latlng }
   };
 }
 
-const saveStaticMapRequest = (latlng) => {
+const saveOfflineSpotSuccess = (id, spot, latlng, uri) => {
   return {
-    type: types.SAVE_STATIC_MAP_REQUEST,
-    payload: latlng
+    type: types.SAVE_OFFLINE_SPOT_SUCCESS,
+    payload: { id, spot, latlng, uri }
   };
 }
 
-const saveStaticMapSuccess = (uri) => {
+const saveOfflineSpotFailure = (error) => {
   return {
-    type: types.SAVE_STATIC_MAP_SUCCESS,
-    payload: uri
-  };
-}
-
-const saveStaticMapFailure = (error) => {
-  return {
-    type: types.SAVE_STATIC_MAP_FAILURE,
+    type: types.SAVE_OFFLINE_SPOT_FAILURE,
     error,
   };
 }
 
 export default {
-  saveOfflineSpot,
-  saveStaticMapRequest,
-  saveStaticMapSuccess,
-  saveStaticMapFailure,
+  saveOfflineSpotRequest,
+  saveOfflineSpotSuccess,
+  saveOfflineSpotFailure,
 }

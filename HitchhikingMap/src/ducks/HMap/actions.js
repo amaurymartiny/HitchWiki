@@ -16,7 +16,7 @@ const fetchSpotsSuccess = (region) => {
 
 const fetchSpotsFailure = (error) => {
   return {
-    type: types.FETCH_SPOTS_REQUEST,
+    type: types.FETCH_SPOTS_FAILURE,
     error,
   };
 }
@@ -36,7 +36,7 @@ const getLocationSuccess = () => {
 
 const getLocationFailure = (error) => {
   return {
-    type: types.GET_LOCATION_SUCCESS,
+    type: types.GET_LOCATION_FAILURE,
     error
   }
 }

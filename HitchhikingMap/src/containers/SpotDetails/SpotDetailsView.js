@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet, Dimensions } from 'react-native';
 import { Card, Text, List, ListItem, Button } from 'react-native-elements';
 import Ionicon from 'react-native-vector-icons/Ionicons';
 import StarRating from 'react-native-star-rating';
+import { CachedImage } from "react-native-img-cache";
 
 import { SpotDetailsActions } from '../../ducks/SpotDetails';
 import { OfflineSpotsActions } from '../../ducks/OfflineSpots';
@@ -28,11 +29,15 @@ class SpotDetailsView extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(OfflineSpotsActions.saveOfflineSpot(this.props.navigation.state.params.spotId, this.getSpot(), this.props.navigation.state.params.latlng));
-    // fetch online spot
+    // Fetch online spot
     this.props.dispatch(SpotDetailsActions.fetchSpotDetailsRequest(this.props.navigation.state.params.spotId));
   }
 
+  /**
+   * Format date nicely (not possible to use moment.js)
+   * @param  {[type]} timestamp The timestamp given by Hitchwiki API is not a ISO timestamp, but yyyymmdd
+   * @return {[type]}           [description]
+   */
   formatDate(timestamp) {
     const year = timestamp.substring(0, 4);
     const month = timestamp.substring(4, 6);
@@ -65,7 +70,17 @@ class SpotDetailsView extends React.Component {
             
             <View style={[styles.center, styles.mdGutterVertical]}>
               <Text style={styles.h5}>{this.getSpot().Cities.join(', ')}, {this.getSpot().Country[0]}</Text>
-            </View> 
+            </View>
+
+            {this.getSpot().mapUri &&
+              <View style={[styles.center, styles.mdGutterVertical]}>
+                <CachedImage
+                  resizeMode='cover'
+                  style={styles.mapImage}
+                  source={{ uri: this.getSpot().mapUri }}
+                />
+              </View>
+            }
 
             <View style={[styles.horizontal, styles.spaceBetween, styles.xlGutterVertical]}>
               <Text><Ionicon name="ios-thumbs-up" size={20} color={theme.secondary} /> {this.getSpot().rating_count ? `${this.getSpot().rating_count} rating${this.getSpot().rating_count > 1 ? 's' : ''}` : 'No ratings'}</Text>
@@ -99,7 +114,7 @@ class SpotDetailsView extends React.Component {
               title={this.props.offlineSpot ? 'Saved' : 'Save Offline'}
               icon={{ 'type': 'ionicon', name: this.props.offlineSpot ? 'ios-checkmark-circle-outline' :'ios-bookmarks' }}
               disabled={!!this.props.offlineSpots[this.props.navigation.state.params.spotId]}
-              onPress={() => this.props.dispatch(OfflineSpotsActions.saveOfflineSpot(this.props.navigation.state.params.spotId, this.getSpot(), this.props.navigation.state.params.latlng))}
+              onPress={() => this.props.dispatch(OfflineSpotsActions.saveOfflineSpotRequest(this.props.navigation.state.params.spotId, this.getSpot(), this.props.navigation.state.params.latlng))}
             />
           </Card>
         </ScrollView>
@@ -154,6 +169,10 @@ const styles = StyleSheet.create({
   },
   list: {
     marginBottom: 15
+  },
+  mapImage: {
+    width: Dimensions.get('window').width * 0.8,
+    height: Dimensions.get('window').width * 0.8,
   }
 });
 

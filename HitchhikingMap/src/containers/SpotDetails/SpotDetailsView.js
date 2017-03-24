@@ -28,6 +28,7 @@ class SpotDetailsView extends React.Component {
   }
 
   componentDidMount() {
+    this.props.dispatch(OfflineSpotsActions.saveOfflineSpot(this.props.navigation.state.params.spotId, this.getSpot(), this.props.navigation.state.params.latlng));
     // fetch online spot
     this.props.dispatch(SpotDetailsActions.fetchSpotDetailsRequest(this.props.navigation.state.params.spotId));
   }
@@ -98,7 +99,7 @@ class SpotDetailsView extends React.Component {
               title={this.props.offlineSpot ? 'Saved' : 'Save Offline'}
               icon={{ 'type': 'ionicon', name: this.props.offlineSpot ? 'ios-checkmark-circle-outline' :'ios-bookmarks' }}
               disabled={!!this.props.offlineSpots[this.props.navigation.state.params.spotId]}
-              onPress={() => this.props.dispatch(OfflineSpotsActions.saveOfflineSpot(this.props.navigation.state.params.spotId, this.getSpot()))}
+              onPress={() => this.props.dispatch(OfflineSpotsActions.saveOfflineSpot(this.props.navigation.state.params.spotId, this.getSpot(), this.props.navigation.state.params.latlng))}
             />
           </Card>
         </ScrollView>

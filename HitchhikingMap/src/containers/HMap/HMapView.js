@@ -69,7 +69,7 @@ class HMapView extends React.Component {
               description="See Description &rarr;"
               title={drawStars(marker.rating)}
               pinColor={getPinColor(marker.rating)}
-              onCalloutPress={() => this.props.navigation.navigate('spotDetails', { spotId: marker.id })}
+              onCalloutPress={() => this.props.navigation.navigate('spotDetails', { spotId: marker.id, latlng: marker.latlng })}
             />
           ))}
         </MapView>

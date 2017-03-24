@@ -24,7 +24,8 @@ class MessageBarView extends React.Component {
       messageStyle: { color: 'white', fontSize: 14, textAlign: 'center', padding: 0 },
       stylesheetInfo : { backgroundColor : 'rgba(0, 0, 0, 0.7)', strokeColor : 'rgba(0, 0, 0, 0.7)' },
       shouldHideAfterDelay: this.props.shouldHideAfterDelay,
-      viewTopOffset: Navigator.NavigationBar.Styles.General.TotalNavHeight
+      viewTopOffset: Navigator.NavigationBar.Styles.General.TotalNavHeight,
+      animationType: 'SlideFromLeft',
     });
     // Clear message after showing it
     this.props.dispatch(MessageBarActions.clearMessage());

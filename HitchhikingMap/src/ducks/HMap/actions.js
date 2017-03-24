@@ -7,6 +7,20 @@ const fetchSpotsRequest = (region) => {
   };
 }
 
+const fetchSpotsSuccess = (region) => {
+  return {
+    type: types.FETCH_SPOTS_SUCCESS,
+    payload: region
+  };
+}
+
+const fetchSpotsFailure = (error) => {
+  return {
+    type: types.FETCH_SPOTS_REQUEST,
+    error,
+  };
+}
+
 const setRegion = (region) => {
   return {
     type: types.SET_REGION,

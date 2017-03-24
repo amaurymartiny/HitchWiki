@@ -28,9 +28,8 @@ class SpotDetailsView extends React.Component {
   }
 
   componentDidMount() {
-    // fetch offline and online spot
-    // this.props.dispatch(OfflineSpotsActions.fetchOfflineSpot(this.props.navigation.state.params.spotId));
-    this.props.dispatch(SpotDetailsActions.fetchSpotDetails(this.props.navigation.state.params.spotId));
+    // fetch online spot
+    this.props.dispatch(SpotDetailsActions.fetchSpotDetailsRequest(this.props.navigation.state.params.spotId));
   }
 
   formatDate(timestamp) {

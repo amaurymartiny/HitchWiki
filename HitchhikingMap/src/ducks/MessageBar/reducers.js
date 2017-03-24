@@ -1,6 +1,4 @@
 import types from './types';
-import SnapshotsTypes from '../Snapshots/types'; // TODO not good here I think
-import OfflineSpotsTypes from '../OfflineSpots/types';
 
 const initialState = {
   message: '',
@@ -18,11 +16,6 @@ export default function OfflineSpotsStateReducer(state = initialState, action = 
       return {
         ...state,
         message: ''
-      };
-    case OfflineSpotsTypes.SAVE_OFFLINE_SPOT_SUCCESS:
-      return {
-        ...state,
-        message: 'Spot saved successfully.'
       };
     default:
       return state;

@@ -1,12 +1,28 @@
 import types from './types';
 
-const fetchSpotDetails = spotId => {
+const fetchSpotDetailsRequest = spotId => {
   return {
     type: types.FETCH_SPOT_DETAILS_REQUEST,
-    spotId,
+    payload: spotId,
+  };
+}
+
+const fetchSpotDetailsSuccess = spot => {
+  return {
+    type: types.FETCH_SPOT_DETAILS_SUCCESS,
+    payload: spot,
+  };
+}
+
+const fetchSpotDetailsFailure = error => {
+  return {
+    type: types.FETCH_SPOT_DETAILS_FAILURE,
+    error,
   };
 }
 
 export default {
-  fetchSpotDetails,
+  fetchSpotDetailsRequest,
+  fetchSpotDetailsSuccess,
+  fetchSpotDetailsFailure,
 }

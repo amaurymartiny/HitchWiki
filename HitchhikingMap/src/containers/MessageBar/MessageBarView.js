@@ -26,6 +26,8 @@ class MessageBarView extends React.Component {
       shouldHideAfterDelay: this.props.shouldHideAfterDelay,
       viewTopOffset: Navigator.NavigationBar.Styles.General.TotalNavHeight,
       animationType: 'SlideFromLeft',
+      durationToShow: 1,
+      durationToHide: 1,
     });
     // Clear message after showing it
     this.props.dispatch(MessageBarActions.clearMessage());

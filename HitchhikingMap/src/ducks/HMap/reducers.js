@@ -8,10 +8,27 @@ const initialState = {
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   },
-  isFetchingGPS: false
+  isFetchingGPS: false,
+  isFetchingSpots: false,
 };
 export default function HitchhikingMapStateReducer(state = initialState, action = {}) {
   switch (action.type) {
+    case types.FETCH_SPOTS_REQUEST:
+      return {
+        ...state,
+        isFetchingSpots: true,
+      };
+    case types.FETCH_SPOTS_SUCCESS:
+      return {
+        ...state,
+        markers: action.payload,
+        isFetchingSpots: false,
+      };
+    case types.FETCH_SPOTS_FAILURE:
+      return {
+        ...state,
+        isFetchingSpots: false,
+      };
     case types.GET_LOCATION_REQUEST:
       return {
         ...state,
@@ -28,11 +45,6 @@ export default function HitchhikingMapStateReducer(state = initialState, action 
         ...state,
         region: action.payload
       }
-    case types.FETCH_SPOTS_SUCCESS:
-      return {
-        ...state,
-        markers: action.payload,
-      };
     default:
       return state;
   }

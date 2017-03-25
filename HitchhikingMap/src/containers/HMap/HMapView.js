@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 import ActionButton from 'react-native-action-button';
 import MapView from 'react-native-maps';
@@ -29,14 +29,17 @@ class HMapView extends React.Component {
     this.props.dispatch(HMapActions.getLocationRequest());
   }
 
-  render() {
+  generateMarkers() {
     // Some helper functions to show correctly the markers
 
-    // Print as text number of stars
+    /**
+     * Print as text number of stars
+     * @param  {[type]} number [description]
+     * @return {[type]}        [description]
+     */
     function drawStars(number) {
       return '★'.repeat(number) + '☆'.repeat(5 - number);
     }
-
     /**
      * Get corresponding pin for each rating
      * @param  {[type]} number Average Rating
@@ -56,7 +59,23 @@ class HMapView extends React.Component {
           return require('../../../assets/images/1.png');
       }
     }
+    
+    return this.props.markers.map(marker => (
+      <MapView.Marker
+        ref={`marker-${marker.id}`}
+        key={marker.id}
+        coordinate={marker.latlng}
+        description="See Description &rarr;"
+        title={drawStars(marker.rating)}
+        centerOffset={{ x: 1, y: 1 }}
+        onCalloutPress={() => this.props.navigation.navigate('spotDetails', { spotId: marker.id, latlng: marker.latlng })}
+      >
+        <Image source={getPinImage(marker.rating)} style={{ width: 32, height: 32}} />
+      </MapView.Marker>
+    ));
+  }
 
+  render() {
     return (
       <View style={styles.fullScreen}>
         <MapView
@@ -64,22 +83,19 @@ class HMapView extends React.Component {
           style={styles.fullScreen}
           region={this.props.region}
           showsUserLocation
+          showsPointsOfInterest={false}
+          showsBuildings={false}
+          showsTraffic={false}
+          showsIndoors={false}
           onRegionChange={region => {
             this.props.dispatch(HMapActions.setRegion(region));
           }}
         >
-          {this.props.markers.map(marker => (
-            <MapView.Marker
-              key={marker.id}
-              coordinate={marker.latlng}
-              description="See Description &rarr;"
-              title={drawStars(marker.rating)}
-              onPress={() => { /* TODO Hack that shows the callout on press */}}
-              onCalloutPress={() => this.props.navigation.navigate('spotDetails', { spotId: marker.id, latlng: marker.latlng })}
-            >
-              <Image source={getPinImage(marker.rating)} style={{ width: 32, height: 32}} />
-            </MapView.Marker>
-          ))}
+          {this.props.isFetchingSpots ?
+            <View />
+          :
+            this.generateMarkers()
+          }
         </MapView>
         <ActionButton
           position="left"

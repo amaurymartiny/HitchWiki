@@ -74,9 +74,11 @@ class HMapView extends React.Component {
               coordinate={marker.latlng}
               description="See Description &rarr;"
               title={drawStars(marker.rating)}
-              image={getPinImage(marker.rating)}
+              onPress={() => { /* TODO Hack that shows the callout on press */}}
               onCalloutPress={() => this.props.navigation.navigate('spotDetails', { spotId: marker.id, latlng: marker.latlng })}
-            />
+            >
+              <Image source={getPinImage(marker.rating)} style={{ width: 32, height: 32}} />
+            </MapView.Marker>
           ))}
         </MapView>
         <ActionButton

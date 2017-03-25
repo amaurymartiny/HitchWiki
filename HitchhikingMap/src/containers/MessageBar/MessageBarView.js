@@ -29,6 +29,7 @@ class MessageBarView extends React.Component {
       durationToShow: 1,
       durationToHide: 1,
     });
+    
     // Clear message after showing it
     this.props.dispatch(MessageBarActions.clearMessage());
   }

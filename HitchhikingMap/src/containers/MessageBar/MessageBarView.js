@@ -19,10 +19,10 @@ class MessageBarView extends React.Component {
       return;
     }
     MessageBarManager.showAlert({
-      alertType: 'info',
+      alertType: 'success',
       message: this.props.message,
       messageStyle: { color: 'white', fontSize: 14, textAlign: 'center', padding: 0 },
-      stylesheetInfo : { backgroundColor : 'rgba(0, 0, 0, 0.7)', strokeColor : 'rgba(0, 0, 0, 0.7)' },
+      stylesheetSuccess : { backgroundColor: `${theme.green}D9`, strokeColor : `${theme.green}D9` }, // D9=85% opacity
       shouldHideAfterDelay: this.props.shouldHideAfterDelay,
       viewTopOffset: Navigator.NavigationBar.Styles.General.TotalNavHeight,
       animationType: 'SlideFromLeft',

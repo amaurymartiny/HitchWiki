@@ -12,7 +12,7 @@ import { MessageBarActions } from '../MessageBar';
  */
 function* saveSnapshotRequestSaga(action) {
   try {
-    yield put(MessageBarActions.setMessage('Saving snapshot...', false));
+    // yield put(MessageBarActions.setMessage('Saving snapshot...', false));
     const uri = yield action.payload;
     yield put(actions.saveSnapshotSuccess(uri));
   } catch (error) {

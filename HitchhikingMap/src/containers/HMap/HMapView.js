@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
 import ActionButton from 'react-native-action-button';
 import MapView from 'react-native-maps';
@@ -36,18 +36,24 @@ class HMapView extends React.Component {
     function drawStars(number) {
       return '★'.repeat(number) + '☆'.repeat(5 - number);
     }
-    function getPinColor(number) {
+
+    /**
+     * Get corresponding pin for each rating
+     * @param  {[type]} number Average Rating
+     * @return {[type]}        Image
+     */
+    function getPinImage(number) {
       switch (number) {
         case 2:
-          return 'pink';
+          return require('../../../assets/images/2.png');
         case 3:
-          return 'yellow';
+          return require('../../../assets/images/3.png');
         case 4:
-          return 'green';
+          return require('../../../assets/images/4.png');
         case 5:
-          return 'blue';
+          return require('../../../assets/images/5.png');
         default:
-          return 'red';
+          return require('../../../assets/images/1.png');
       }
     }
 
@@ -68,7 +74,7 @@ class HMapView extends React.Component {
               coordinate={marker.latlng}
               description="See Description &rarr;"
               title={drawStars(marker.rating)}
-              pinColor={getPinColor(marker.rating)}
+              image={getPinImage(marker.rating)}
               onCalloutPress={() => this.props.navigation.navigate('spotDetails', { spotId: marker.id, latlng: marker.latlng })}
             />
           ))}

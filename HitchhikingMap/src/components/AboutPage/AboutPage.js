@@ -18,12 +18,12 @@ class TabBar extends React.Component {
         </View>
         <Text style={styles.description}>Made with &hearts; by Amaury Martiny (development) and Weronika Pawelec (design).</Text>
         <Text style={styles.description}>Special thanks to all the people that gave us a ride when we were hitchhiking, you are the the reason we loved hitchhiking and decided to build this app.</Text>
-        <Button
+        {/*<Button
           buttonStyle={styles.button}
           backgroundColor={theme.blue}
           icon={{ type:'ionicon', name: 'ios-star' }}
           title='Rate this app on the App Store'
-        />
+        />*/}
       </Card>
       </View>
     );

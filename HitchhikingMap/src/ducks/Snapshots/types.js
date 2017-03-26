@@ -9,4 +9,4 @@ export default {
   SAVE_SNAPSHOT_SUCCESS,
   SAVE_SNAPSHOT_FAILURE,
   SET_PAGE,
-}
+};

@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+/* eslint-disable global-require */
+import React from 'react';
+import { View, StyleSheet, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
 import ActionButton from 'react-native-action-button';
 import MapView from 'react-native-maps';
@@ -19,10 +20,12 @@ class HMapView extends React.Component {
   }
 
   static propTypes = {
-    markers: PropTypes.array.isRequired,
-    region: PropTypes.object.isRequired,
-    isFetchingGPS: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    dispatch: React.PropTypes.func.isRequired,
+    isFetchingGPS: React.PropTypes.bool.isRequired,
+    isFetchingSpots: React.PropTypes.bool.isRequired,
+    markers: React.PropTypes.array.isRequired,
+    navigation: React.PropTypes.object.isRequired,
+    region: React.PropTypes.object.isRequired,
   }
 
   componentDidMount() {
@@ -70,7 +73,7 @@ class HMapView extends React.Component {
         centerOffset={{ x: 1, y: 1 }}
         onCalloutPress={() => this.props.navigation.navigate('spotDetails', { spotId: marker.id, latlng: marker.latlng })}
       >
-        <Image source={getPinImage(marker.rating)} style={{ width: 32, height: 32}} />
+        <Image source={getPinImage(marker.rating)} style={{ width: 32, height: 32 }} />
       </MapView.Marker>
     ));
   }
@@ -87,7 +90,7 @@ class HMapView extends React.Component {
           showsBuildings={false}
           showsTraffic={false}
           showsIndoors={false}
-          onRegionChange={region => {
+          onRegionChange={(region) => {
             this.props.dispatch(HMapActions.setRegion(region));
           }}
         >
@@ -103,7 +106,7 @@ class HMapView extends React.Component {
             title="Take Snapshot"
             onPress={() => {
               const snapshot = this.refs.map.takeSnapshot({});
-              this.props.dispatch(SnapshotsActions.saveSnapshotRequest(snapshot))
+              this.props.dispatch(SnapshotsActions.saveSnapshotRequest(snapshot));
             }}
           >
             <Icon type="ionicon" name="ios-image" color="white" />
@@ -125,7 +128,7 @@ class HMapView extends React.Component {
 const styles = StyleSheet.create({
   fullScreen: {
     ...StyleSheet.absoluteFillObject,
-  }
+  },
 });
 
 export default HMapView;

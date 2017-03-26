@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { View, ScrollView, StyleSheet, Dimensions } from 'react-native';
 import { Card, Text, List, ListItem, Button } from 'react-native-elements';
 import Ionicon from 'react-native-vector-icons/Ionicons';
 import StarRating from 'react-native-star-rating';
-import { CachedImage } from "react-native-img-cache";
+import { CachedImage } from 'react-native-img-cache';
 
 import { SpotDetailsActions } from '../../ducks/SpotDetails';
 import { OfflineSpotsActions } from '../../ducks/OfflineSpots';
@@ -17,29 +17,28 @@ class SpotDetailsView extends React.Component {
   }
 
   static propTypes = {
-    spot: PropTypes.any.isRequired
-  }
-
-  /**
-   * Get Spot selector
-   * @return {Object} Offline spot it exists, online spot otherwise
-   */
-  getSpot = () => {
-    return this.props.offlineSpots[this.props.navigation.state.params.spotId] || this.props.spot;
-  }
-
-  /**
-   * Get Spot selector
-   * @return {Object} Offline spot it exists, online spot otherwise
-   */
-  getIsOffline = () => {
-    return !!this.props.offlineSpots[this.props.navigation.state.params.spotId];
+    dispatch: React.PropTypes.func.isRequired,
+    navigation: React.PropTypes.object.isRequired,
+    offlineSpots: React.PropTypes.array.isRequired,
+    spot: React.PropTypes.object.isRequired,
   }
 
   componentDidMount() {
     // Fetch online spot
     this.props.dispatch(SpotDetailsActions.fetchSpotDetailsRequest(this.props.navigation.state.params.spotId));
   }
+
+  /**
+   * Get Spot selector
+   * @return {Object} Offline spot it exists, online spot otherwise
+   */
+  getSpot = () => this.props.offlineSpots[this.props.navigation.state.params.spotId] || this.props.spot
+
+  /**
+   * Get Spot selector
+   * @return {Object} Offline spot it exists, online spot otherwise
+   */
+  getIsOffline = () => !!this.props.offlineSpots[this.props.navigation.state.params.spotId]
 
   /**
    * Format date nicely (not possible to use moment.js)
@@ -75,7 +74,7 @@ class SpotDetailsView extends React.Component {
                 selectedStar={() => {}}
               />
             </View>
-            
+
             <View style={[styles.center, styles.mdGutterVertical]}>
               <Text style={styles.h5}>{this.getSpot().Cities.length ? `${this.getSpot().Cities.join(', ')}, ` : ''}{this.getSpot().Country[0]}</Text>
             </View>
@@ -83,7 +82,7 @@ class SpotDetailsView extends React.Component {
             {this.getIsOffline() &&
               <View style={[styles.center, styles.mdGutterVertical]}>
                 <CachedImage
-                  resizeMode='cover'
+                  resizeMode="cover"
                   style={styles.mapImage}
                   source={{ uri: this.getSpot().metadata.mapUri }}
                 />
@@ -98,7 +97,7 @@ class SpotDetailsView extends React.Component {
 
             <Text style={styles.xlGutterVertical}>{this.stripTags(this.getSpot().Description) || 'No description available.'}</Text>
             <List containerStyle={styles.list}>
-              {this.getSpot().comments.map((comment, index) => (
+              {this.getSpot().comments.map(comment => (
                 <ListItem
                   key={comment.comment_id}
                   leftIcon={{
@@ -120,7 +119,7 @@ class SpotDetailsView extends React.Component {
             <Button
               backgroundColor={theme.blue}
               title={this.getIsOffline() ? 'Saved' : 'Save Offline'}
-              icon={{ 'type': 'ionicon', name: this.getIsOffline() ? 'ios-checkmark-circle-outline' :'ios-bookmarks' }}
+              icon={{ type: 'ionicon', name: this.getIsOffline() ? 'ios-checkmark-circle-outline' : 'ios-bookmarks' }}
               disabled={this.getIsOffline()}
               onPress={() => this.props.dispatch(OfflineSpotsActions.saveOfflineSpotRequest(this.props.navigation.state.params.spotId, this.getSpot(), this.props.navigation.state.params.latlng))}
             />
@@ -133,7 +132,7 @@ class SpotDetailsView extends React.Component {
 
 const styles = StyleSheet.create({
   small: {
-    fontSize: 12
+    fontSize: 12,
   },
   h5: {
     fontSize: 20,
@@ -151,7 +150,7 @@ const styles = StyleSheet.create({
   },
   center: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   spaceBetween: {
     justifyContent: 'space-between',
@@ -170,19 +169,19 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     color: 'black',
-    fontWeight: 'normal'
+    fontWeight: 'normal',
   },
   alignTop: {
     flex: 1,
     alignItems: 'flex-start',
   },
   list: {
-    marginBottom: 15
+    marginBottom: 15,
   },
   mapImage: {
     width: Dimensions.get('window').width * 0.8,
     height: Dimensions.get('window').width * 0.8,
-  }
+  },
 });
 
 export default SpotDetailsView;

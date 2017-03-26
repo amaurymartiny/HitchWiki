@@ -11,11 +11,11 @@ const palette = {
 
 const styles = StyleSheet.create({
   textColor: {
-    color: palette.darkGrey
+    color: palette.darkGrey,
   },
   secondaryTextColor: {
-    color: palette.lightGrey
-  }
+    color: palette.lightGrey,
+  },
 });
 
 const ThemeService = {

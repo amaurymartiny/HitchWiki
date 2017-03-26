@@ -1,8 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
-import { ListItem, Text } from 'react-native-elements';
-
-import { OfflineSpotsActions } from '../../ducks/OfflineSpots';
+import { ListItem } from 'react-native-elements';
 
 import EmptyScreen from '../../components/EmptyScreen/EmptyScreen';
 import theme from '../../services/ThemeService';
@@ -10,11 +8,12 @@ import theme from '../../services/ThemeService';
 class OfflineSpotsView extends React.Component {
 
   static navigationOptions = {
-    title: 'Offline Spots'
+    title: 'Offline Spots',
   }
 
   static propTypes = {
-    dispatch: PropTypes.func.isRequired,
+    navigation: React.PropTypes.object.isRequired,
+    spots: React.PropTypes.array.isRequired,
   }
 
   render() {
@@ -22,14 +21,16 @@ class OfflineSpotsView extends React.Component {
       <View style={styles.fullScreen}>
         {Object.keys(this.props.spots).length ?
           <ScrollView style={{ backgroundColor: 'white' }}>
-            {Object.keys(this.props.spots).sort((a, b) => this.props.spots[a].metadata.dateAdded > this.props.spots[b].metadata.dateAdded).map((spotId, index) => (
-              <ListItem
-                key={index}
-                title={`Spot #${index + 1}`}
-                titleStyle={theme.styles.textColor}
-                leftIcon={{ type: 'ionicon', name: 'ios-pin', color: theme.darkGrey }}
-                onPress={() => this.props.navigation.navigate('spotDetailsSettings', { spotId: spotId })}
-              />
+            {Object.keys(this.props.spots)
+              .sort((a, b) => this.props.spots[a].metadata.dateAdded > this.props.spots[b].metadata.dateAdded)
+              .map((spotId, index) => (
+                <ListItem
+                  key={spotId}
+                  title={`Spot #${index + 1}`}
+                  titleStyle={theme.styles.textColor}
+                  leftIcon={{ type: 'ionicon', name: 'ios-pin', color: theme.darkGrey }}
+                  onPress={() => this.props.navigation.navigate('spotDetailsSettings', { spotId })}
+                />
             ))}
           </ScrollView>
         :
@@ -43,7 +44,7 @@ class OfflineSpotsView extends React.Component {
 const styles = StyleSheet.create({
   fullScreen: {
     ...StyleSheet.absoluteFillObject,
-  }
+  },
 });
 
 export default OfflineSpotsView;

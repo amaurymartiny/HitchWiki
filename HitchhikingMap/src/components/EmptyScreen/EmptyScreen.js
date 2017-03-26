@@ -4,15 +4,15 @@ import { Text } from 'react-native-elements';
 
 import theme from '../../services/ThemeService';
 
-class TabBar extends React.Component {
-  render() {
-    return (
-      <View style={styles.center}>
-        <Text style={{ color: '#777', textAlign: 'center' }}>{this.props.title}</Text>
-      </View>
-    );
-  }
-}
+const EmptyScreen = ({ title }) => (
+  <View style={styles.center}>
+    <Text style={{ color: '#777', textAlign: 'center' }}>{title}</Text>
+  </View>
+);
+
+EmptyScreen.propTypes = {
+  title: React.PropTypes.string.isRequired,
+};
 
 const styles = StyleSheet.create({
   center: {
@@ -21,9 +21,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingLeft: 50,
     paddingRight: 50,
-    backgroundColor: theme.iosBackgroundGrey
-  }
+    backgroundColor: theme.iosBackgroundGrey,
+  },
 });
 
 
-export default TabBar;
+export default EmptyScreen;

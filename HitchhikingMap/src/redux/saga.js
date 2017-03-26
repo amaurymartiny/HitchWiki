@@ -10,6 +10,6 @@ export default function* rootSaga() {
     fork(HMapSagas),
     fork(SpotDetailsSagas),
     fork(SnapshotsSagas),
-    fork(OfflineSpotsSagas)
+    fork(OfflineSpotsSagas),
   ];
 }

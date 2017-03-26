@@ -16,4 +16,4 @@ export default {
   FETCH_SPOTS_REQUEST,
   FETCH_SPOTS_SUCCESS,
   FETCH_SPOTS_FAILURE,
-}
+};

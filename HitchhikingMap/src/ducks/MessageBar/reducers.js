@@ -15,7 +15,7 @@ export default function OfflineSpotsStateReducer(state = initialState, action = 
     case types.CLEAR_MESSAGE:
       return {
         ...state,
-        message: ''
+        message: '',
       };
     default:
       return state;

@@ -11,20 +11,20 @@ import AboutPage from './components/AboutPage/AboutPage';
 
 const HMapNavigator = StackNavigator({
   HMap: { screen: HMapViewContainer },
-  spotDetails: { screen: SpotDetailsViewContainer }
+  spotDetails: { screen: SpotDetailsViewContainer },
 }, {
   navigationOptions: {
     header: {
-      visible: false
+      visible: false,
     },
     tabBar: {
       label: 'Map',
-      icon: ({ tintColor }) => (
+      icon: ({ tintColor }) => ( // eslint-disable-line react/prop-types
         <Icon type="ionicon" name="ios-map" color={tintColor} />
       ),
-      visible: true
+      visible: true,
     },
-  }
+  },
 });
 
 const SettingsNavigator = StackNavigator({
@@ -32,29 +32,31 @@ const SettingsNavigator = StackNavigator({
   snapshots: { screen: SnapshotsViewContainer },
   offlineSpots: { screen: OfflineSpotsViewContainer },
   spotDetailsSettings: { screen: SpotDetailsViewContainer },
-  about: { screen: AboutPage }
+  about: { screen: AboutPage },
 }, {
   navigationOptions: {
     header: {
-      visible: true
+      visible: true,
     },
     tabBar: {
       label: 'Settings',
-      icon: ({ tintColor }) => (
+      icon: ({ tintColor }) => ( // eslint-disable-line react/prop-types
         <Icon type="ionicon" name="ios-settings" color={tintColor} />
       ),
-      visible: true
+      visible: true,
     },
-  }
+  },
 });
 
-export default AppNavigator = TabNavigator({
+const AppNavigator = TabNavigator({
   HMap: { screen: HMapNavigator },
-  settings: { screen: SettingsNavigator }
+  settings: { screen: SettingsNavigator },
 }, {
   navigationOptions: {
     header: {
       visible: false,
     },
- },
+  },
 });
+
+export default AppNavigator;

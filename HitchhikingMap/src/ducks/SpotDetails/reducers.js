@@ -18,7 +18,7 @@ export const initialState = {
     waiting_time_count: 0,
     comment_count: 0,
     comments: [],
-  }
+  },
 };
 
 export default function SpotDetailsStateReducer(state = initialState, action = {}) {

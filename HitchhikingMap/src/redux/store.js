@@ -13,23 +13,28 @@ import rootSaga from './saga';
 const configureStore = () => {
   /* ------------- Redux Configuration ------------- */
 
-  const middleware = [createLogger()]
-  const enhancers = []
+  const middleware = [];
+
+  // Add redux-logger in dev mode
+  if (process.env !== 'production') {
+    middleware.push(createLogger());
+  }
+  const enhancers = [];
 
   /* ------------- Saga Middleware ------------- */
 
-  const sagaMiddleware = createSagaMiddleware()
-  middleware.push(sagaMiddleware)
+  const sagaMiddleware = createSagaMiddleware();
+  middleware.push(sagaMiddleware);
 
   /* ------------- Assemble Middleware ------------- */
 
-  enhancers.push(applyMiddleware(...middleware))
+  enhancers.push(applyMiddleware(...middleware));
 
   /* ------------- AutoRehydrate Enhancer ------------- */
 
   // // add the autoRehydrate enhancer
   // if (ReduxPersist.active) {
-  enhancers.push(autoRehydrate())
+  enhancers.push(autoRehydrate());
   // }
 
   // // if Reactotron is enabled (default for __DEV__), we'll create the store through Reactotron
@@ -40,13 +45,13 @@ const configureStore = () => {
   // begin periodically persisting the store
   persistStore(store, {
     whitelist: ['offlineSpots', 'snapshots'],
-    storage: AsyncStorage
+    storage: AsyncStorage,
   });
 
   // kick off root saga
-  sagaMiddleware.run(rootSaga)
+  sagaMiddleware.run(rootSaga);
 
-  return store
-}
+  return store;
+};
 
 export default configureStore;

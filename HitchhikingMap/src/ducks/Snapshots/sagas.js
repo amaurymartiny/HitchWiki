@@ -1,4 +1,3 @@
-import { AsyncStorage } from 'react-native';
 import { put, takeLatest } from 'redux-saga/effects';
 
 import types from './types';
@@ -25,7 +24,7 @@ function* saveSnapshotRequestSaga(action) {
  * @param {[type]} action        action.payload is snapshot Promise
  * @yield {[type]} [description]
  */
-function* saveSnapshotSuccessSaga(action) {
+function* saveSnapshotSuccessSaga() {
   yield put(MessageBarActions.setMessage('Snapshot saved successfully.'));
 }
 

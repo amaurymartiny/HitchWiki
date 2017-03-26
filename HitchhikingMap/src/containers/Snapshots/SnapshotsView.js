@@ -1,22 +1,23 @@
-import React, { PropTypes } from 'react';
-import { View, StyleSheet, Image } from 'react-native';
-import { ListItem, Text } from 'react-native-elements';
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Text } from 'react-native-elements';
 import Gallery from 'react-native-gallery';
 import moment from 'moment';
 
 import { SnapshotsActions } from '../../ducks/Snapshots';
 
 import EmptyScreen from '../../components/EmptyScreen/EmptyScreen';
-import theme from '../../services/ThemeService';
 
 class OfflinesnapshotsView extends React.Component {
 
   static navigationOptions = {
-    title: 'Snapshots'
+    title: 'Snapshots',
   }
 
   static propTypes = {
-    dispatch: PropTypes.func.isRequired,
+    currentPage: React.PropTypes.number.isRequired,
+    dispatch: React.PropTypes.func.isRequired,
+    snapshots: React.PropTypes.array.isRequired,
   }
 
   render() {
@@ -25,7 +26,7 @@ class OfflinesnapshotsView extends React.Component {
         {this.props.snapshots.length ?
           <View style={styles.fullScreen}>
             <Gallery
-              style={{flex: 1}}
+              style={{ flex: 1 }}
               images={this.props.snapshots.map(item => item.uri)}
               onPageSelected={page => this.props.dispatch(SnapshotsActions.setPage(page))}
             />
@@ -49,8 +50,8 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 14,
     bottom: 40,
-    padding: 10
-  }
+    padding: 10,
+  },
 });
 
 export default OfflinesnapshotsView;

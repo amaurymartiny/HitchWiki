@@ -59,7 +59,7 @@ class HMapView extends React.Component {
           return require('../../../assets/images/1.png');
       }
     }
-    
+
     return this.props.markers.map(marker => (
       <MapView.Marker
         ref={`marker-${marker.id}`}
@@ -91,11 +91,7 @@ class HMapView extends React.Component {
             this.props.dispatch(HMapActions.setRegion(region));
           }}
         >
-          {this.props.isFetchingSpots ?
-            <View />
-          :
-            this.generateMarkers()
-          }
+          {this.props.isFetchingSpots ? <View /> : this.generateMarkers()}
         </MapView>
         <ActionButton
           position="left"
@@ -108,9 +104,6 @@ class HMapView extends React.Component {
             onPress={() => {
               const snapshot = this.refs.map.takeSnapshot({});
               this.props.dispatch(SnapshotsActions.saveSnapshotRequest(snapshot))
-              // snapshot
-              //   .then(uri => this.props.dispatch(SnapshotsActions.saveSnapshotSuccess(uri)))
-              //   .catch(error => this.props.dispatch(SnapshotsActions.saveSnapshotFailure(error)));
             }}
           >
             <Icon type="ionicon" name="ios-image" color="white" />

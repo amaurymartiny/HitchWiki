@@ -77,7 +77,7 @@ class SpotDetailsView extends React.Component {
             </View>
             
             <View style={[styles.center, styles.mdGutterVertical]}>
-              <Text style={styles.h5}>{this.getSpot().Cities.join(', ')}, {this.getSpot().Country[0]}</Text>
+              <Text style={styles.h5}>{this.getSpot().Cities.length ? `${this.getSpot().Cities.join(', ')}, ` : ''}{this.getSpot().Country[0]}</Text>
             </View>
 
             {this.getIsOffline() &&

@@ -19,7 +19,7 @@ class SpotDetailsView extends React.Component {
   static propTypes = {
     dispatch: React.PropTypes.func.isRequired,
     navigation: React.PropTypes.object.isRequired,
-    offlineSpots: React.PropTypes.array.isRequired,
+    offlineSpots: React.PropTypes.object.isRequired,
     spot: React.PropTypes.object.isRequired,
   }
 

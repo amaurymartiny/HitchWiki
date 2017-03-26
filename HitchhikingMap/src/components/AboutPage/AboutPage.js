@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import { Card, Text, Button } from 'react-native-elements';
 
 import theme from '../../services/ThemeService';
@@ -11,10 +11,13 @@ class TabBar extends React.Component {
 
   render() {
     return (
+      <View style={{ flex: 1 }}>
       <Card>
-        <Text>Made with &hearts; by Amaury Martiny (development) and Weronika Pawelec (design).</Text>
-        <Text> </Text>
-        <Text>Special thanks to all the people that gave us a ride when we were hitchhiking, you are the the reason we loved hitchhiking and decided to build this app.</Text>
+        <View style={styles.center}>
+          <Image source={require('../../../assets/images/logo/ios/iTunesArtwork.png')} style={styles.logo} />
+        </View>
+        <Text style={styles.description}>Made with &hearts; by Amaury Martiny (development) and Weronika Pawelec (design).</Text>
+        <Text style={styles.description}>Special thanks to all the people that gave us a ride when we were hitchhiking, you are the the reason we loved hitchhiking and decided to build this app.</Text>
         <Button
           buttonStyle={styles.button}
           backgroundColor={theme.blue}
@@ -22,14 +25,26 @@ class TabBar extends React.Component {
           title='Rate this app on the App Store'
         />
       </Card>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  button: {
-    marginTop: 20,
-  }
+  description: {
+    textAlign: 'justify',
+    marginBottom: 20,
+  },
+  logo: {
+    width: 128,
+    height: 128,
+    marginBottom: 20,
+  },
+  center: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
 });
 
 

@@ -137,6 +137,7 @@ const styles = StyleSheet.create({
   },
   h5: {
     fontSize: 20,
+    textAlign: 'center',
   },
   primaryColor: {
     color: theme.primary,

@@ -13,7 +13,7 @@ class OfflineSpotsView extends React.Component {
 
   static propTypes = {
     navigation: React.PropTypes.object.isRequired,
-    spots: React.PropTypes.array.isRequired,
+    spots: React.PropTypes.object.isRequired,
   }
 
   render() {

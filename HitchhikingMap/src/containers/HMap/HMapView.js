@@ -71,9 +71,9 @@ class HMapView extends React.Component {
         description="See Description &rarr;"
         title={drawStars(marker.rating)}
         centerOffset={{ x: 1, y: 1 }}
+        image={getPinImage(marker.rating)}
         onCalloutPress={() => this.props.navigation.navigate('spotDetails', { spotId: marker.id, latlng: marker.latlng })}
       >
-        <Image source={getPinImage(marker.rating)} style={{ width: 32, height: 32 }} />
       </MapView.Marker>
     ));
   }

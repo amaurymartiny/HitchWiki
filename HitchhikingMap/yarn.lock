@@ -3526,9 +3526,9 @@ react-mixin@^3.0.5:
     object-assign "^4.0.1"
     smart-mixin "^2.0.0"
 
-react-native-action-button@^2.6.4:
-  version "2.6.4"
-  resolved "https://registry.yarnpkg.com/react-native-action-button/-/react-native-action-button-2.6.4.tgz#90b9bb7b88b57079f85e40e6060e0bbad45a74e4"
+react-native-action-button@^2.6.5:
+  version "2.6.5"
+  resolved "https://registry.yarnpkg.com/react-native-action-button/-/react-native-action-button-2.6.5.tgz#935c5d63b8a95c00064b4fc224f3168c7ffd033f"
 
 react-native-button@^1.6.0:
   version "1.8.2"
@@ -3560,9 +3560,9 @@ react-native-drawer-layout@~1.1.5:
   dependencies:
     react-native-dismiss-keyboard "1.0.0"
 
-react-native-elements@^0.10.2:
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-0.10.2.tgz#a8b9135f92d58f8abbc0209233e8f35e4c121878"
+react-native-elements@^0.10.3:
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-0.10.3.tgz#ddef62a456cb71a21a2fdf4aa9ee268af7e1cdd0"
   dependencies:
     react-native-side-menu "^0.20.1"
     react-native-tab-navigator "^0.3.3"
@@ -3762,7 +3762,7 @@ react-redux@^5.0.3:
     lodash-es "^4.2.0"
     loose-envify "^1.1.0"
 
-react-test-renderer@~15.4.1:
+react-test-renderer@~15.4.2:
   version "15.4.2"
   resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-15.4.2.tgz#27e1dff5d26d0e830f99614c487622bc831416f3"
   dependencies:
@@ -3780,7 +3780,7 @@ react-transform-hmr@^1.0.4:
     global "^4.3.0"
     react-proxy "^1.1.7"
 
-react@~15.4.1:
+react@~15.4.2:
   version "15.4.2"
   resolved "https://registry.yarnpkg.com/react/-/react-15.4.2.tgz#41f7991b26185392ba9bae96c8889e7e018397ef"
   dependencies:
@@ -3869,9 +3869,9 @@ redux-persist@^4.5.0:
     lodash "^4.17.4"
     lodash-es "^4.17.4"
 
-redux-saga@^0.14.3:
-  version "0.14.3"
-  resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.14.3.tgz#28cd2c5b49cf780a1de25875765724150c630513"
+redux-saga@^0.14.4:
+  version "0.14.4"
+  resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.14.4.tgz#a09acf294ef8387a0f23043e5c6d2f9f3fd25b54"
 
 redux@^3.6.0:
   version "3.6.0"

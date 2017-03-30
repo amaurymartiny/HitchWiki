@@ -1277,7 +1277,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.martiny.amaury.HitchhikingMap;
 				PRODUCT_NAME = HitchhikingMap;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1305,7 +1305,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.martiny.amaury.HitchhikingMap;
 				PRODUCT_NAME = HitchhikingMap;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

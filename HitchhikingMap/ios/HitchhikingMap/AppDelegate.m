@@ -9,6 +9,7 @@
 
 #import "AppDelegate.h"
 #import <CodePush/CodePush.h>
+#import <BugsnagReactNative/BugsnagReactNative.h>
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -18,6 +19,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   NSURL *jsCodeLocation;
+  
+  [BugsnagReactNative start];
 
   
 #ifdef DEBUG

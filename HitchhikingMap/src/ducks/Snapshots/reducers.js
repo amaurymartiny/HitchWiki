@@ -2,7 +2,6 @@ import types from './types';
 
 export const initialState = {
   snapshots: [],
-  currentPage: 0,
 };
 
 export default function SnapshotReducer(state = initialState, action = {}) {
@@ -15,11 +14,6 @@ export default function SnapshotReducer(state = initialState, action = {}) {
           uri: action.payload,
           date: new Date(),
         }]),
-      };
-    case types.SET_PAGE:
-      return {
-        ...state,
-        currentPage: action.payload,
       };
     default:
       return state;

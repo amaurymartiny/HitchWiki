@@ -15,14 +15,8 @@ const saveSnapshotFailure = error => ({
   error,
 });
 
-const setPage = page => ({
-  type: types.SET_PAGE,
-  payload: page,
-});
-
 export default {
   saveSnapshotRequest,
   saveSnapshotSuccess,
   saveSnapshotFailure,
-  setPage,
 };

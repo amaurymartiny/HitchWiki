@@ -16,10 +16,14 @@ const store = createStore();
  *
  * We separate like this to play nice with React Native's hot reloading.
  */
-const App = () => (
-  <Provider store={store}>
-    <RootContainer />
-  </Provider>
-);
+class App extends React.Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <RootContainer />
+      </Provider>
+    );
+  }
+}
 
 export default App;

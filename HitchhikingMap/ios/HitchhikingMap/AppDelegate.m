@@ -9,6 +9,8 @@
 
 #import "AppDelegate.h"
 #import <CodePush/CodePush.h>
+//#import <Fabric/Fabric.h>
+//#import <Crashlytics/Crashlytics.h>
 #import <BugsnagReactNative/BugsnagReactNative.h>
 
 #import <React/RCTBundleURLProvider.h>
@@ -20,6 +22,7 @@
 {
   NSURL *jsCodeLocation;
   
+  //[Fabric with:@[[Crashlytics class]]];
   [BugsnagReactNative start];
 
   

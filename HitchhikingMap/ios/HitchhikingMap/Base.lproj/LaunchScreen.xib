@@ -15,18 +15,18 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="ksc-nt-7ef">
-                    <rect key="frame" x="140" y="203" width="200" height="200"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="gMe-cl-nux">
+                    <rect key="frame" x="177" y="182" width="100" height="100"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="100" id="JHm-vp-Qu5"/>
-                        <constraint firstAttribute="height" constant="100" id="h0c-8M-RxT"/>
+                        <constraint firstAttribute="width" constant="100" id="C99-B6-L92"/>
+                        <constraint firstAttribute="height" constant="100" id="JjU-ed-scL"/>
                     </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="ksc-nt-7ef" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="0Bm-mq-Zh7"/>
-                <constraint firstItem="ksc-nt-7ef" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="pGO-fq-hv8"/>
+                <constraint firstItem="gMe-cl-nux" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="DUX-cQ-QvP"/>
+                <constraint firstItem="gMe-cl-nux" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="dc9-T6-nu5"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -34,6 +34,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Image" width="1536" height="1536"/>
+        <image name="Image" width="768" height="768"/>
     </resources>
 </document>

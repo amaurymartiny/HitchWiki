@@ -50,8 +50,6 @@ class HMapView extends React.Component {
      */
     function getPinImage(number) {
       switch (number) {
-        case 2:
-          return require('../../../assets/images/2.png');
         case 3:
           return require('../../../assets/images/3.png');
         case 4:
@@ -59,7 +57,7 @@ class HMapView extends React.Component {
         case 5:
           return require('../../../assets/images/5.png');
         default:
-          return require('../../../assets/images/1.png');
+          return require('../../../assets/images/2.png');
       }
     }
 

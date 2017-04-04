@@ -23,7 +23,7 @@ function* setRegionSaga(action) {
 function* fetchSpotsRequestSaga(action) {
   try {
     // First step is to make the API call with correct bounds
-    const response = yield call(ApiService, `action=hwmapapi&format=json&SWlat=${action.payload.latitude - Math.min(action.payload.latitudeDelta, 1)}&SWlon=${action.payload.longitude - Math.min(action.payload.longitudeDelta, 1)}&NElat=${action.payload.latitude + Math.min(action.payload.latitudeDelta, 1)}&NElon=${action.payload.longitude + Math.min(action.payload.longitudeDelta, 1)}`);
+    const response = yield call(ApiService, `action=hwmapapi&category=Spots&format=json&SWlat=${action.payload.latitude - Math.min(action.payload.latitudeDelta, 1)}&SWlon=${action.payload.longitude - Math.min(action.payload.longitudeDelta, 1)}&NElat=${action.payload.latitude + Math.min(action.payload.latitudeDelta, 1)}&NElon=${action.payload.longitude + Math.min(action.payload.longitudeDelta, 1)}`);
 
     // Second step is to transfrom Hitchwiki Spots to Map Markers
     const spotsToMarkers = (spots) => {

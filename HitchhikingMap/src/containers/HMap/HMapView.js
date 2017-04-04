@@ -32,6 +32,10 @@ class HMapView extends React.Component {
     this.props.dispatch(HMapActions.getLocationRequest());
   }
 
+  /**
+   * Generate the markers array to be shown on the map
+   * @return {<MapView.Marker>[]} [description]
+   */
   generateMarkers() {
     // Some helper functions to show correctly the markers
 
@@ -51,16 +55,18 @@ class HMapView extends React.Component {
     function getPinImage(number) {
       switch (number) {
         case 3:
-          return require('../../../assets/images/3.png');
+          return require('../../../assets/images/markers/3.png');
         case 4:
-          return require('../../../assets/images/4.png');
+          return require('../../../assets/images/markers/4.png');
         case 5:
-          return require('../../../assets/images/5.png');
+          return require('../../../assets/images/markers/5.png');
         default:
-          return require('../../../assets/images/2.png');
+          return require('../../../assets/images/markers/2.png');
       }
     }
 
+    // ref={`marker-${marker.id}`}
+    // onPress={() => this.refs[`marker-${marker.id}`].showCallout()}
     return this.props.markers.map(marker => (
       <MapView.Marker
         ref={`marker-${marker.id}`}
@@ -72,6 +78,7 @@ class HMapView extends React.Component {
         image={getPinImage(marker.rating)}
         onCalloutPress={() => this.props.navigation.navigate('spotDetails', { spotId: marker.id, latlng: marker.latlng })}
       >
+        {/*<Image source={getPinImage(marker.rating)} style={{ width: 32, height: 32}} />*/}
       </MapView.Marker>
     ));
   }
@@ -92,7 +99,7 @@ class HMapView extends React.Component {
             this.props.dispatch(HMapActions.setRegion(region));
           }}
         >
-          {this.props.isFetchingSpots ? <View /> : this.generateMarkers()}
+          {this.generateMarkers()}
         </MapView>
         <ActionButton
           position="left"

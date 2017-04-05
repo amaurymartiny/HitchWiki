@@ -15,10 +15,9 @@ const HMapNavigator = StackNavigator({
   onboarding: { screen: OnboardingPage },
   spotDetails: { screen: SpotDetailsViewContainer },
 }, {
+  // headerMode: 'none',
+  headerMode: 'screen',
   navigationOptions: {
-    header: {
-      visible: false,
-    },
     tabBar: {
       label: 'Map',
       icon: ({ tintColor }) => ( // eslint-disable-line react/prop-types

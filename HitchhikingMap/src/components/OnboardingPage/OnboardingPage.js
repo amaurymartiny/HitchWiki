@@ -5,14 +5,15 @@ import { Text } from 'react-native-elements';
 
 class Onboarding extends React.Component {
   static navigationOptions = {
-    title: 'Tutorial',
+    title: 'Quick Tutorial',
+    header: {
+      visible: false,
+    },
   }
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
         <Text>Hello</Text>
-      </View>
     );
   }
 }

@@ -45,6 +45,11 @@ export default function HitchhikingMapStateReducer(state = initialState, action 
         ...state,
         region: action.payload,
       };
+    case types.SET_TUTORIAL:
+      return {
+        ...state,
+        tutorial: action.payload,
+      };
     default:
       return state;
   }

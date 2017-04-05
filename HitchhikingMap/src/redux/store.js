@@ -2,9 +2,10 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { AsyncStorage } from 'react-native';
 import { createLogger } from 'redux-logger';
 import { autoRehydrate, persistStore } from 'redux-persist';
+import createBlacklistFilter from 'redux-persist-transform-filter';
 import createSagaMiddleware from 'redux-saga';
-// import RehydrationServices from '../Services/RehydrationServices'
-// import ReduxPersist from '../Config/ReduxPersist'
+
+import { AppActions } from '../ducks/App';
 
 import rootReducer from './reducer';
 import rootSaga from './saga';
@@ -44,9 +45,13 @@ const configureStore = () => {
 
   // begin periodically persisting the store
   persistStore(store, {
-    whitelist: ['offlineSpots', 'snapshots'],
+    whitelist: ['app', 'offlineSpots', 'snapshots'],
     storage: AsyncStorage,
-  });
+    transform: createBlacklistFilter( // Remove appLoaded key from AppReducer
+      'app',
+      ['appLoaded']
+    ),
+  }, () => store.dispatch(AppActions.setAppLoaded(true)));
 
   // kick off root saga
   sagaMiddleware.run(rootSaga);

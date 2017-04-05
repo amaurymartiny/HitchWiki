@@ -5,6 +5,7 @@ import { Icon } from 'react-native-elements';
 import ActionButton from 'react-native-action-button';
 import MapView from 'react-native-maps';
 
+import { AppActions } from '../../ducks/App';
 import { HMapActions } from '../../ducks/HMap';
 import { SnapshotsActions } from '../../ducks/Snapshots';
 
@@ -29,8 +30,14 @@ class HMapView extends React.Component {
   }
 
   componentDidMount() {
-    this.props.navigation.navigate('onboarding');
     this.props.dispatch(HMapActions.getLocationRequest());
+  }
+
+  componentDidUpdate() {
+    if (this.props.appLoaded && this.props.showTutorial) {
+      this.props.dispatch(AppActions.setShowTutorial(false));
+      this.props.navigation.navigate('onboarding');
+    }
   }
 
   /**

@@ -30,6 +30,7 @@
     "redux": "^3.6.0",
     "redux-logger": "^3.0.1",
     "redux-persist": "^4.6.0",
+    "redux-persist-transform-filter": "^0.0.9",
     "redux-saga": "^0.14.4"
   },
   "devDependencies": {

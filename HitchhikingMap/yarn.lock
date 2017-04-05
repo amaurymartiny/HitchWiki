@@ -3663,6 +3663,12 @@ react-native-side-menu@^0.20.1:
   version "0.20.1"
   resolved "https://registry.yarnpkg.com/react-native-side-menu/-/react-native-side-menu-0.20.1.tgz#df21b4bb9d8a1aa3bae53d74ddf8a739eb59bfc5"
 
+react-native-simple-onboarding@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-simple-onboarding/-/react-native-simple-onboarding-0.1.1.tgz#0a0db528a339f6be01dac60fe4ee26629ee832de"
+  dependencies:
+    tinycolor2 "^1.4.1"
+
 react-native-star-rating@^1.0.7:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/react-native-star-rating/-/react-native-star-rating-1.0.7.tgz#18da97ff52065c789a93c34fb20cf703cd995a96"
@@ -4491,6 +4497,10 @@ through@^2.3.6:
 time-stamp@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/time-stamp/-/time-stamp-1.0.1.tgz#9f4bd23559c9365966f3302dbba2b07c6b99b151"
+
+tinycolor2@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/tinycolor2/-/tinycolor2-1.4.1.tgz#f4fad333447bc0b07d4dc8e9209d8f39a8ac77e8"
 
 tmp@^0.0.29:
   version "0.0.29"

@@ -3,7 +3,7 @@ import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { Text } from 'react-native-elements';
-import AppIntro from 'react-native-app-intro';
+import SimpleOnboarding from 'react-native-simple-onboarding';
 
 import theme from '../../services/ThemeService';
 
@@ -26,81 +26,72 @@ class Onboarding extends React.Component {
     }
   }
 
-  navigateToHMap() {
+  navigateBack() {
     this.props.navigation.dispatch(NavigationActions.back());
   }
 
   render() {
+
     const pageArray = [{
       title: 'Zoom',
-      description: 'into the map to see spots',
+      subtitle: 'into the app to see spots',
+      image: <Image source={tutorial1} style={[styles.image, { borderRadius: 40 }]} />,
+      // description: 'into the map to see spots',
       // img: require('../../../assets/images/tutorial/1.gif'),
-      img: tutorial1,
-      imgStyle: {
-        height: 240,
-        width: 240,
-        borderRadius: 40,
-      },
+      // img: tutorial1,
+      // imgStyle: {
+      //   height: 240,
+      //   width: 240,
+      //   borderRadius: 40,
+      // },
       backgroundColor: theme.red,
-      fontColor: 'white',
-      level: 1,
+      // fontColor: 'white',
+      // level: 15,
     }, {
       title: 'Spots',
-      description: 'have different ratings',
+      subtitle: 'have different ratings',
+      image: <Image source={tutorial2} style={styles.image} />,
+      // description: 'have different ratings',
       // img: require('../../../assets/images/tutorial/2.png'),
-      img: tutorial2,
-      imgStyle: {
-        height: 240,
-        width: 240,
-      },
+      // img: tutorial2,
+      // imgStyle: {
+      //   height: 240,
+      //   width: 240,
+      // },
       backgroundColor: theme.blue,
-      fontColor: 'white',
-      level: 1,
+      // fontColor: 'white',
+      // level: 15,
     }
     , {
       title: 'Offline',
-      description: 'You can save spots offline and take snapshots of the map',
+      subtitle: 'You can save spots offline and take snapshots of the map',
+      image: <Image source={tutorial3} style={styles.image} />,
+      // description: 'You can save spots offline and take snapshots of the map',
       // // img: require('../../../assets/images/tutorial/3.png'),
-      img: tutorial3,
-      imgStyle: {
-        height: 240,
-        width: 240,
-      },
+      // img: tutorial3,
+      // imgStyle: {
+      //   height: 240,
+      //   width: 240,
+      // },
       backgroundColor: theme.green,
-      fontColor: 'white',
-      level: 1,
-    }
-    ];
+      // fontColor: 'white',
+      // level: 15,
+    }];
     return (
-      <View>
-        <Text>HELLO</Text>
-        <AppIntro
-          onDoneBtnClick={this.navigateToHMap.bind(this)}
-          onSkipBtnClick={this.navigateToHMap.bind(this)}
-          pageArray={pageArray}
-        >
-        </AppIntro>
-      </View>
+        <SimpleOnboarding
+          pages={pageArray}
+          onEnd={() => this.navigateBack()}
+        />
     );
   }
 }
 
-// const styles = StyleSheet.create({
-//   description: {
-//     textAlign: 'justify',
-//     marginBottom: 20,
-//   },
-//   logo: {
-//     width: 128,
-//     height: 128,
-//     marginBottom: 20,
-//   },
-//   center: {
-//     flexDirection: 'column',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
+const styles = StyleSheet.create({
+  image: {
+    width: 240,
+    height: 240,
+  },
+});
 
 
 export default Onboarding;

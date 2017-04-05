@@ -12,10 +12,9 @@ import OnboardingPage from './components/OnboardingPage/OnboardingPage';
 
 const HMapNavigator = StackNavigator({
   hMap: { screen: HMapViewContainer },
-  // onboarding: { screen: OnboardingPage },
+  onboarding: { screen: OnboardingPage },
   spotDetails: { screen: SpotDetailsViewContainer },
 }, {
-  // headerMode: 'none',
   headerMode: 'screen',
   navigationOptions: {
     tabBar: {

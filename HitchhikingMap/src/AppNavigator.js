@@ -11,7 +11,7 @@ import AboutPage from './components/AboutPage/AboutPage';
 import OnboardingPage from './components/OnboardingPage/OnboardingPage';
 
 const HMapNavigator = StackNavigator({
-  HMap: { screen: HMapViewContainer },
+  hMap: { screen: HMapViewContainer },
   onboarding: { screen: OnboardingPage },
   spotDetails: { screen: SpotDetailsViewContainer },
 }, {
@@ -37,9 +37,6 @@ const SettingsNavigator = StackNavigator({
   onboarding: { screen: OnboardingPage },
 }, {
   navigationOptions: {
-    header: {
-      visible: true,
-    },
     tabBar: {
       label: 'Settings',
       icon: ({ tintColor }) => ( // eslint-disable-line react/prop-types
@@ -51,13 +48,10 @@ const SettingsNavigator = StackNavigator({
 });
 
 const AppNavigator = TabNavigator({
-  HMap: { screen: HMapNavigator },
+  hMap: { screen: HMapNavigator },
   settings: { screen: SettingsNavigator },
 }, {
   navigationOptions: {
-    header: {
-      visible: false,
-    },
   },
 });
 

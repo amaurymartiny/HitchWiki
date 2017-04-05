@@ -14,9 +14,9 @@ class HMapView extends React.Component {
 
   static navigationOptions = {
     title: 'Hitchhiking Map',
-    header: {
-      visible: false,
-    },
+    // header: {
+    //   visible: false,
+    // },
   }
 
   static propTypes = {
@@ -100,7 +100,7 @@ class HMapView extends React.Component {
             this.props.dispatch(HMapActions.setRegion(region));
           }}
         >
-          {this.generateMarkers()}
+          {this.props.isFetchingSpots ? <View /> : this.generateMarkers()}
         </MapView>
         <ActionButton
           position="left"

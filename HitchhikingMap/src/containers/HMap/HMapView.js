@@ -112,7 +112,12 @@ class HMapView extends React.Component {
         <ActionButton
           position="left"
           buttonColor={theme.red}
-          icon={<Icon type="ionicon" name="ios-camera" color="white" />}
+          
+          icon={this.props.isFetchingSpots ?
+            <Icon type="ionicon" name="ios-reverse-camera" color="white" />
+          :
+            <Icon type="ionicon" name="ios-camera" color="white" />
+          }
         >
           <ActionButton.Item
             buttonColor={theme.red}

@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, ActivityIndicator } from 'react-native';
 import { Icon } from 'react-native-elements';
 import ActionButton from 'react-native-action-button';
 import MapView from 'react-native-maps';
@@ -112,9 +112,8 @@ class HMapView extends React.Component {
         <ActionButton
           position="left"
           buttonColor={theme.red}
-          
           icon={this.props.isFetchingSpots ?
-            <Icon type="ionicon" name="ios-reverse-camera" color="white" />
+            <ActivityIndicator color="white" />
           :
             <Icon type="ionicon" name="ios-camera" color="white" />
           }

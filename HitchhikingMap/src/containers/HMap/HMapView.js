@@ -33,7 +33,7 @@ class HMapView extends React.Component {
     this.props.dispatch(HMapActions.getLocationRequest());
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     if (this.props.appLoaded && this.props.showTutorial) {
       this.props.dispatch(AppActions.setShowTutorial(false));
       this.props.navigation.navigate('onboarding');

@@ -3,7 +3,7 @@ import { View, ScrollView, StyleSheet, Dimensions } from 'react-native';
 import { Card, Text, List, ListItem, Button } from 'react-native-elements';
 import Ionicon from 'react-native-vector-icons/Ionicons';
 import StarRating from 'react-native-star-rating';
-import { CachedImage } from 'react-native-img-cache';
+import CachedImage from 'react-native-cached-image';
 
 import { SpotDetailsActions } from '../../ducks/SpotDetails';
 import { OfflineSpotsActions } from '../../ducks/OfflineSpots';
@@ -85,6 +85,7 @@ class SpotDetailsView extends React.Component {
                   resizeMode="cover"
                   style={styles.mapImage}
                   source={{ uri: this.getSpot().metadata.mapUri }}
+                  useQueryParamsInCacheKey={true}
                 />
               </View>
             }

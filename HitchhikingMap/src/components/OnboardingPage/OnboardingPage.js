@@ -34,7 +34,7 @@ class Onboarding extends React.Component {
       imgStyle: {
         height: 240,
         width: 240,
-        borderRadius: 50,
+        borderRadius: 40,
       },
       backgroundColor: theme.red,
       fontColor: '#fff',
@@ -51,9 +51,9 @@ class Onboarding extends React.Component {
       fontColor: '#fff',
       level: 10,
     }, {
-      title: 'Spots',
-      description: 'have different ratings',
-      img: require('../../../assets/images/tutorial/2.png'),
+      title: 'Offline',
+      description: 'You can save spots offline and take snapshots of the map',
+      img: require('../../../assets/images/tutorial/3.png'),
       imgStyle: {
         height: 240,
         width: 240,

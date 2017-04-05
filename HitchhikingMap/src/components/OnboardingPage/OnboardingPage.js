@@ -72,11 +72,15 @@ class Onboarding extends React.Component {
     }
     ];
     return (
-      <AppIntro
-        onDoneBtnClick={this.navigateToHMap.bind(this)}
-        onSkipBtnClick={this.navigateToHMap.bind(this)}
-        pageArray={pageArray}
-      />
+      <View>
+        <Text>HELLO</Text>
+        <AppIntro
+          onDoneBtnClick={this.navigateToHMap.bind(this)}
+          onSkipBtnClick={this.navigateToHMap.bind(this)}
+          pageArray={pageArray}
+        >
+        </AppIntro>
+      </View>
     );
   }
 }

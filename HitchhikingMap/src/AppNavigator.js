@@ -36,6 +36,7 @@ const SettingsNavigator = StackNavigator({
   about: { screen: AboutPage },
   onboarding: { screen: OnboardingPage },
 }, {
+  headerMode: 'screen',
   navigationOptions: {
     tabBar: {
       label: 'Settings',

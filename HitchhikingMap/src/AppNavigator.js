@@ -8,9 +8,11 @@ import SettingsViewContainer from './containers/Settings/SettingsViewContainer';
 import SnapshotsViewContainer from './containers/Snapshots/SnapshotsViewContainer';
 import OfflineSpotsViewContainer from './containers/OfflineSpots/OfflineSpotsViewContainer';
 import AboutPage from './components/AboutPage/AboutPage';
+import OnboardingPage from './components/OnboardingPage/OnboardingPage';
 
 const HMapNavigator = StackNavigator({
   HMap: { screen: HMapViewContainer },
+  onboarding: { screen: OnboardingPage },
   spotDetails: { screen: SpotDetailsViewContainer },
 }, {
   navigationOptions: {
@@ -33,6 +35,7 @@ const SettingsNavigator = StackNavigator({
   offlineSpots: { screen: OfflineSpotsViewContainer },
   spotDetailsSettings: { screen: SpotDetailsViewContainer },
   about: { screen: AboutPage },
+  onboarding: { screen: OnboardingPage },
 }, {
   navigationOptions: {
     header: {

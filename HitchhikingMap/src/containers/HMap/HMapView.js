@@ -29,6 +29,7 @@ class HMapView extends React.Component {
   }
 
   componentDidMount() {
+    this.props.navigation.navigate('onboarding');
     this.props.dispatch(HMapActions.getLocationRequest());
   }
 

@@ -33,12 +33,12 @@ class HMapView extends React.Component {
     this.props.dispatch(HMapActions.getLocationRequest());
   }
 
-  componentDidUpdate() {
-    if (this.props.appLoaded && this.props.showTutorial) {
-      this.props.dispatch(AppActions.setShowTutorial(false));
-      this.props.navigation.navigate('onboarding');
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.appLoaded && this.props.showTutorial) {
+  //     this.props.dispatch(AppActions.setShowTutorial(false));
+  //     this.props.navigation.navigate('onboarding');
+  //   }
+  // }
 
   /**
    * Generate the markers array to be shown on the map

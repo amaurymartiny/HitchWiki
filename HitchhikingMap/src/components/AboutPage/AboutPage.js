@@ -14,9 +14,10 @@ class TabBar extends React.Component {
         <Card>
           <View style={styles.center}>
             <Image source={require('../../../assets/images/logo/ios/iTunesArtwork.png')} style={styles.logo} />
+            <Image source={require('../../../assets/images/hitchwiki/logo.png')} style={styles.logo} />
           </View>
           <Text style={styles.description}>Made with &hearts; by Amaury Martiny (development)
-          and Weronika Pawelec (design).</Text>
+          and Weronika Pawelec (design), with the help of the Hitchwiki team.</Text>
           <Text style={styles.description}>Special thanks to all the people that
           gave us a ride when we were hitchhiking, you are the the reason we loved hitchhiking
           and decided to build this app.</Text>
@@ -38,14 +39,15 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   logo: {
-    width: 128,
-    height: 128,
+    width: 100,
+    height: 100,
+    borderRadius: 15,
     marginBottom: 20,
   },
   center: {
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
   },
 });
 

@@ -13,4 +13,4 @@ This is the first version of the app, new features such as adding/editing spots,
 
 Happy hitchhiking everybody!
 
-**Get the app here: 👍👍👍** https://itunes.apple.com/us/app/hitchhiking-map/id1222440865?ls=1&mt=8 
+**👍👍👍 Get the app here:** https://itunes.apple.com/us/app/hitchhiking-map/id1222440865?ls=1&mt=8 

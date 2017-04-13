@@ -34,7 +34,7 @@ class SettingsView extends React.Component {
             badge={{ value: this.props.offlineSpotsCount }}
             onPress={() => this.props.navigation.navigate('offlineSpots')}
           />
-          {/*<ListItem
+          {/* <ListItem
             title="Offline Maps"
             titleStyle={theme.styles.textColor}
             leftIcon={{ type: 'ionicon', name: 'ios-cloud-download', color: theme.darkGrey }}

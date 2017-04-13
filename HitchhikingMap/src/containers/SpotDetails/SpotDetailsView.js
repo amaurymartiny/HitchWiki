@@ -23,6 +23,25 @@ class SpotDetailsView extends React.Component {
     spot: React.PropTypes.object.isRequired,
   }
 
+  /**
+   * Format date nicely (not possible to use moment.js)
+   * @param  {[type]} timestamp The timestamp given by Hitchwiki API is not a ISO timestamp, but yyyymmdd
+   * @return {[type]}           [description]
+   */
+  // TODO put in a helper function file?
+  static formatDate(timestamp) {
+    const year = timestamp.substring(0, 4);
+    const month = timestamp.substring(4, 6);
+    const day = timestamp.substring(6, 8);
+    return `${day}.${month}.${year}`;
+  }
+
+  // TODO the API is giving back HTML, so for now we strip tags
+  // We remove line breaks, remove everythign between <div></div>, and strip tags
+  static stripTags(string) {
+    return string.replace(/\r?\n|\r/g, '').replace(/<div.*div>/ig, '').replace(/(<([^>]+)>)/ig, '');
+  }
+
   componentDidMount() {
     // Fetch online spot
     this.props.dispatch(SpotDetailsActions.fetchSpotDetailsRequest(this.props.navigation.state.params.spotId));
@@ -39,24 +58,6 @@ class SpotDetailsView extends React.Component {
    * @return {Object} Offline spot it exists, online spot otherwise
    */
   getIsOffline = () => !!this.props.offlineSpots[this.props.navigation.state.params.spotId]
-
-  /**
-   * Format date nicely (not possible to use moment.js)
-   * @param  {[type]} timestamp The timestamp given by Hitchwiki API is not a ISO timestamp, but yyyymmdd
-   * @return {[type]}           [description]
-   */
-  formatDate(timestamp) {
-    const year = timestamp.substring(0, 4);
-    const month = timestamp.substring(4, 6);
-    const day = timestamp.substring(6, 8);
-    return `${day}.${month}.${year}`;
-  }
-
-  // TODO the API is giving back HTML, so for now we strip tags
-  // We remove line breaks, remove everythign between <div></div>, and strip tags
-  stripTags(string) {
-    return string.replace(/\r?\n|\r/g, '').replace(/<div.*div>/ig, '').replace(/(<([^>]+)>)/ig, '');
-  }
 
   render() {
     return (
@@ -85,7 +86,7 @@ class SpotDetailsView extends React.Component {
                   resizeMode="cover"
                   style={styles.mapImage}
                   source={{ uri: this.getSpot().metadata.mapUri }}
-                  useQueryParamsInCacheKey={true}
+                  useQueryParamsInCacheKey
                 />
               </View>
             }
@@ -96,7 +97,7 @@ class SpotDetailsView extends React.Component {
               <Text><Ionicon name="ios-text" size={20} color={theme.secondary} /> {this.getSpot().comment_count ? `${this.getSpot().comment_count} comment${this.getSpot().comment_count > 1 ? 's' : ''}` : 'No comments'}</Text>
             </View>
 
-            <Text style={styles.xlGutterVertical}>{this.stripTags(this.getSpot().Description) || 'No description available.'}</Text>
+            <Text style={styles.xlGutterVertical}>{SpotDetailsView.stripTags(this.getSpot().Description) || 'No description available.'}</Text>
             <List containerStyle={styles.list}>
               {this.getSpot().comments.map(comment => (
                 <ListItem
@@ -107,10 +108,10 @@ class SpotDetailsView extends React.Component {
                     color: theme.secondary,
                     style: styles.alignTop,
                   }}
-                  title={`${comment.user_name || 'Anonymous User'} on ${this.formatDate(comment.timestamp)}`}
+                  title={`${comment.user_name || 'Anonymous User'} on ${SpotDetailsView.formatDate(comment.timestamp)}`}
                   titleStyle={styles.small}
                   wrapperStyle={styles.alignTop}
-                  subtitle={this.stripTags(comment.commenttext)}
+                  subtitle={SpotDetailsView.stripTags(comment.commenttext)}
                   subtitleStyle={[styles.small, styles.subtitle]}
                   hideChevron
                 />

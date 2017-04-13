@@ -49,7 +49,7 @@ const configureStore = () => {
     storage: AsyncStorage,
     transform: createBlacklistFilter( // Remove appLoaded key from AppReducer
       'app',
-      ['appLoaded']
+      ['appLoaded'],
     ),
   }, () => store.dispatch(AppActions.setAppLoaded(true)));
 

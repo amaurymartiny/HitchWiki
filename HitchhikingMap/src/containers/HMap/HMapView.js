@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 import React from 'react';
-import { View, StyleSheet, Image, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import { Icon } from 'react-native-elements';
 import ActionButton from 'react-native-action-button';
 import MapView from 'react-native-maps';
@@ -21,12 +21,14 @@ class HMapView extends React.Component {
   }
 
   static propTypes = {
+    appLoaded: React.PropTypes.bool.isRequired,
     dispatch: React.PropTypes.func.isRequired,
     isFetchingGPS: React.PropTypes.bool.isRequired,
     isFetchingSpots: React.PropTypes.bool.isRequired,
     markers: React.PropTypes.array.isRequired,
     navigation: React.PropTypes.object.isRequired,
     region: React.PropTypes.object.isRequired,
+    showTutorial: React.PropTypes.bool.isRequired,
   }
 
   componentDidMount() {
@@ -77,16 +79,18 @@ class HMapView extends React.Component {
     // onPress={() => this.refs[`marker-${marker.id}`].showCallout()}
     return this.props.markers.map(marker => (
       <MapView.Marker
-        ref={`marker-${marker.id}`}
         key={marker.id}
         coordinate={marker.latlng}
         description="See Description &rarr;"
         title={drawStars(marker.rating)}
         centerOffset={{ x: 1, y: 1 }}
         image={getPinImage(marker.rating)}
-        onCalloutPress={() => this.props.navigation.navigate('spotDetails', { spotId: marker.id, latlng: marker.latlng })}
+        onCalloutPress={() => this.props.navigation.navigate('spotDetails', {
+          spotId: marker.id,
+          latlng: marker.latlng,
+        })}
       >
-        {/*<Image source={getPinImage(marker.rating)} style={{ width: 32, height: 32}} />*/}
+        {/* <Image source={getPinImage(marker.rating)} style={{ width: 32, height: 32}} />*/}
       </MapView.Marker>
     ));
   }

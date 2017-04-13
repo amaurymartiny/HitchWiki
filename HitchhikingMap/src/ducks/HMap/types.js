@@ -8,7 +8,7 @@ const FETCH_SPOTS_REQUEST = 'HitchhikingMap/HMap/FETCH_SPOTS_REQUEST';
 const FETCH_SPOTS_SUCCESS = 'HitchhikingMap/HMap/FETCH_SPOTS_SUCCESS';
 const FETCH_SPOTS_FAILURE = 'HitchhikingMap/HMap/FETCH_SPOTS_FAILURE';
 
-const SET_TUTORIAL = 'HitchhikingMap/HMap/SET_TUTORIAL'
+const SET_TUTORIAL = 'HitchhikingMap/HMap/SET_TUTORIAL';
 
 export default {
   GET_LOCATION_REQUEST,

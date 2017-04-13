@@ -1,8 +1,7 @@
 /* eslint-disable global-require, import/no-unresolved */
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 import { NavigationActions } from 'react-navigation';
-import { Text } from 'react-native-elements';
 import SimpleOnboarding from 'react-native-simple-onboarding';
 
 import theme from '../../services/ThemeService';
@@ -23,7 +22,13 @@ class Onboarding extends React.Component {
     },
     tabBar: {
       visible: false,
-    }
+    },
+  }
+
+  static propTypes = {
+    navigation: React.PropTypes.shape({
+      dispatch: React.PropTypes.func.isRequired,
+    }).isRequired,
   }
 
   navigateBack() {
@@ -31,7 +36,6 @@ class Onboarding extends React.Component {
   }
 
   render() {
-
     const pageArray = [{
       title: 'Zoom',
       subtitle: 'into the app to see spots',
@@ -61,8 +65,8 @@ class Onboarding extends React.Component {
       backgroundColor: theme.blue,
       // fontColor: 'white',
       // level: 15,
-    }
-    , {
+    },
+    {
       title: 'Offline',
       subtitle: 'You can save spots offline and take snapshots of the map',
       image: <Image source={tutorial3} style={styles.image} />,
@@ -78,10 +82,10 @@ class Onboarding extends React.Component {
       // level: 15,
     }];
     return (
-        <SimpleOnboarding
-          pages={pageArray}
-          onEnd={() => this.navigateBack()}
-        />
+      <SimpleOnboarding
+        pages={pageArray}
+        onEnd={() => this.navigateBack()}
+      />
     );
   }
 }

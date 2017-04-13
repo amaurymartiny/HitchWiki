@@ -22,7 +22,7 @@ class OfflineSpotsView extends React.Component {
         {Object.keys(this.props.spots).length ?
           <ScrollView style={{ backgroundColor: 'white' }}>
             {Object.keys(this.props.spots)
-              .sort((a, b) => {return (new Date(this.props.spots[a].metadata.dateAdded)) - (new Date(this.props.spots[b].metadata.dateAdded))})
+              .sort((a, b) => (new Date(this.props.spots[a].metadata.dateAdded)) - (new Date(this.props.spots[b].metadata.dateAdded)))
               .map((spotId, index) => (
                 <ListItem
                   key={spotId}
